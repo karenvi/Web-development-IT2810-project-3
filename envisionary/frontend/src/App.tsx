@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { testRecoilState } from './states/states';
+import { useRecoilState } from 'recoil';
+import Button from '@mui/material/Button';
 
 function App() {
+  const [testRecoil, setTestRecoil] = useRecoilState(testRecoilState);
+
+  const handleChange = () => {
+    setTestRecoil(testRecoil+1);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      ENVISIONARY... 
+      <br/>
+      <Button onClick={handleChange} variant="contained">CLICK ME</Button>
+      <br/>
+      Result of recoil state:
+      {testRecoil}
     </div>
   );
 }
