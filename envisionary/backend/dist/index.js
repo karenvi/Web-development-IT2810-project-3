@@ -1,5 +1,23 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import 'dotenv/config';
+import mongoose from 'mongoose';
+const uri = process.env.DB_URL;
+async function connect() {
+    try {
+        console.log(uri);
+        await mongoose.connect(uri);
+        mongoose.connection.db.listCollections().toArray(function (err, names) {
+            console.log(names); // så vi kan se collections i databasen
+        });
+        console.log("🎉 Connected to database successfully");
+    }
+    catch (err) {
+        console.log(uri);
+        console.log(err);
+    }
+}
+connect();
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.

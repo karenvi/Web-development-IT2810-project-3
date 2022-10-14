@@ -14,7 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.0.0",
-    "graphql": "^16.6.0"
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "mongoose": "^6.6.5"
   },
   "devDependencies": {
     "@types/node": "^18.8.5",
