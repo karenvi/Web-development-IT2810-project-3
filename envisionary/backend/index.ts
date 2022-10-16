@@ -1,9 +1,10 @@
 import { MongoClient } from "mongodb";
 // Replace the uri string with your connection string.
 const uri =
-  "mongodb://admin:materialGworls!@it2810-66.idi.ntnu.no:27017?retryWrites=true&w=majority";
+  "mongodb://admin:materialGworls!@it2810-66.idi.ntnu.no:27017/envisionary";
 const client = new MongoClient(uri);
-async function run() {
+
+/* async function run() {
   try {
     const database = client.db('envisionary');
     const cities = database.collection('cities');
@@ -16,4 +17,4 @@ async function run() {
     await client.close();
   }
 }
-run().catch(console.dir);
+run().catch(console.dir); */
