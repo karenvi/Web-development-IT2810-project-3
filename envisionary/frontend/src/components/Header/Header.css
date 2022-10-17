@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  height: 10vh;
+  width: 100vw;
+  background-color: #172A3A;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 
+    0px 1px 10px 0px rgb(0 0 0 / 12%);
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: whitesmoke;
+  font-weight: 500;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  align-items: center;
+}
