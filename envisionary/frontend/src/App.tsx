@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
 import Header from './components/Header/Header';
 import Feed from './pages/Feed'
+import Book from './pages/Book'
 
 function App() {
   const [testRecoil, setTestRecoil] = useRecoilState(testRecoilState);
@@ -18,7 +19,8 @@ function App() {
       <Router>
       <Header />
         <Routes>
-          <Route path='/' element= {<Feed/>}/>
+          <Route path='/' element={<Feed/>}/>
+          <Route path='/book' element={<Book/>}/>
           {/* ENVISIONARY... 
           <br/>
           <Button onClick={handleChange} variant="contained">CLICK ME</Button>
