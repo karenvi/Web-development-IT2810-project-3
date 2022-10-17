@@ -7,7 +7,7 @@ const uri = process.env.DB_URL
 
 async function connect() {
     try {
-        console.log(uri);
+        //console.log(uri);
         await mongoose.connect(uri);
         mongoose.connection.db.listCollections().toArray(function(err, names){
             console.log(names) // så vi kan se collections i databasen
@@ -20,7 +20,7 @@ async function connect() {
 }
 connect()
 
-
+// The code below is from https://www.apollographql.com/docs/apollo-server/getting-started/
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
@@ -68,10 +68,6 @@ const server = new ApolloServer({
     resolvers,
   });
   
-  // Passing an ApolloServer instance to the `startStandaloneServer` function:
-  //  1. creates an Express app
-  //  2. installs your ApolloServer instance as middleware
-  //  3. prepares your app to handle incoming requests
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
   });
