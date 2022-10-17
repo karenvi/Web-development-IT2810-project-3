@@ -1,7 +1,10 @@
 import './App.css';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { testRecoilState } from './states/states';
 import { useRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
+import Header from './components/Header/Header';
+import Feed from './pages/Feed'
 import { useQuery, gql } from '@apollo/client';
 
 const GET_BOOKS = gql`
@@ -38,12 +41,18 @@ function App() {
 
   return (
     <div className="App">
-      ENVISIONARY... 
-      <br/>
-      <Button onClick={handleChange} variant="contained">CLICK ME</Button>
-      <br/>
-      Result of recoil state:
-      {testRecoil}
+      <Router>
+      <Header />
+        <Routes>
+          <Route path='/' element= {<Feed/>}/>
+          {/* ENVISIONARY... 
+          <br/>
+          <Button onClick={handleChange} variant="contained">CLICK ME</Button>
+          <br/>
+          Result of recoil state:
+          {testRecoil} */}
+        </Routes>
+      </Router>
       <DisplayLocations />
     </div>
   );
