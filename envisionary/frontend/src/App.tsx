@@ -16,17 +16,18 @@ const GET_BOOKS = gql`
   }
 `;
 
+
 function DisplayLocations() {
   const { loading, error, data } = useQuery(GET_BOOKS);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  return data.books.map(({ title, author }) => (
+  return data.books.map(({ title, author }: {title: string, author: string}) => (
       <div>
       <h3>{title}</h3>
       <br />
-      <b>About this location:</b>
+      <b>Author: </b>
       <p>{author}</p>
       </div>
   ));

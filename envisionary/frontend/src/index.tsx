@@ -8,7 +8,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client
 
 
 const client = new ApolloClient({
-  uri: 'localhost:4000',
+  uri: "http://localhost:4000/",
   cache: new InMemoryCache(),
 });
 
@@ -28,6 +28,7 @@ client
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <RecoilRoot>
