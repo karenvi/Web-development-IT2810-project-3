@@ -1,0 +1,19 @@
+type Country {
+    Rank: String
+    CCA3: String
+    Country: String
+    Capital: String
+    Continent: String
+    2022-Population: String
+    2020-Population: String
+    2015-Population: String
+    2010-Population: String
+    2000-Population: String
+    1990-Population: String
+    1980-Population: String
+    1970-Population: String
+    Area: String
+    Density: String
+    Growth-Rate: String
+    World-Population-Percentage: String
+}
