@@ -1,3 +1,15 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  background-color: aliceblue;
 }
