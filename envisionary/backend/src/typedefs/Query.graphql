@@ -1,4 +1,0 @@
-type Query {
-    numberOfCountries: Int
-    countryByName(Country: String): Country
-}
