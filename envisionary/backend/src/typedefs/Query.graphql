@@ -1,4 +1,4 @@
 type Query {
     numberOfCountries: Int
-    countries: [Country]
+    countryByName(Country: String): Country
 }

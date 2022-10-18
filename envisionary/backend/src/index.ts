@@ -3,6 +3,8 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import 'dotenv/config'
 import mongoose from 'mongoose';
 
+import resolvers from './resolvers/Countries';
+
 const uri = process.env.DB_URL
 
 async function connect() {
@@ -54,11 +56,11 @@ const books = [
 
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
-const resolvers = {
+/* const resolvers = {
     Query: {
       books: () => books,
     },
-  };
+  }; */
 
 
 // The ApolloServer constructor requires two parameters: your schema

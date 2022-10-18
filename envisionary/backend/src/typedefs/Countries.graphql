@@ -4,14 +4,14 @@ type Country {
     Country: String
     Capital: String
     Continent: String
-    2022-Population: String
-    2020-Population: String
-    2015-Population: String
-    2010-Population: String
-    2000-Population: String
-    1990-Population: String
-    1980-Population: String
-    1970-Population: String
+    Population2022: String
+    Population2020: String
+    Population2015: String
+    Population2010: String
+    Population2000: String
+    Population1990: String
+    Population1980: String
+    Population1970: String
     Area: String
     Density: String
     Growth-Rate: String
