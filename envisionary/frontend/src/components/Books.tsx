@@ -30,10 +30,31 @@ function Books() {
 
   const toBookPage = () => {
     navigate('/book', {state: {
-      id: "1",
-      title: "Building Data-Intensive Applications",
-      description: "The big ideas behind reliable, scalable and maintainable systems",
-      author: "Martin Kleppmann"
+      // id: "1",
+      // title: "Building Data-Intensive Applications",
+      // description: "The big ideas behind reliable, scalable and maintainable systems",
+      // author: "Martin Kleppmann"
+      
+        _id: {
+          $oid: "634d51042d68bfbb82171082"
+        },
+        Rank: "34",
+        CCA3: "DZA",
+        Country: "Algeria",
+        Capital: "Algiers",
+        Continent: "Africa",
+        Population2022: "44903225",
+        Population2020: "43451666",
+        Population2015: "39543154",
+        Population2010: "35856344",
+        Population2000: "30774621",
+        Population1990: "25518074",
+        Population1980: "18739378",
+        Population1970: "13795915",
+        Area: "2381741",
+        Density: "18.8531",
+        GrowthRate: "1.0164",
+        WorldPopulationPercentage: "0.56"
     }})
   }
 
