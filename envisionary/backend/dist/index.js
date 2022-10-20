@@ -1,57 +1,31 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import 'dotenv/config'
+import 'dotenv/config';
 import mongoose from 'mongoose';
-import express from "express";
-//import expressGraphQL from 'express-graphql';
-const { graphqlHTTP } = require('express-graphql');
-const expressGraphQL = require('express-graphql');
-//import schema from './schema/schema';
-//const { typeDefs } = './schema'
-const schema = require('./schema/schema');
-
-const uri = process.env.DB_URL
-
-
-const app = express()
+import express from 'express';
+import expressGraphQL from 'express';
+import schema from './schema/schema';
+const uri = process.env.DB_URL;
+const app = express();
 app.use('/graphql', expressGraphQL({
     schema,
     graphiql: true
-}))
-
-app.listen(3000, () => {
-    console.log('Server is running at port 3000')
-})
-
-//const app = express();
-
-/* app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema: schema,
-    graphiql: true,
-  }),
-); */
-
-app.listen(3000, () => {
-  console.log('Server is running at port 3000')
-})
-
+}));
 async function connect() {
     try {
         //console.log(uri);
         await mongoose.connect(uri);
-        mongoose.connection.db.listCollections().toArray(function(err, names){
-            console.log(names) // så vi kan se collections i databasen
+        mongoose.connection.db.listCollections().toArray(function (err, names) {
+            console.log(names); // så vi kan se collections i databasen
         });
         console.log("🎉 Connected to database successfully");
-    } catch (err) {
+    }
+    catch (err) {
         console.log(uri);
         console.log(err);
     }
 }
-connect()
-
+connect();
 // The code below is from https://www.apollographql.com/docs/apollo-server/getting-started/
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -72,36 +46,30 @@ const typeDefs = `#graphql
     books: [Book]
   }
 `;
-
 const books = [
     {
-      title: 'The Awakening',
-      author: 'Kate Chopin',
+        title: 'The Awakening',
+        author: 'Kate Chopin',
     },
     {
-      title: 'City of Glass',
-      author: 'Paul Auster',
+        title: 'City of Glass',
+        author: 'Paul Auster',
     },
-  ];
-
+];
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
-      books: () => books,
+        books: () => books,
     },
-  };
-
-
+};
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-  });
-  
-  const { url } = await startStandaloneServer(server, {
+});
+const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
-  });
-  
-  console.log(`🚀  Server ready at: ${url}`);
+});
+console.log(`🚀  Server ready at: ${url}`);
