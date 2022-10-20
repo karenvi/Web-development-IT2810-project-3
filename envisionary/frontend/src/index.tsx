@@ -15,15 +15,15 @@ const client = new ApolloClient({
 client
   .query({
     query: gql`
-      query GetBooks {
-        books {
-          title
-          author
+      query GetCountries {
+        countries {
+          Country,
+          Continent
         }
       }
     `,
   })
-  .then((result) => console.log(result));
+  .then((result) => console.log(result))
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

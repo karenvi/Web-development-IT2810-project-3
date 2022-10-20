@@ -9,30 +9,29 @@ import Country from './pages/Country'
 import { useQuery, gql } from '@apollo/client';
 import GiveReview from './pages/GiveReview';
 
-const GET_BOOKS = gql`
-  query GetBooks {
-    books {
-      title
-      author
-    }
-  }
-`;
+// const GET_BOOKS = gql`
+//   query GetBooks {
+//     countries {
+//       Country
+//     }
+//   }
+// `;
 
-function DisplayLocations() {
-  const { loading, error, data } = useQuery(GET_BOOKS);
+// function DisplayLocations() {
+//   const { loading, error, data } = useQuery(GET_BOOKS);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Error :(</p>;
 
-  return data.books.map(({ title, author }: {title: string, author: string}) => (
-      <div>
-      <h3>{title}</h3>
-      <br />
-      <b>Author: </b>
-      <p>{author}</p>
-      </div>
-  ));
-}
+//   return data.books.map(({ title, author }: {title: string, author: string}) => (
+//       <div>
+//       <h3>{title}</h3>
+//       <br />
+//       <b>Author: </b>
+//       <p>{author}</p>
+//       </div>
+//   ));
+// }
 
 function App() {
   const [testRecoil, setTestRecoil] = useRecoilState(testRecoilState);
