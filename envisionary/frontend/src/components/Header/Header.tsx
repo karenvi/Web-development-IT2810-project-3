@@ -5,11 +5,10 @@ function Header() {
 
   return (
     <nav className='header'>
-      <ul>
-        <li>
-          <Link className='link' to="/">Countries</Link>
-        </li>
-      </ul>
+      <div className='linkContainer'>
+        <Link className='link' to="/">Countries</Link>
+        <Link className='link' to="/give-review">Give review</Link>
+      </div>
     </nav>
   );
 }

@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Feed from './pages/Feed'
 import Country from './pages/Country'
 import { useQuery, gql } from '@apollo/client';
+import GiveReview from './pages/GiveReview';
 
 const GET_BOOKS = gql`
   query GetBooks {
@@ -47,6 +48,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Feed/>}/>
           <Route path='/country' element={<Country/>}/>
+          <Route path='/give-review' element={<GiveReview/>}/>
           {/* ENVISIONARY... 
           <br/>
           <Button onClick={handleChange} variant="contained">CLICK ME</Button>
