@@ -7,7 +7,7 @@ function Header() {
     <nav className='header'>
       <ul>
         <li>
-          <Link className='link' to="/">Books</Link>
+          <Link className='link' to="/">Countries</Link>
         </li>
       </ul>
     </nav>

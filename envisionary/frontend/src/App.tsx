@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
 import Header from './components/Header/Header';
 import Feed from './pages/Feed'
+import Country from './pages/Country'
 import { useQuery, gql } from '@apollo/client';
 
 const GET_BOOKS = gql`
@@ -15,7 +16,6 @@ const GET_BOOKS = gql`
     }
   }
 `;
-
 
 function DisplayLocations() {
   const { loading, error, data } = useQuery(GET_BOOKS);
@@ -45,7 +45,8 @@ function App() {
       <Router>
       <Header />
         <Routes>
-          <Route path='/' element= {<Feed/>}/>
+          <Route path='/' element={<Feed/>}/>
+          <Route path='/country' element={<Country/>}/>
           {/* ENVISIONARY... 
           <br/>
           <Button onClick={handleChange} variant="contained">CLICK ME</Button>
@@ -54,7 +55,7 @@ function App() {
           {testRecoil} */}
         </Routes>
       </Router>
-      <DisplayLocations />
+      {/* <DisplayLocations /> */}
     </div>
   );
 }

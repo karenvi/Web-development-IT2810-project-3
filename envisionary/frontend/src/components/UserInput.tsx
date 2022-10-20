@@ -35,9 +35,10 @@ function UserInput () {
           label="Category"
           onChange={handleChange}
         >
-          <MenuItem value='Fantasy'>Fantasy</MenuItem>
-          <MenuItem value='Novel'>Novel</MenuItem>
-          <MenuItem value='Science'>Science</MenuItem>
+          <MenuItem value='Country'>Country</MenuItem>
+          <MenuItem value='Continent'>Continent</MenuItem>
+          <MenuItem value='Population'>Population</MenuItem>
+          <MenuItem value='Area'>Area</MenuItem>
         </Select>
       </FormControl>
       <Button variant="contained" sx={{backgroundColor: '#172A3A', '&:hover': {backgroundColor: '#172A3A'}}}>
