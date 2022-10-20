@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
 import Header from './components/Header/Header';
 import Feed from './pages/Feed'
-import Book from './pages/Book'
+import Country from './pages/Country'
 import { useQuery, gql } from '@apollo/client';
 
 const GET_BOOKS = gql`
@@ -46,7 +46,7 @@ function App() {
       <Header />
         <Routes>
           <Route path='/' element={<Feed/>}/>
-          <Route path='/book' element={<Book/>}/>
+          <Route path='/country' element={<Country/>}/>
           {/* ENVISIONARY... 
           <br/>
           <Button onClick={handleChange} variant="contained">CLICK ME</Button>
