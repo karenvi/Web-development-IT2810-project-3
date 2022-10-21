@@ -1,5 +1,9 @@
 import { atom } from "recoil";
 
+export const searchQueryState = atom({
+  key: 'searchQueryID',
+  default: '',
+});
 
 // Kan fjerne denne staten, men er greit å ha i begynnelsen så man skjønner hovedprinsippet til recoil!
 export const testRecoilState = atom({

@@ -1,13 +1,15 @@
 import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { testRecoilState } from './states/states';
+import { searchQueryState, testRecoilState } from './states/states';
 import { useRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
 import Header from './components/Header/Header';
 import Feed from './pages/Feed'
 import Country from './pages/Country'
 import { useQuery, gql } from '@apollo/client';
+import Search from './components/Search';
 
+// APOLLO CLIENT:
 // const GET_BOOKS = gql`
 //   query GetBooks {
 //     countries {
@@ -33,10 +35,25 @@ import { useQuery, gql } from '@apollo/client';
 // }
 
 function App() {
-  const [testRecoil, setTestRecoil] = useRecoilState(testRecoilState);
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s');
+  // const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
 
-  const handleChange = () => {
-    setTestRecoil(testRecoil+1);
+  const posts = [
+    { id: '1', name: 'This first post is about React' },
+    { id: '2', name: 'This next post is about Preact' },
+    { id: '3', name: 'We have yet another React post!' },
+    { id: '4', name: 'This is the fourth and final post' },
+  ];
+
+  const filterPosts = (posts: any, query: String | null) => {
+    if (!query) {
+      return posts;
+    }
+    return posts.filter((post: any) => {
+      const postName = post.name.toLowerCase();
+      return postName.includes(query);
+    })
   }
 
   return (
@@ -46,14 +63,15 @@ function App() {
         <Routes>
           <Route path='/' element={<Feed/>}/>
           <Route path='/country' element={<Country/>}/>
-          {/* ENVISIONARY... 
-          <br/>
-          <Button onClick={handleChange} variant="contained">CLICK ME</Button>
-          <br/>
-          Result of recoil state:
-          {testRecoil} */}
+          
         </Routes>
       </Router>
+      <Search />
+      <ul>
+        {filterPosts(posts, query).map((post: any) => (
+          <li key={post.id}>{post.name}</li>
+        ))}
+      </ul>
       {/* <DisplayLocations /> */}
     </div>
   );
