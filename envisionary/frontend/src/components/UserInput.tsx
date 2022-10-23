@@ -25,7 +25,19 @@ function UserInput () {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Search" variant="outlined" />
+    <form action="/" method="get">
+      <label htmlFor="header-search">
+        <span className="visually-hidden">Search countries by name</span>
+      </label>
+      <TextField  
+      label="Search" 
+      variant="outlined"
+      type="text"
+      id="header-search"
+      name="s"
+      />
+      <Button type="submit">SEARCH!!</Button>
+    </form>
       <FormControl fullWidth sx={{width: '150px'}}>
         <InputLabel id="demo-simple-select-label">Category</InputLabel>
         <Select

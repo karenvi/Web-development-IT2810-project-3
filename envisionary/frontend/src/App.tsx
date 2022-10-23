@@ -7,7 +7,6 @@ import Header from './components/Header/Header';
 import Feed from './pages/Feed'
 import Country from './pages/Country'
 import { useQuery, gql } from '@apollo/client';
-import Search from './components/Search';
 
 // APOLLO CLIENT:
 // const GET_BOOKS = gql`
@@ -39,13 +38,6 @@ function App() {
   const query = new URLSearchParams(search).get('s');
   // const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
 
-  const posts = [
-    { id: '1', name: 'This first post is about React' },
-    { id: '2', name: 'This next post is about Preact' },
-    { id: '3', name: 'We have yet another React post!' },
-    { id: '4', name: 'This is the fourth and final post' },
-  ];
-
   const filterPosts = (posts: any, query: String | null) => {
     if (!query) {
       return posts;
@@ -66,12 +58,6 @@ function App() {
           
         </Routes>
       </Router>
-      <Search />
-      <ul>
-        {filterPosts(posts, query).map((post: any) => (
-          <li key={post.id}>{post.name}</li>
-        ))}
-      </ul>
       {/* <DisplayLocations /> */}
     </div>
   );

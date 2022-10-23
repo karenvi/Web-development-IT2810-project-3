@@ -13,6 +13,10 @@ function Countries() {
   const [countries, setCountries] = useState<ICountry[]>([]);
   const navigate = useNavigate()
 
+  // Code for the searchbar
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s');
+
   interface ICountry {
     _id: {
       $oid: string
@@ -50,6 +54,16 @@ function Countries() {
 
   const tableHeadStyling = {fontWeight: 'bold'}
 
+  const filterCountries = (countries: any, query: String | null) => {
+    if (!query) {
+      return countries;
+    }
+    return countries.filter((country: any) => {
+      const countryName = country.Country.toLowerCase();
+      return countryName.includes(query);
+    })
+  }
+
   return (
     <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="simple table">
@@ -62,7 +76,7 @@ function Countries() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {countries.map((row: ICountry) => (
+          {filterCountries(countries, query).map((row: any ) => (
             <TableRow
               key={row._id.$oid}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
