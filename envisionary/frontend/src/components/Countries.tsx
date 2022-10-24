@@ -5,19 +5,23 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {useState } from 'react';
-import countriesJson from './countries.json'
 import { useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
+import { useRecoilState } from 'recoil';
+import { categoryState, searchQueryState } from '../states/states';
 
 function Countries() {
-  const [countries, setCountries] = useState<ICountry[]>([]);
+  const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
+  // const [countries, setCountries] = useState<ICountry[]>([]);
   const navigate = useNavigate()
+  const [category, setCategory] = useRecoilState(categoryState);
 
   // Code for the searchbar
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
-
+  if (query) {
+    setSearchQuery(query);
+  }
   // Code for displaying data from the database
   const GET_COUNTRIES = gql`
     query Countries {
@@ -71,9 +75,9 @@ function Countries() {
     WorldPopulationPercentage: string
   }
 
-  const fetchData = () => {
-    setCountries(countriesJson)
-  }
+  // const fetchData = () => {
+  //   setCountries(countriesJson)
+  // }
 
   const toCountryPage = (country: ICountry) => {
     navigate('/country', {state: {country}})
@@ -93,19 +97,42 @@ function Countries() {
       query = modifiedQuery;
     } 
 
-
+    // TODO: Må finne ut hvordan man kan bare bruke category i stedet for å hardkode inn alle verdiene :,)
     return countries.filter((country: any) => {
-      const countryName = country.Country;
-      const countryContinent = country.Continent;
-      if (countryName != null) {
-        if (countryName.includes(query)) {
-          return countryName.includes(query)
+      if (category == "Country") {
+        const countryName = country.Country;
+        if (countryName != null) {
+          if (countryName.includes(query)) {
+            return countryName.includes(query)
+          }
+        }
+      } else if (category == "Population") {
+        const countryPopulation = country.Population2022;
+        if (countryPopulation != null) {
+          if (countryPopulation.includes(query)) {
+            return countryPopulation.includes(query)
+          }
+        }
+      } else if (category == "Area") {
+        const countryArea = country.Area;
+        if (countryArea != null) {
+          if (countryArea.includes(query)) {
+            return countryArea.includes(query);
+          }
+        }
+      } else if (category == "Continent") {
+        const countryContinent = country.Continent;
+        if (countryContinent != null) {
+          if (countryContinent.includes(query)) {
+            return countryContinent.includes(query);
+          }
         }
       }
+      
     })
   }
 
-  const testCountries = filterCountries(data.countries, query)
+  const testCountries = filterCountries(data.countries, searchQuery)
   console.log(testCountries)
 
   return (

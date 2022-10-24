@@ -6,13 +6,25 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { categoryState, searchQueryState } from '../states/states';
+import { useNavigate } from 'react-router-dom';
 
 function UserInput () {
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useRecoilState(categoryState);
+  const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
+  const history = useNavigate();
+  const labelSearch = "Search after " + category.toLowerCase();
 
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
   };
+
+  // To ensure that the SPA requirement is achieved in the search
+  async function onSubmit(event: any) {
+    history("?s=${searchQuery}", { replace: true });
+    event.preventDefault();
+  }
 
   return (
     <Box
@@ -25,20 +37,21 @@ function UserInput () {
       noValidate
       autoComplete="off"
     >
-    <form action="/" method="get">
+    <form action="/" method="get" autoComplete="off" onSubmit={onSubmit}>
       <label htmlFor="header-search">
-        <span className="visually-hidden">Search countries by name</span>
+        <span className="visually-hidden">Search by {category.toLowerCase()}</span>
       </label>
       <TextField  
-      label="Search" 
+      label={labelSearch} 
       variant="outlined"
       type="text"
       id="header-search"
       name="s"
+      value={searchQuery}
+      onInput={e => setSearchQuery((e.target as HTMLInputElement).value)}
       />
-      <Button type="submit">SEARCH!!</Button>
     </form>
-      <FormControl fullWidth sx={{width: '150px'}}>
+      <FormControl fullWidth sx={{width: '150px', ml: "10px"}}>
         <InputLabel id="demo-simple-select-label">Category</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -53,9 +66,9 @@ function UserInput () {
           <MenuItem value='Area'>Area</MenuItem>
         </Select>
       </FormControl>
-      <Button variant="contained" sx={{backgroundColor: '#172A3A', '&:hover': {backgroundColor: '#172A3A'}}}>
+      {/* <Button variant="contained" sx={{backgroundColor: '#172A3A', '&:hover': {backgroundColor: '#172A3A'}}}>
         Search
-      </Button>
+      </Button> */}
     </Box>
   )
 }

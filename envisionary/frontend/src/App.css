@@ -14,7 +14,7 @@ body {
   background-color: aliceblue;
 }
 
-/* Makes a visually hidden header title for placeholders, makes it possible for screen readers to read text */
+/* Makes a visually hidden header title for placeholders, makes it possible for screen readers to read text outside placeholder */
 /* (CSS by: https://www.emgoto.com/) */
 .visually-hidden {
   clip: rect(0 0 0 0);
