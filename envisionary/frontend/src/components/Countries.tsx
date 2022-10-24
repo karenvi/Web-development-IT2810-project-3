@@ -84,13 +84,29 @@ function Countries() {
   const filterCountries = (countries: any, query: String | null) => {
     if (!query) {
       return countries;
-    }
+    } 
+
+    // Make sure query is valid even though user types it without big capital letters etc.
+    if (query) {
+      const lengthOfQuery = query.length;
+      const modifiedQuery = query[0].toUpperCase() + query.substring(1, lengthOfQuery).toLowerCase();
+      query = modifiedQuery;
+    } 
+
+
     return countries.filter((country: any) => {
-      const countryName = country.Country.toLowerCase();
-      const continentName = country.Continent.toLowerCase();
-      return countryName.includes(query.toLowerCase()), continentName.includes(query.toLowerCase());
+      const countryName = country.Country;
+      const countryContinent = country.Continent;
+      if (countryName != null) {
+        if (countryName.includes(query)) {
+          return countryName.includes(query)
+        }
+      }
     })
   }
+
+  const testCountries = filterCountries(data.countries, query)
+  console.log(testCountries)
 
   return (
     <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
@@ -104,7 +120,7 @@ function Countries() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.countries.map((row: any ) => (
+          {testCountries.map((row: any ) => (
             <TableRow
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => {toCountryPage(row)}}
