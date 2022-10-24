@@ -1,11 +1,11 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-import 'dotenv/config';
-import mongoose from 'mongoose';
-import { resolvers } from "./resolvers.js";
-import { typedefs } from './typedefs.js';
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import "dotenv/config";
+import mongoose from "mongoose";
+import { resolvers } from "./resolvers.js"; // TODO: .js should be removed
+import { typedefs } from "./typedefs.js"; // TODO: .js should be removed - only there to work around module not found error in dist/server.js
 const uri = process.env.DB_URL;
-async function connect() {
+async function connectToDB() {
     try {
         //console.log(uri);
         await mongoose.connect(uri);
@@ -19,7 +19,7 @@ async function connect() {
         console.log(err);
     }
 }
-connect();
+connectToDB();
 // The ApolloServer constructor requires two parameters: your schema definition and your set of resolvers.
 const server = new ApolloServer({
     typeDefs: typedefs,
