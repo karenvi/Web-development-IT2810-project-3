@@ -1,4 +1,10 @@
 export const typedefs = `#graphql
+type Review {
+  Name: String
+  ReviewText: String
+  Date: String
+  Rating: Int
+}
 
 type Country {
   Rank: String 
@@ -18,9 +24,15 @@ type Country {
   Density: String
   GrowthRate: String
   WorldPopulationPercentage: String
+  AverageRating: Int
+  Reviews: [Review]!
 }
 
 type Query {
   countries: [Country]
+}
+
+type Mutation {
+   addReview(Country: String, Name:String, ReviewText:String, Date:String, Rating:Int):Review
 }
 `;
