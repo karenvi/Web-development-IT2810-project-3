@@ -3,10 +3,11 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { testRecoilState } from './states/states';
 import { useRecoilState } from 'recoil';
 import Button from '@mui/material/Button';
-import Header from './components/Header/Header';
+import Header from './components/header/Header';
 import Feed from './pages/Feed'
 import Country from './pages/Country'
 import { useQuery, gql } from '@apollo/client';
+import GiveReview from './pages/GiveReview';
 
 // const GET_BOOKS = gql`
 //   query GetBooks {
@@ -46,6 +47,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Feed/>}/>
           <Route path='/country' element={<Country/>}/>
+          <Route path='/give-review' element={<GiveReview/>}/>
           {/* ENVISIONARY... 
           <br/>
           <Button onClick={handleChange} variant="contained">CLICK ME</Button>
