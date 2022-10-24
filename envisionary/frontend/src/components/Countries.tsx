@@ -5,9 +5,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import countriesJson from './countries.json'
 import { useNavigate } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
 
 function Countries() {
   const [countries, setCountries] = useState<ICountry[]>([]);
@@ -16,6 +17,36 @@ function Countries() {
   // Code for the searchbar
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
+
+  // Code for displaying data from the database
+  const GET_COUNTRIES = gql`
+    query Countries {
+      countries {
+        Rank,
+        CCA3,
+        Country,
+        Capital,
+        Continent,
+        Population2022,
+        Population2020,
+        Population2015,
+        Population2010,
+        Population2000,
+        Population1990,
+        Population1980,
+        Population1970,
+        Area,
+        Density,
+        GrowthRate,
+        WorldPopulationPercentage
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(GET_COUNTRIES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
   interface ICountry {
     _id: {
@@ -40,10 +71,6 @@ function Countries() {
     WorldPopulationPercentage: string
   }
 
-  useEffect(() => {
-    fetchData();
-  }, [])
-
   const fetchData = () => {
     setCountries(countriesJson)
   }
@@ -60,7 +87,8 @@ function Countries() {
     }
     return countries.filter((country: any) => {
       const countryName = country.Country.toLowerCase();
-      return countryName.includes(query);
+      const continentName = country.Continent.toLowerCase();
+      return countryName.includes(query.toLowerCase()), continentName.includes(query.toLowerCase());
     })
   }
 
@@ -76,9 +104,8 @@ function Countries() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {filterCountries(countries, query).map((row: any ) => (
+          {data.countries.map((row: any ) => (
             <TableRow
-              key={row._id.$oid}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => {toCountryPage(row)}}
               hover={true}
