@@ -1,48 +1,87 @@
 import '../App.css'
 import Card from '@mui/material/Card';
-import { Autocomplete, Rating, TextField, Typography } from '@mui/material';
+import { Autocomplete, Button, Rating, TextField, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import { Box, Container } from '@mui/system';
+import { Box } from '@mui/system';
 import { useState } from 'react';
 
 function GiveReview() {
-  const [value, setValue] = useState<number | null>(0);
+  const [country, setCountry] = useState('');
+  const [rating, setRating] = useState<number | null>(0);
+  const [author, setAuthor] = useState('');
+  const [reviewText, setReviewText] = useState('');
 
   const getCountries = () => [
-    {label: 'Algeria', CCA3: 'DZA'},
-    {label: 'Norway', CCA3: 'NOR'},
+    // Need to get all the country names from database
+    {label: 'Algeria'},
+    {label: 'Norway'},
   ]
 
+  const addReview = () => {
+    // Write code for adding the review to the database here
+  }
+
+  const reviewHeaderStyling = {mt: 3, fontSize: '18px'}
+
   return (
-    <Card sx={{m: '3%', width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center',
-              alignItems: 'center', p: 3}}>
-      <Typography variant="h3" sx={{m: 2}}>Give review</Typography>
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={getCountries()}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Country" />}
-      />
-      <Rating
-        name="hover-feedback"
-        value={value}
-        precision={0.5}
-        // getLabelText={getLabelText}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-      />
-      <TextField id="outlined-basic" label="Name" variant="outlined" />
-      <TextField
-          id="outlined-multiline-static"
-          label=""
-          placeholder="Write your review..."
-          multiline
-          rows={4}
+    <Card sx={{m: '3%', width: '50%', maxWidth: 700, display: 'flex', justifyContent: 'center',
+              alignItems: 'center', p: 6}}>
+      <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
+        <Typography variant="h4">Give review</Typography>
+        <Typography variant="h6" sx={reviewHeaderStyling}>Choose a country</Typography>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={getCountries()}
+          sx={{ width: 250 }}
+          inputValue={country}
+          onInputChange={(event, newInputValue) => {
+            setCountry(newInputValue);
+          }}
+          renderInput={(params) => <TextField {...params} label="" placeholder="Country" required={true} />}
         />
 
+        <Typography variant="h6" sx={reviewHeaderStyling}>Name</Typography>
+        <TextField id="outlined-basic" 
+          required
+          label=""
+          placeholder="Name"
+          variant="outlined"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+         />
+
+        <Typography variant="h6" sx={reviewHeaderStyling}>Rating</Typography>
+        <Rating
+          name="hover-feedback"
+          value={rating}
+          precision={0.5}
+          // getLabelText={getLabelText}
+          onChange={(event, newValue) => {
+            setRating(newValue);
+          }}
+          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+        />
+
+        <Typography variant="h6" sx={reviewHeaderStyling}>Review Content</Typography>
+        <TextField
+            id="outlined-multiline-static"
+            label=""
+            placeholder="Write your review..."
+            multiline
+            rows={7}
+            sx={{width: '50vw', maxWidth: 500}}
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+          />
+
+        <Button variant="contained" 
+          sx={{backgroundColor: '#172A3A', '&:hover': {backgroundColor: '#172A3A'}, mt: 3, mb: 2}}
+          onClick={() => addReview()}
+        >
+          Submit
+        </Button>
+      </Box>
     </Card>
   );
 }
