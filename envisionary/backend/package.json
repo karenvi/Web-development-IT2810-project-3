@@ -2,12 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "compile": "tsc",
     "postinstall": "npm run compile",
-    "start": "npm run compile && node ./dist/index.js"
+    "start": "npm run compile && node ./dist/server.js"
   },
   "keywords": [],
   "author": "",

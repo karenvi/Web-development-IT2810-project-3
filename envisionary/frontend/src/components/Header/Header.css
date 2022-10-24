@@ -9,16 +9,14 @@
   align-items: center;
 }
 
+.linkContainer {
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+}
+
 .link {
   text-decoration: none;
   color: whitesmoke;
   font-weight: 500;
-}
-
-ul {
-  list-style-type: none;
-}
-
-li {
-  align-items: center;
 }
