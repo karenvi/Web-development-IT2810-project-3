@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import 'dotenv/config';
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 const uri = process.env.DB_URL;
 async function connect() {
     try {
@@ -68,38 +68,36 @@ const typeDefs = `#graphql
     addReview(country: String, name: String, reviewText: String, date: Date, rating: Int)
   }
 `;
-/*
-const reviewSchema = new mongoose.Schema({
-  Name: 'string',
-  ReviewText: 'string',
-  Date: 'string',
-  Rating: 'int'
+;
+const reviewSchema = new Schema({
+    Name: { Type: String },
+    ReviewText: { Type: String },
+    Date: { Type: String },
+    Rating: { Type: Number }
 });
-
-const countrySchema = new mongoose.Schema({
-  Rank: 'string',
-  CCA3: 'string',
-  Country: 'string',
-  Capital: 'string',
-  Continent: 'string',
-  Population2022: 'string',
-  Population2020: 'string',
-  Population2015: 'string',
-  Population2010: 'string',
-  Population2000: 'string',
-  Population1990: 'string',
-  Population1980: 'string',
-  Population1970: 'string',
-  Area: 'string',
-  Density: 'string',
-  GrowthRate: 'string',
-  WorldPopulationPercentage: 'string',
-  AverageRating: 'int',
-  Reviews: [reviewSchema]
+const countrySchema = new Schema({
+    Rank: { Type: String },
+    CCA3: { Type: String },
+    Country: { Type: String },
+    Capital: { Type: String },
+    Continent: { Type: String },
+    Population2022: { Type: String },
+    Population2020: { Type: String },
+    Population2015: { Type: String },
+    Population2010: { Type: String },
+    Population2000: { Type: String },
+    Population1990: { Type: String },
+    Population1980: { Type: String },
+    Population1970: { Type: String },
+    Area: { Type: String },
+    Density: { Type: String },
+    GrowthRate: { Type: String },
+    WorldPopulationPercentage: { Type: String },
+    AverageRating: { Type: Number },
+    Reviews: { Type: (Array) }
 });
-
-const countryModel = mongoose.model('CountryModel', countrySchema);
-*/
+const countries = mongoose.model('countries', countrySchema);
+const reviewModel = mongoose.model('countries.Review', reviewSchema);
 const resolvers = {
     Query: {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(),
@@ -110,8 +108,11 @@ const resolvers = {
     },
     Mutation: {
         addReview: (parent, args, context, info) => {
+            //mongoose.connection.db.collection("countries").updateOne({ Country: args.country }, {});
             let review = { Name: args.name, ReviewText: args.reviewText, Date: args.Date, Rating: args.rating };
-            mongoose.connection.db.collection("countries").updateOne({ Country: args.country }, { $push: { Reviews: review } });
+            //let review = makeReview(args.name, args.reviewText, args.date, args.rating);
+            console.log(review);
+            mongoose.connection.db.collection("countries").findOneAndUpdate({ Country: args.country }, { $push: { Reviews: review }, });
             //{ $push: { Reviews: review }}),
         }
     }
