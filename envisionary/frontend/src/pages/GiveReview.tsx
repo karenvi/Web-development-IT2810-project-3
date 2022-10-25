@@ -25,11 +25,13 @@ function GiveReview() {
       Country
     }}`;
 
-  const { loading, error, data } = useQuery(getCountryNames); // TODO: add error handling
+  const { loading, error, data } = useQuery(getCountryNames); 
 
   let countryNames: Array<{ label: string }> = [];
 
   const getCountries = () => {
+    if (loading) return [{label: "Loading available countries ... "}];
+    if (error) return [{label: "Could not find any countries to review"}];
     data.countries.map((country: any, i: number) => {
       if (data.countries[i.toString()].Country !== null) { // some countries currently have null values. Do not include them
         countryNames.push({ label: data.countries[i.toString()].Country })
@@ -60,6 +62,7 @@ function GiveReview() {
           inputValue={country}
           onInputChange={(event, newInputValue) => {
             setCountry(newInputValue);
+            console.log(newInputValue)
           }}
           renderInput={(params) => <TextField {...params} label="" placeholder="Country" required={true} />}
         />
