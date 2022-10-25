@@ -12,28 +12,23 @@ function GiveReview() {
   const [author, setAuthor] = useState('');
   const [reviewText, setReviewText] = useState('');
 
-  // const getCountries = () => [
-  //   // Need to get all the country names from database
-  //   {label: 'Algeria'},
-  //   {label: 'Norway'},
-  // ]
-
-  const getCountryNames = gql`
-  query getCountryNames {
+  // TODO: Move queries to its own file for more tidy code
+  const getCountryNames = gql`query getCountryNames {
     countries {
       _id,
       Country
-    }}`;
+    }
+  }`;
 
-  const { loading, error, data } = useQuery(getCountryNames); 
+  const { loading, error, data } = useQuery(getCountryNames);
 
   let countryNames: Array<{ label: string }> = [];
 
   const getCountries = () => {
-    if (loading) return [{label: "Loading available countries ... "}];
-    if (error) return [{label: "Could not find any countries to review"}];
-    
-    data.countries.map((country: any) => {
+    if (loading) return [{ label: "Loading available countries ... " }];
+    if (error) return [{ label: "Could not find any countries to review" }];
+
+    data.countries.map((country: any) => { // TODO: make interface for country instead of any
       if (country.Country !== null) { // some countries currently have null values. Do not include them
         countryNames.push({ label: country.Country })
       }
@@ -63,9 +58,9 @@ function GiveReview() {
           inputValue={country}
           onInputChange={(event, newInputValue) => {
             setCountry(newInputValue);
-            console.log(newInputValue)
           }}
           renderInput={(params) => <TextField {...params} label="" placeholder="Country" required={true} />}
+          isOptionEqualToValue={(option, value) => option.label === value.label}
         />
 
         <Typography variant="h6" sx={reviewHeaderStyling}>Name</Typography>
