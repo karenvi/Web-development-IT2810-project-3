@@ -97,38 +97,15 @@ function Countries() {
       query = modifiedQuery;
     } 
 
-    // TODO: Må finne ut hvordan man kan bare bruke category i stedet for å hardkode inn alle verdiene :,)
     return countries.filter((country: any) => {
-      if (category == "Country") {
-        const countryName = country.Country;
+      if (category != "") {
+        const countryName = country[category];
         if (countryName != null) {
           if (countryName.includes(query)) {
             return countryName.includes(query)
           }
         }
-      } else if (category == "Population") {
-        const countryPopulation = country.Population2022;
-        if (countryPopulation != null) {
-          if (countryPopulation.includes(query)) {
-            return countryPopulation.includes(query)
-          }
-        }
-      } else if (category == "Area") {
-        const countryArea = country.Area;
-        if (countryArea != null) {
-          if (countryArea.includes(query)) {
-            return countryArea.includes(query);
-          }
-        }
-      } else if (category == "Continent") {
-        const countryContinent = country.Continent;
-        if (countryContinent != null) {
-          if (countryContinent.includes(query)) {
-            return countryContinent.includes(query);
-          }
-        }
       }
-      
     })
   }
 
