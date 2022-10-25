@@ -57,8 +57,6 @@ function UserInput () {
         >
           <MenuItem value='Country'>Country</MenuItem>
           <MenuItem value='Continent'>Continent</MenuItem>
-          <MenuItem value='Population'>Population</MenuItem>
-          <MenuItem value='Area'>Area</MenuItem>
         </Select>
       </FormControl>
     </Box>
