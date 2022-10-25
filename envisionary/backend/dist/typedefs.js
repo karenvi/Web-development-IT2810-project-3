@@ -4,7 +4,7 @@ type Review {
   Name: String
   ReviewText: String
   Date: String
-  Rating: Int
+  Rating: Float
 }
 
 type Country {
@@ -25,7 +25,7 @@ type Country {
   Density: String
   GrowthRate: String
   WorldPopulationPercentage: String
-  AverageRating: Int
+  AverageRating: Float
   Reviews: [Review]
 }
 
@@ -34,6 +34,6 @@ type Query {
 }
 
 type Mutation {
-   addReview(Country: String, Name: String, ReviewText: String, Date: String, Rating: Int) : Review
+   addReview(Country: String, Name: String, ReviewText: String, Date: String, Rating: Float) : Review
 }
 `;
