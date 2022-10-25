@@ -4,6 +4,7 @@ import { Autocomplete, Button, Rating, TextField, Typography } from '@mui/materi
 import StarIcon from '@mui/icons-material/Star';
 import { Box } from '@mui/system';
 import { useState } from 'react';
+import { useQuery, gql } from '@apollo/client';
 
 function GiveReview() {
   const [country, setCountry] = useState('');
@@ -11,22 +12,44 @@ function GiveReview() {
   const [author, setAuthor] = useState('');
   const [reviewText, setReviewText] = useState('');
 
-  const getCountries = () => [
-    // Need to get all the country names from database
-    {label: 'Algeria'},
-    {label: 'Norway'},
-  ]
+  // const getCountries = () => [
+  //   // Need to get all the country names from database
+  //   {label: 'Algeria'},
+  //   {label: 'Norway'},
+  // ]
+
+  const getCountryNames = gql`
+  query getCountryNames {
+    countries {
+      _id,
+      Country
+    }}`;
+
+  const { loading, error, data } = useQuery(getCountryNames); // TODO: add error handling
+
+  let countryNames: Array<{ label: string }> = [];
+
+  const getCountries = () => {
+    data.countries.map((country: any, i: number) => {
+      if (data.countries[i.toString()].Country !== null) { // some countries currently have null values. Do not include them
+        countryNames.push({ label: data.countries[i.toString()].Country })
+      }
+    })
+    return countryNames;
+  };
 
   const addReview = () => {
     // Write code for adding the review to the database here
   }
 
-  const reviewHeaderStyling = {mt: 3, fontSize: '18px'}
+  const reviewHeaderStyling = { mt: 3, fontSize: '18px' }
 
   return (
-    <Card sx={{m: '3%', width: '50%', maxWidth: 700, display: 'flex', justifyContent: 'center',
-              alignItems: 'center', p: 6}}>
-      <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
+    <Card sx={{
+      m: '3%', width: '50%', maxWidth: 700, display: 'flex', justifyContent: 'center',
+      alignItems: 'center', p: 6
+    }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <Typography variant="h4">Give review</Typography>
         <Typography variant="h6" sx={reviewHeaderStyling}>Choose a country</Typography>
         <Autocomplete
@@ -42,14 +65,14 @@ function GiveReview() {
         />
 
         <Typography variant="h6" sx={reviewHeaderStyling}>Name</Typography>
-        <TextField id="outlined-basic" 
+        <TextField id="outlined-basic"
           required
           label=""
           placeholder="Name"
           variant="outlined"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-         />
+        />
 
         <Typography variant="h6" sx={reviewHeaderStyling}>Rating</Typography>
         <Rating
@@ -65,18 +88,18 @@ function GiveReview() {
 
         <Typography variant="h6" sx={reviewHeaderStyling}>Review Content</Typography>
         <TextField
-            id="outlined-multiline-static"
-            label=""
-            placeholder="Write your review..."
-            multiline
-            rows={7}
-            sx={{width: '50vw', maxWidth: 500}}
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
-          />
+          id="outlined-multiline-static"
+          label=""
+          placeholder="Write your review..."
+          multiline
+          rows={7}
+          sx={{ width: '50vw', maxWidth: 500 }}
+          value={reviewText}
+          onChange={(e) => setReviewText(e.target.value)}
+        />
 
-        <Button variant="contained" 
-          sx={{backgroundColor: '#172A3A', '&:hover': {backgroundColor: '#172A3A'}, mt: 3, mb: 2}}
+        <Button variant="contained"
+          sx={{ backgroundColor: '#172A3A', '&:hover': { backgroundColor: '#172A3A' }, mt: 3, mb: 2 }}
           onClick={() => addReview()}
         >
           Submit
