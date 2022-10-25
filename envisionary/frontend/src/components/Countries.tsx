@@ -26,6 +26,7 @@ function Countries() {
   const GET_COUNTRIES = gql`
     query Countries {
       countries {
+        _id,
         Rank,
         CCA3,
         Country,
@@ -109,8 +110,7 @@ function Countries() {
     })
   }
 
-  const testCountries = filterCountries(data.countries, searchQuery)
-  console.log(testCountries)
+  const queryFilteredCountries = filterCountries(data.countries, searchQuery)
 
   return (
     <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
@@ -124,8 +124,9 @@ function Countries() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {testCountries.map((row: any ) => (
+          {queryFilteredCountries.map((row: any ) => (
             <TableRow
+              key={row._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => {toCountryPage(row)}}
               hover={true}
