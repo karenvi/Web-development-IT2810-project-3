@@ -102,7 +102,6 @@ function Countries() {
         const countryName = country[category];
         if (countryName != null) {
           const countryNameNotNull = countryName.toLowerCase();
-          console.log(query);
           if (countryNameNotNull.includes(query)) {
             return countryNameNotNull.includes(query)
           }
