@@ -20,7 +20,7 @@ function UserInput () {
 
   // To ensure that the SPA requirement is achieved in the search (doesnt change url on search)
   async function onSubmit(event: any) {
-    history("?s=${searchQuery}", { replace: true });
+    history(`?=${searchQuery}`, { replace: true });
     event.preventDefault();
   }
 
