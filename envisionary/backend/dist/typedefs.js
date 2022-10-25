@@ -1,5 +1,12 @@
 export const typedefs = `#graphql
 
+type Review {
+  Name: String
+  ReviewText: String
+  Date: String
+  Rating: Float
+}
+
 type Country {
   Rank: String 
   CCA3: String
@@ -18,9 +25,15 @@ type Country {
   Density: String
   GrowthRate: String
   WorldPopulationPercentage: String
+  AverageRating: Float
+  Reviews: [Review]
 }
 
 type Query {
   countries: [Country]
+}
+
+type Mutation {
+   addReview(Country: String, Name: String, ReviewText: String, Date: String, Rating: Float) : Review
 }
 `;
