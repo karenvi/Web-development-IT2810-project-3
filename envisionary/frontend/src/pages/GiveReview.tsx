@@ -32,9 +32,10 @@ function GiveReview() {
   const getCountries = () => {
     if (loading) return [{label: "Loading available countries ... "}];
     if (error) return [{label: "Could not find any countries to review"}];
-    data.countries.map((country: any, i: number) => {
-      if (data.countries[i.toString()].Country !== null) { // some countries currently have null values. Do not include them
-        countryNames.push({ label: data.countries[i.toString()].Country })
+    
+    data.countries.map((country: any) => {
+      if (country.Country !== null) { // some countries currently have null values. Do not include them
+        countryNames.push({ label: country.Country })
       }
     })
     return countryNames;
