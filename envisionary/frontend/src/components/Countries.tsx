@@ -93,8 +93,7 @@ function Countries() {
 
     // Make sure query is valid even though user types it without big capital letters etc.
     if (query) {
-      const lengthOfQuery = query.length;
-      const modifiedQuery = query[0].toUpperCase() + query.substring(1, lengthOfQuery).toLowerCase();
+      const modifiedQuery = query.toLowerCase();
       query = modifiedQuery;
     } 
 
@@ -102,8 +101,10 @@ function Countries() {
       if (category != "") {
         const countryName = country[category];
         if (countryName != null) {
-          if (countryName.includes(query)) {
-            return countryName.includes(query)
+          const countryNameNotNull = countryName.toLowerCase();
+          console.log(query);
+          if (countryNameNotNull.includes(query)) {
+            return countryNameNotNull.includes(query)
           }
         }
       }
