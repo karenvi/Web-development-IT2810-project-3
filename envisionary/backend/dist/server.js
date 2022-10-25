@@ -7,11 +7,7 @@ import { typedefs } from "./typedefs.js"; // TODO: .js should be removed - only 
 const uri = process.env.DB_URL;
 async function connectToDB() {
     try {
-        //console.log(uri);
         await mongoose.connect(uri);
-        mongoose.connection.db.listCollections().toArray(function (err, names) {
-            console.log(names); // så vi kan se collections i databasen
-        });
         console.log("🎉 Connected to database successfully");
     }
     catch (err) {
@@ -28,4 +24,4 @@ const server = new ApolloServer({
 const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
 });
-console.log(`🚀  Server ready at: ${url}`);
+console.log(`🚀 Server ready at: ${url}`);
