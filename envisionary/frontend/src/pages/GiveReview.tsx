@@ -3,12 +3,12 @@ import Card from '@mui/material/Card';
 import { Autocomplete, Button, Rating, TextField, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { Box } from '@mui/system';
-import { useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import React, { useState } from 'react';
+import { useQuery, useMutation, gql } from '@apollo/client';
 
 function GiveReview() {
   const [country, setCountry] = useState('');
-  const [rating, setRating] = useState<number | null>(0);
+  const [rating, setRating] = useState<number>(0);
   const [author, setAuthor] = useState('');
   const [reviewText, setReviewText] = useState('');
 
@@ -36,12 +36,22 @@ function GiveReview() {
     return countryNames;
   };
 
-  const addReview = () => {
-    // Write code for adding the review to the database here
-  }
+  // TODO: Move me to query file
+  const addReviewMutation = gql`mutation AddReview($country: String, $name: String, $reviewText: String, $date: String, $rating: Float) {
+    addReview(Country: $country, Name: $name, ReviewText: $reviewText, Date: $date, Rating: $rating) {
+      Name
+      ReviewText
+      Date
+      Rating
+    }
+  }`;
+
+  // Write code for adding the review to the database here
+  const [addReview] = useMutation(addReviewMutation);
 
   const reviewHeaderStyling = { mt: 3, fontSize: '18px' }
 
+  // TODO: Tilbakemelding til brukeren ved feil input
   return (
     <Card sx={{
       m: '3%', width: '50%', maxWidth: 700, display: 'flex', justifyContent: 'center',
@@ -58,6 +68,7 @@ function GiveReview() {
           inputValue={country}
           onInputChange={(event, newInputValue) => {
             setCountry(newInputValue);
+            console.log([newInputValue, rating, author, reviewText]); // TODO: Remove this when development is done
           }}
           renderInput={(params) => <TextField {...params} label="" placeholder="Country" required={true} />}
           isOptionEqualToValue={(option, value) => option.label === value.label}
@@ -80,7 +91,7 @@ function GiveReview() {
           precision={0.5}
           // getLabelText={getLabelText}
           onChange={(event, newValue) => {
-            setRating(newValue);
+            newValue === null ? setRating(0) : setRating(newValue);
           }}
           emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
         />
@@ -99,7 +110,23 @@ function GiveReview() {
 
         <Button variant="contained"
           sx={{ backgroundColor: '#172A3A', '&:hover': { backgroundColor: '#172A3A' }, mt: 3, mb: 2 }}
-          onClick={() => addReview()}
+          onClick={(event) => {
+            event.preventDefault();
+            country && addReview({
+              variables:
+              {
+                country: country,
+                name: author,
+                reviewText: reviewText,
+                date: new Date().toISOString(),
+                rating: rating
+              }
+            });
+            setCountry(""); // TODO: this does nothing, ideally we want to unselect country in dropdown too
+            setAuthor("");
+            setReviewText("");
+            setRating(0);
+          }}
         >
           Submit
         </Button>
