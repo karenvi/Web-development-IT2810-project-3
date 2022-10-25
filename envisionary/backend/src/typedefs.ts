@@ -8,6 +8,7 @@ type Review {
 }
 
 type Country {
+  _id: ID
   Rank: String 
   CCA3: String
   Country: String

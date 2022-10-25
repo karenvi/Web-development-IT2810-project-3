@@ -5,13 +5,53 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useEffect, useState } from 'react';
-import countriesJson from './countries.json'
 import { useNavigate } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
+import { useRecoilState } from 'recoil';
+import { categoryState, searchQueryState } from '../states/states';
 
 function Countries() {
-  const [countries, setCountries] = useState<ICountry[]>([]);
+  const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
+  // const [countries, setCountries] = useState<ICountry[]>([]);
   const navigate = useNavigate()
+  const [category, setCategory] = useRecoilState(categoryState);
+
+  // Code for the searchbar
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s');
+  if (query) {
+    setSearchQuery(query);
+  }
+  // Code for displaying data from the database
+  const GET_COUNTRIES = gql`
+    query Countries {
+      countries {
+        _id,
+        Rank,
+        CCA3,
+        Country,
+        Capital,
+        Continent,
+        Population2022,
+        Population2020,
+        Population2015,
+        Population2010,
+        Population2000,
+        Population1990,
+        Population1980,
+        Population1970,
+        Area,
+        Density,
+        GrowthRate,
+        WorldPopulationPercentage
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(GET_COUNTRIES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
   interface ICountry {
     _id: {
@@ -36,19 +76,41 @@ function Countries() {
     WorldPopulationPercentage: string
   }
 
-  useEffect(() => {
-    fetchData();
-  }, [])
-
-  const fetchData = () => {
-    setCountries(countriesJson)
-  }
+  // const fetchData = () => {
+  //   setCountries(countriesJson)
+  // }
 
   const toCountryPage = (country: ICountry) => {
     navigate('/country', {state: {country}})
   }
 
   const tableHeadStyling = {fontWeight: 'bold'}
+
+  const filterCountries = (countries: any, query: String | null) => {
+    if (!query) {
+      return countries;
+    } 
+
+    // Make sure query is valid even though user types it without big capital letters etc.
+    if (query) {
+      const modifiedQuery = query.toLowerCase();
+      query = modifiedQuery;
+    } 
+
+    return countries.filter((country: any) => {
+      if (category != "") {
+        const countryName = country[category];
+        if (countryName != null) {
+          const countryNameNotNull = countryName.toLowerCase();
+          if (countryNameNotNull.includes(query)) {
+            return countryNameNotNull.includes(query)
+          }
+        }
+      }
+    })
+  }
+
+  const queryFilteredCountries = filterCountries(data.countries, searchQuery)
 
   return (
     <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
@@ -62,9 +124,9 @@ function Countries() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {countries.map((row: ICountry) => (
+          {queryFilteredCountries.map((row: any ) => (
             <TableRow
-              key={row._id.$oid}
+              key={row._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => {toCountryPage(row)}}
               hover={true}
