@@ -14,7 +14,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Feed/>}/>
           <Route path='/country' element={<Country/>}/>
-          
           <Route path='/give-review' element={<GiveReview/>}/>
         </Routes>
       </Router>
