@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { categoryState, searchQueryState } from '../states/states';
+import { Stack } from '@mui/material';
 
 function Countries() {
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
@@ -76,10 +77,6 @@ function Countries() {
     WorldPopulationPercentage: string
   }
 
-  // const fetchData = () => {
-  //   setCountries(countriesJson)
-  // }
-
   const toCountryPage = (country: ICountry) => {
     navigate('/country', {state: {country}})
   }
@@ -111,6 +108,7 @@ function Countries() {
   }
 
   const queryFilteredCountries = filterCountries(data.countries, searchQuery)
+  console.log(queryFilteredCountries.length);
 
   return (
     <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
@@ -124,7 +122,8 @@ function Countries() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {queryFilteredCountries.map((row: any ) => (
+          {queryFilteredCountries.length == 0 ? <TableCell colSpan={4}>Sorry, no results matched your search</TableCell> :
+          queryFilteredCountries.map((row: any ) => (
             <TableRow
               key={row._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
