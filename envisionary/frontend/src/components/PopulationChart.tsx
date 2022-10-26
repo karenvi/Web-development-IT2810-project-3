@@ -68,9 +68,9 @@ function PopulationChart() {
   const FormatYaxis = (populationNumber: number) => {
     if (populationNumber <= 999999){
       return (populationNumber/1000).toString() + 'K';
-    } else if (populationNumber <= 399000000) {
+    } else if (populationNumber <= 999999999) {
       return (populationNumber/1000000).toString() + 'M';
-    } else if (populationNumber >= 40000000) {
+    } else if (populationNumber >= 1000000000) {
       return (populationNumber/1000000000).toString() + 'BN';
     }
     return "Sorry no data";
