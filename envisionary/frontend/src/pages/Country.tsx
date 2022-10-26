@@ -3,14 +3,16 @@ import { useLocation } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import { Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
+import Reviews from '../components/Reviews';
 
 function Country() {
   const location = useLocation()
   // console.log(location)
 
   return (
-    <Card sx={{m: '3%', width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+    <Card sx={{m: '3%', width: '50%', minWidth: 500, display: 'flex', flexDirection: 'column', justifyContent: 'center',
               alignItems: 'center', p: 3}}>
+      {/* <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}> */}
       <Typography variant="h3" sx={{m: 2}}>{location.state.country.Country}</Typography>
       <Box sx={{width: '45vw', height: '25vw', border: 1}}>Graph</Box>
       <Container sx={{width: '45vw', display: 'flex', flexDirection: 'row', m: 4}}>
@@ -27,6 +29,8 @@ function Country() {
           <Typography variant="overline" align='left'>Percentage of world population: {location.state.country.WorldPopulationPercentage}%</Typography>
         </Container>
       </Container>
+      <Reviews/>
+      {/* </Box> */}
     </Card>
   );
 }

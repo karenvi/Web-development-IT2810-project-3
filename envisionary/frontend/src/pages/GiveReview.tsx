@@ -10,6 +10,8 @@ function GiveReview() {
   const [rating, setRating] = useState<number | null>(0);
   const [author, setAuthor] = useState('');
   const [reviewText, setReviewText] = useState('');
+  // const date = new Date(Date.now()).toDateString()
+  // console.log(date)
 
   const getCountries = () => [
     // Need to get all the country names from database
