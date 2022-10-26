@@ -121,7 +121,7 @@ function Countries() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {queryFilteredCountries.length == 0 ? <TableCell colSpan={4}>Sorry, no results matched your search</TableCell> :
+          {queryFilteredCountries.length == 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
           queryFilteredCountries.map((row: any ) => (
             <TableRow
               key={row._id}
