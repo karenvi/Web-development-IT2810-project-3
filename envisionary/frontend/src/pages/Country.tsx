@@ -12,7 +12,7 @@ function Country() {
     <Card sx={{m: '3%', width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center',
               alignItems: 'center', p: 3}}>
       <Typography variant="h3" sx={{m: 2}}>{location.state.country.Country}</Typography>
-      <Box sx={{width: '45vw', height: '30vw', border: 1}}><PopulationChart /></Box>
+      <Box sx={{width: '45vw', height: '30vw'}}><PopulationChart /></Box>
       <Container sx={{width: '45vw', display: 'flex', flexDirection: 'row', m: 4}}>
         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
           <Typography variant="overline">Population rank: {location.state.country.Rank}</Typography>
