@@ -107,8 +107,7 @@ function Countries() {
     })
   }
 
-  const queryFilteredCountries = filterCountries(data.countries, searchQuery)
-  console.log(queryFilteredCountries.length);
+  const queryFilteredCountries = filterCountries(data.countries, searchQuery);
 
   return (
     <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
