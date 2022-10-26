@@ -3,16 +3,16 @@ import { useLocation } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import { Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
+import PopulationChart from '../components/PopulationChart';
 
 function Country() {
   const location = useLocation()
-  // console.log(location)
 
   return (
     <Card sx={{m: '3%', width: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'center',
               alignItems: 'center', p: 3}}>
       <Typography variant="h3" sx={{m: 2}}>{location.state.country.Country}</Typography>
-      <Box sx={{width: '45vw', height: '25vw', border: 1}}>Graph</Box>
+      <Box sx={{width: '45vw', height: '30vw'}}><PopulationChart /></Box>
       <Container sx={{width: '45vw', display: 'flex', flexDirection: 'row', m: 4}}>
         <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
           <Typography variant="overline">Population rank: {location.state.country.Rank}</Typography>
