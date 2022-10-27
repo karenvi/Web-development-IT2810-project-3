@@ -18,9 +18,9 @@ client
       query GetCountries {
         countries {
           Country,
-          Continent,
-          Population2022,
-          Area
+          Reviews{
+            Name
+          }
         }
       }
     `,

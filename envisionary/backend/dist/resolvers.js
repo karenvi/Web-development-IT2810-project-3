@@ -2,7 +2,11 @@ import mongoose from 'mongoose';
 ;
 export const resolvers = {
     Query: {
-        countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries
+        countries: () => mongoose.connection.db.collection("countries").find({}).toArray(),
+        countryByName: async (_parent, args) => {
+            const response = await mongoose.connection.db.collection("countries").findOne({ Country: args.Country });
+            return response;
+        },
     },
     Mutation: {
         addReview: async (_parent, args) => {
@@ -10,7 +14,7 @@ export const resolvers = {
             const update = { $push: { Reviews: { Name: args.Name, ReviewText: args.ReviewText, Date: args.Date, Rating: args.Rating } } };
             const options = { upsert: true };
             const response = await mongoose.connection.db.collection("countries").updateOne(filter, update, options);
-            console.log(response.modifiedCount, " documents updated successfully");
+            console.log(response.modifiedCount, " document updated successfully");
             return response;
         },
     },
