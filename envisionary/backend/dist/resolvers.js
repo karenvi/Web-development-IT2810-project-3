@@ -5,7 +5,6 @@ export const resolvers = {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(),
         countryByName: async (_parent, args) => {
             const response = await mongoose.connection.db.collection("countries").findOne({ Country: args.Country });
-            console.log(response);
             return response;
         },
     },

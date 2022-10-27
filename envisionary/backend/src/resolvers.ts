@@ -17,7 +17,6 @@ export const resolvers = {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries
         countryByName: async (_parent: unknown, args: IcountryReviewsByNameArgs) => {
             const response = await mongoose.connection.db.collection("countries").findOne({Country: args.Country});
-            console.log(response)
             return response;
         },
     },
@@ -29,7 +28,7 @@ export const resolvers = {
             const options = { upsert: true };
             const response = await mongoose.connection.db.collection("countries").updateOne(filter, update, options);
 
-            console.log(response.modifiedCount, " documents updated successfully");
+            console.log(response.modifiedCount, " document updated successfully");
 
             return response;
         },
