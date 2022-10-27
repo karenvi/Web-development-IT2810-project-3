@@ -7,20 +7,32 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
 import { ICountry } from './CountriesQuery';
+import { useState } from 'react';
+import PaginationFunctions from './PaginationFunctions';
+import { Pagination, Stack, Typography } from '@mui/material';
 
 interface Props {
     queryFilteredCountries: any;
 }
 
 function CountriesPagination({queryFilteredCountries}: Props) {
-
-
+    const [onPage, setOnPage] = useState(1);
     const navigate = useNavigate()
-
+    const elementsPerPage = 7;
+    const numberOfPages = Math.ceil(queryFilteredCountries.length / elementsPerPage);
+    const dataPage = PaginationFunctions(queryFilteredCountries, elementsPerPage);
+    
     const toCountryPage = (country: ICountry) => {
         navigate('/country', {state: {country}})
     }
+
     const tableHeadStyling = {fontWeight: 'bold'}
+
+    const handlePagination = (e: any, p: number) => {
+        dataPage.skip(p);
+        setOnPage(p);
+    }
+
     return (
         <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
         <Table sx={{ minWidth: 300 }} aria-label="simple table">
@@ -33,8 +45,8 @@ function CountriesPagination({queryFilteredCountries}: Props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {queryFilteredCountries.length == 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
-            queryFilteredCountries.map((row: any ) => (
+            {dataPage.dataDisplaying().length == 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
+            dataPage.dataDisplaying().map((row: any ) => (
               <TableRow
                 key={row._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -49,6 +61,17 @@ function CountriesPagination({queryFilteredCountries}: Props) {
             ))}
           </TableBody>
         </Table>
+        {dataPage.dataDisplaying().length == 0 ? <></> : 
+        <Stack alignItems="center" sx={{pt: '10px', pb: "10px"}}>
+                <Pagination
+                    count={numberOfPages}
+                    variant='outlined'
+                    page={onPage}
+                    onChange={handlePagination}
+                    className="pagination"
+                />
+                <Typography variant="subtitle1" sx={{ fontFamily: 'Roboto', fontSize: '16px'}}>{onPage} of {numberOfPages == 0 ? "1" : numberOfPages}</Typography>
+        </Stack>}
       </TableContainer>
     );
 }
