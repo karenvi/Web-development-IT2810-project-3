@@ -1,12 +1,10 @@
-import Books from '../components/Countries';
-import UserInput from '../components/UserInput';
+import Countries from '../components/Countries';
 
 function Feed() {
 
   return (
     <>
-      <UserInput />
-      <Books />
+      <Countries />
     </>
   );
 }

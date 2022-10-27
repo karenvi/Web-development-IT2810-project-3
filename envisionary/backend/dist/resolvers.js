@@ -14,7 +14,7 @@ export const resolvers = {
             const update = { $push: { Reviews: { Name: args.Name, ReviewText: args.ReviewText, Date: args.Date, Rating: args.Rating } } };
             const options = { upsert: true };
             const response = await mongoose.connection.db.collection("countries").updateOne(filter, update, options);
-            console.log(response.modifiedCount, " documents updated successfully");
+            console.log(response.modifiedCount, " document updated successfully");
             return response;
         },
     },

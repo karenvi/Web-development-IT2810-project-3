@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { categoryState, searchQueryState } from '../states/states';
-import CountriesPagination from './CountriesPagination';
 import {GET_COUNTRIES} from './CountriesQuery';
+import UserInput from './UserInput';
 
 function Countries() {
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
@@ -47,7 +47,7 @@ function Countries() {
   const queryFilteredCountries = filterCountries(data.countries, searchQuery);
 
   return (
-    <CountriesPagination queryFilteredCountries={queryFilteredCountries} />
+    <UserInput queryFilteredCountries={queryFilteredCountries} />
   );
 }
 export default Countries
