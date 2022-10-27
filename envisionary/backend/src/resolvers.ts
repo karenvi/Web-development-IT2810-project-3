@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import { TypedQueryDocumentNode } from 'graphql';
+import mongoose, { FilterQuery, Query, UpdateQuery } from 'mongoose';
 
 
 interface IaddReviewArgs {
@@ -9,21 +10,23 @@ interface IaddReviewArgs {
     Rating: number; // float between 1-5
 };
 
+
 export const resolvers = {
     Query: {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries
     },
 
     Mutation: {
-        addReview: async (_parent: unknown, args: IaddReviewArgs) => {
+        addReview: async (_parent: any, args: IaddReviewArgs) => {
             const filter = { Country: args.Country };
             const update = { $push: { Reviews: { Name: args.Name, ReviewText: args.ReviewText, Date: args.Date, Rating: args.Rating } } };
-            const options = { upsert: true };
-            const response = await mongoose.connection.db.collection("countries").updateOne(filter, update, options);
+            const options = { new: true, upsert: true };
 
-            console.log(response.modifiedCount, " documents updated successfully");
+            const response = await mongoose.connection.db.collection("countries").findOneAndUpdate(filter, update as unknown, options);
 
-            return response;
+            console.log(response.value);
+
+            return response.value;
         },
     },
 

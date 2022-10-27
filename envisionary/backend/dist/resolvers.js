@@ -8,10 +8,10 @@ export const resolvers = {
         addReview: async (_parent, args) => {
             const filter = { Country: args.Country };
             const update = { $push: { Reviews: { Name: args.Name, ReviewText: args.ReviewText, Date: args.Date, Rating: args.Rating } } };
-            const options = { upsert: true };
-            const response = await mongoose.connection.db.collection("countries").updateOne(filter, update, options);
-            console.log(response.modifiedCount, " documents updated successfully");
-            return response;
+            const options = { new: true, upsert: true };
+            const response = await mongoose.connection.db.collection("countries").findOneAndUpdate(filter, update, options);
+            console.log(response.value);
+            return response.value;
         },
     },
 };
