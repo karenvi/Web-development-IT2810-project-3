@@ -22,7 +22,7 @@ query Countries {
     Density,
     GrowthRate,
     WorldPopulationPercentage,
-    Reviews{
+    Reviews {
         Name,
         ReviewText,
         Date,
@@ -32,7 +32,7 @@ query Countries {
 }
 `;
 
-interface IReview {
+export interface IReview {
     Name: string
     ReviewText: string,
     Date: string,

@@ -6,9 +6,19 @@ import { Box, Container } from '@mui/system';
 import Reviews from '../components/Reviews';
 import PopulationChart from '../components/PopulationChart';
 import StarIcon from '@mui/icons-material/Star';
+import {IReview, ICountry} from '../components/CountriesQuery';
+
 
 function Country() {
-  const location = useLocation()
+  const location = useLocation();
+
+  // calculate average rating 
+  let totalSum: number = 0, avrgRating: number = 0;
+  if (location.state.country.Reviews !== null) {
+    location.state.country.Reviews.map((row: IReview) => totalSum += row.Rating); 
+    avrgRating = totalSum/location.state.country.Reviews.length;
+  }
+
 
   return (
     <Card sx={{m: '3%', width: '50%', minWidth: '520px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
@@ -17,10 +27,10 @@ function Country() {
       <Box sx={{width: '45vw', minWidth: '500px', height: '30vw', minHeight: '350px'}}><PopulationChart /></Box>
       <Container sx={{width: '670px', display: 'flex', flexDirection: 'column', m: 4, alignItems: 'flex-start'}}>
         <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1}}>
-          <Rating name="read-only" value={3.5 /* Putt averagerating her*/} precision={0.5} readOnly
+          <Rating name="read-only" value={avrgRating} precision={0.5} readOnly
                   emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
           />
-          <Typography variant="overline" sx={{ml: 1}}>3.5 {/* Putt averagerating her*/}</Typography>
+          <Typography variant="overline" sx={{ml: 1}}> {avrgRating}</Typography>
         </Box>
         <Container sx={{display: 'flex', flexDirection: 'row'}}>
           <Container sx={{width: '220px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
