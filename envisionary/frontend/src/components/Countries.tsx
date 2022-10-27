@@ -110,7 +110,7 @@ function Countries() {
   const queryFilteredCountries = filterCountries(data.countries, searchQuery);
 
   return (
-    <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
+    <TableContainer sx={{ width: '50%', m: '10px', minWidth: '520px'}} component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="simple table">
         <TableHead>
           <TableRow>
