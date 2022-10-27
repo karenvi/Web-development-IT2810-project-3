@@ -4,7 +4,7 @@ import { categoryState, searchQueryState } from '../states/states';
 import CountriesPagination from './CountriesPagination';
 import {GET_COUNTRIES} from './CountriesQuery';
 
-function Countries() {
+function Search() {
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
   const [category, setCategory] = useRecoilState(categoryState);
 
@@ -50,4 +50,5 @@ function Countries() {
     <CountriesPagination queryFilteredCountries={queryFilteredCountries} />
   );
 }
-export default Countries
+
+export default Search;

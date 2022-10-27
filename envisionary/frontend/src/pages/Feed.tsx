@@ -1,4 +1,4 @@
-import Books from '../components/Countries';
+import Search from '../components/Search';
 import UserInput from '../components/UserInput';
 
 function Feed() {
@@ -6,7 +6,7 @@ function Feed() {
   return (
     <>
       <UserInput />
-      <Books />
+      <Search />
     </>
   );
 }

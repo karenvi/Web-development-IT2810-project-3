@@ -12,15 +12,15 @@ import PaginationFunctions from './PaginationFunctions';
 import { Pagination, Stack, Typography } from '@mui/material';
 
 interface Props {
-    queryFilteredCountries: any;
+    queryFilteredCountries: Array<any>;
 }
 
 function CountriesPagination({queryFilteredCountries}: Props) {
     const [onPage, setOnPage] = useState(1);
-    const navigate = useNavigate()
+    const [sortByIncreasingPop, setSortByIncreasingPop] = useState(false);
+    const [sortByDecreasingPop, setSortByDecreasingPop] = useState(true);
+    const navigate = useNavigate();
     const elementsPerPage = 7;
-    const numberOfPages = Math.ceil(queryFilteredCountries.length / elementsPerPage);
-    const dataPage = PaginationFunctions(queryFilteredCountries, elementsPerPage);
     
     const toCountryPage = (country: ICountry) => {
         navigate('/country', {state: {country}})
@@ -32,6 +32,27 @@ function CountriesPagination({queryFilteredCountries}: Props) {
         dataPage.skip(p);
         setOnPage(p);
     }
+
+    const newArray: any[] = []
+    for (let i = 0; i < queryFilteredCountries.length; i++) {
+      if (queryFilteredCountries[i].Population2022 != null) {
+        newArray.push(queryFilteredCountries[i]);
+      }
+    }
+    
+  function checkFilters() {
+    if (sortByDecreasingPop) {
+      newArray.sort((a: any, b: any) => {return parseInt(b.Population2022) - parseInt(a.Population2022);})  
+    } else if (sortByIncreasingPop) {
+      newArray.sort((a: any, b: any) => {return parseInt(a.Population2022) - parseInt(b.Population2022);})
+    }
+  }
+
+  const numberOfPages = Math.ceil(newArray.length / elementsPerPage);
+  const dataPage = PaginationFunctions(newArray, elementsPerPage);
+
+  checkFilters();
+
 
     return (
         <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
