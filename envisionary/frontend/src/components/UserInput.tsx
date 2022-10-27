@@ -33,19 +33,25 @@ function UserInput ({queryFilteredCountries}: Props) {
   const numberOfPages = Math.ceil(queryFilteredCountries.length / elementsPerPage);
   const dataPage = PaginationFunctions(queryFilteredCountries, elementsPerPage);
   
+  // Routing to each country
   const toCountryPage = (country: ICountry) => {
       navigate('/country', {state: {country}})
   }
 
+  // Styling of the table headers
   const tableHeadStyling = {fontWeight: 'bold'}
 
+  // Skips/goes and goes to next page 
   const handlePagination = (e: any, p: number) => {
       dataPage.skip(p);
       setOnPage(p);
   }
+
   const history = useNavigate();
+
   const labelSearch = "Search after " + category.toLowerCase();
 
+  // Sets category based on user input
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
   };
@@ -56,6 +62,7 @@ function UserInput ({queryFilteredCountries}: Props) {
     event.preventDefault();
   }
 
+  // Make pagination go back to page 1 whenever user changes input
   const detectAnyChanges = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {
       target: { value }
