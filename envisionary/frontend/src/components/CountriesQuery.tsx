@@ -21,11 +21,35 @@ query Countries {
     Area,
     Density,
     GrowthRate,
-    WorldPopulationPercentage
+    WorldPopulationPercentage,
+    Reviews {
+        Name,
+        ReviewText,
+        Date,
+        Rating
+    }
+    }
+}
+`;
+export const GET_REVIEWS_BY_COUNTRY_NAME = gql`
+query CountryReviewsByName($country: String) {
+  countryByName(Country: $country) {
+    Reviews{
+        Name,
+        ReviewText,
+        Date,
+        Rating
+    }
     }
 }
 `;
 
+export interface IReview {
+    Name: string
+    ReviewText: string,
+    Date: string,
+    Rating: number
+}
 
 export interface ICountry {
     _id: {
@@ -47,5 +71,6 @@ export interface ICountry {
     Area: string,
     Density: string,
     GrowthRate: string,
-    WorldPopulationPercentage: string
+    WorldPopulationPercentage: string,
+    Reviews: Array<IReview>
 }

@@ -1,3 +1,4 @@
+import { argsToArgsConfig } from 'graphql/type/definition';
 import mongoose from 'mongoose';
 
 
@@ -8,10 +9,16 @@ interface IaddReviewArgs {
     Date: string; // set to string to avoid typing problems; in practice we create a new Date(), then convert to iso string
     Rating: number; // float between 1-5
 };
-
+interface IcountryReviewsByNameArgs {
+    Country: string
+}
 export const resolvers = {
     Query: {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries
+        countryByName: async (_parent: unknown, args: IcountryReviewsByNameArgs) => {
+            const response = await mongoose.connection.db.collection("countries").findOne({Country: args.Country});
+            return response;
+        },
     },
 
     Mutation: {
@@ -21,7 +28,7 @@ export const resolvers = {
             const options = { upsert: true };
             const response = await mongoose.connection.db.collection("countries").updateOne(filter, update, options);
 
-            console.log(response.modifiedCount, " documents updated successfully");
+            console.log(response.modifiedCount, " document updated successfully");
 
             return response;
         },
