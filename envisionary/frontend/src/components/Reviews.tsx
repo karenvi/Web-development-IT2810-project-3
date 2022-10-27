@@ -1,8 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid, Paper, Rating, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import StarIcon from '@mui/icons-material/Star';
-import { useEffect, useState } from "react";
-import Country from "../pages/Country";
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_REVIEWS_BY_COUNTRY_NAME } from './CountriesQuery';
@@ -15,7 +13,6 @@ function Reviews() {
     Rating: number
   }
 
-  const [reviews, setReviews] = useState<IReview[]>([]);
   let number = 0;
   const location = useLocation();
   const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
