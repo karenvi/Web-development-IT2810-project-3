@@ -22,7 +22,7 @@ query Countries {
     Density,
     GrowthRate,
     WorldPopulationPercentage,
-    Reviews{
+    Reviews {
         Name,
         ReviewText,
         Date,
@@ -44,7 +44,7 @@ query CountryReviewsByName($country: String) {
 }
 `;
 
-interface IReview {
+export interface IReview {
     Name: string
     ReviewText: string,
     Date: string,
