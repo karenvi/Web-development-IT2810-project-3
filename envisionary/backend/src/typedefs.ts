@@ -26,7 +26,6 @@ type Country {
   Density: String
   GrowthRate: String
   WorldPopulationPercentage: String
-  AverageRating: Float
   Reviews: [Review]
 }
 
@@ -35,7 +34,7 @@ type Query {
 }
 
 type Mutation {
-   addReview(Country: String, Name: String, ReviewText: String, Date: String, Rating: Float) : Review
+   addReview(Country: String, Name: String, ReviewText: String, Date: String, Rating: Float) : Country
 }
 `
 
