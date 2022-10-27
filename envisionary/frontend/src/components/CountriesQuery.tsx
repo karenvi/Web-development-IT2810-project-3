@@ -31,13 +31,25 @@ query Countries {
     }
 }
 `;
+export const GET_REVIEWS_BY_COUNTRY_NAME = gql`
+query CountryReviewsByName($country: String) {
+  countryByName(Country: $country) {
+    Reviews{
+        Name,
+        ReviewText,
+        Date,
+        Rating
+    }
+    }
+}
+`;
 
 interface IReview {
     Name: string
     ReviewText: string,
     Date: string,
     Rating: number
-  }
+}
 
 export interface ICountry {
     _id: {

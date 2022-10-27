@@ -2,7 +2,12 @@ import mongoose from 'mongoose';
 ;
 export const resolvers = {
     Query: {
-        countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries
+        countries: () => mongoose.connection.db.collection("countries").find({}).toArray(),
+        countryByName: async (_parent, args) => {
+            const response = await mongoose.connection.db.collection("countries").findOne({ Country: args.Country });
+            console.log(response);
+            return response;
+        },
     },
     Mutation: {
         addReview: async (_parent, args) => {

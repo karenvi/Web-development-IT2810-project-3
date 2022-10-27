@@ -2,10 +2,10 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid, Paper, Rating, Typ
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import StarIcon from '@mui/icons-material/Star';
 import { useEffect, useState } from "react";
-import { GET_COUNTRIES } from './CountriesQuery';
-import { useQuery } from '@apollo/client';
 import Country from "../pages/Country";
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import {GET_REVIEWS_BY_COUNTRY_NAME} from './CountriesQuery';
 
 function Reviews() {
   const [reviews, setReviews] = useState<IReview[]>([]);
@@ -19,10 +19,16 @@ function Reviews() {
   }
 
   const location = useLocation()
+  const { loading, error, data } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME,{variables:{country: location.state.country.Country}});
+  console.log(loading);
+  console.log(data);
+
+  if (loading) return <p>Loading reviews ...</p>;
+  if (error) return <p>Could not get reviews</p>;
 
   return (
     <>
-      {!location.state.country.Reviews ? <Typography>Nobody has reviewed {location.state.country.Country} yet</Typography> :
+      {!data.countryByName.Reviews ? <Typography>Nobody has reviewed {location.state.country.Country} yet</Typography> :
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -32,7 +38,7 @@ function Reviews() {
             <Typography>Reviews</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {location.state.country.Reviews.map((row: IReview) => (
+            {data.countryByName.Reviews.map((row: IReview) => (
               <Paper variant="outlined" key={number++} sx={{ mb: 2 }}>
                 <Grid container spacing={2} p={2}>
                   <Grid item xs={9} sx={{ display: 'flex', flexDirection: 'row' }}>
@@ -46,8 +52,8 @@ function Reviews() {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    <Typography color='gray' align="right" sx={{fontSize: "14px"}}>
-                      {new Date(row.Date).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'})}</Typography>
+                    <Typography color='gray' align="right" sx={{ fontSize: "14px" }}>
+                      {new Date(row.Date).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <Typography align="left">{row.ReviewText}</Typography>
