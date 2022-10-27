@@ -39,10 +39,12 @@ function GiveReview() {
   // TODO: Move me to query file
   const addReviewMutation = gql`mutation AddReview($country: String, $name: String, $reviewText: String, $date: String, $rating: Float) {
     addReview(Country: $country, Name: $name, ReviewText: $reviewText, Date: $date, Rating: $rating) {
-      Name
-      ReviewText
-      Date
-      Rating
+      #Reviews { // til senere, skal nok endre addReview-mutation og da blir det sånn
+        Name,
+        ReviewText,
+        Date,
+        Rating
+      #}
     }
   }`;
 
@@ -68,7 +70,6 @@ function GiveReview() {
           inputValue={country}
           onInputChange={(event, newInputValue) => {
             setCountry(newInputValue);
-            console.log([newInputValue, rating, author, reviewText]); // TODO: Remove this when development is done
           }}
           renderInput={(params) => <TextField {...params} label="" placeholder="Country" required={true} />}
           isOptionEqualToValue={(option, value) => option.label === value.label}

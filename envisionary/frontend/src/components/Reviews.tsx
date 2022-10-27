@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Country from "../pages/Country";
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import {GET_REVIEWS_BY_COUNTRY_NAME} from './CountriesQuery';
+import { GET_REVIEWS_BY_COUNTRY_NAME } from './CountriesQuery';
 
 function Reviews() {
   const [reviews, setReviews] = useState<IReview[]>([]);
@@ -18,11 +18,13 @@ function Reviews() {
     Rating: number
   }
 
-  const location = useLocation()
-  const { loading, error, data } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME,{variables:{country: location.state.country.Country}});
-  console.log(loading);
-  console.log(data);
+  const location = useLocation();
+  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
 
+  // Fetches any updates before displaying reviews
+  const fetchUpdates = () => refetch({ country: location.state.country.Country });
+  fetchUpdates();
+  
   if (loading) return <p>Loading reviews ...</p>;
   if (error) return <p>Could not get reviews</p>;
 
