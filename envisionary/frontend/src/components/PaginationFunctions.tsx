@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+// Disclaimer: We used this code in our previous IT2810 project 
 // Inspired by: https://codesandbox.io/s/react-hooks-material-ui-pagination-example-trp9o?file=/src/App.js:110-198
 function PaginationFunctions(data: Array<any>, elementsPerPage: number) {
     const [onPage, setOnPage] = useState(1);
