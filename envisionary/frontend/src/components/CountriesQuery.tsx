@@ -21,11 +21,23 @@ query Countries {
     Area,
     Density,
     GrowthRate,
-    WorldPopulationPercentage
+    WorldPopulationPercentage,
+    Reviews{
+        Name,
+        ReviewText,
+        Date,
+        Rating
+    }
     }
 }
 `;
 
+interface IReview {
+    Name: string
+    ReviewText: string,
+    Date: string,
+    Rating: number
+  }
 
 export interface ICountry {
     _id: {
@@ -47,5 +59,6 @@ export interface ICountry {
     Area: string,
     Density: string,
     GrowthRate: string,
-    WorldPopulationPercentage: string
+    WorldPopulationPercentage: string,
+    Reviews: Array<IReview>
 }
