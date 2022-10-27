@@ -39,12 +39,10 @@ function GiveReview() {
   // TODO: Move me to query file
   const addReviewMutation = gql`mutation AddReview($country: String, $name: String, $reviewText: String, $date: String, $rating: Float) {
     addReview(Country: $country, Name: $name, ReviewText: $reviewText, Date: $date, Rating: $rating) {
-      #Reviews { // til senere, skal nok endre addReview-mutation og da blir det sånn
-        Name,
-        ReviewText,
-        Date,
-        Rating
-      #}
+      Name,
+      ReviewText,
+      Date,
+      Rating
     }
   }`;
 

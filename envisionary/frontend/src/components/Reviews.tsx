@@ -8,9 +8,6 @@ import { useQuery } from '@apollo/client';
 import { GET_REVIEWS_BY_COUNTRY_NAME } from './CountriesQuery';
 
 function Reviews() {
-  const [reviews, setReviews] = useState<IReview[]>([]);
-  let number = 0;
-
   interface IReview {
     Name: string
     ReviewText: string,
@@ -18,13 +15,14 @@ function Reviews() {
     Rating: number
   }
 
+  const [reviews, setReviews] = useState<IReview[]>([]);
+  let number = 0;
   const location = useLocation();
   const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
 
-  // Fetches any updates before displaying reviews
-  const fetchUpdates = () => refetch({ country: location.state.country.Country });
-  fetchUpdates();
-  
+  // Fetches any new reviews before displaying reviews section
+  refetch();
+
   if (loading) return <p>Loading reviews ...</p>;
   if (error) return <p>Could not get reviews</p>;
 
