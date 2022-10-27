@@ -30,7 +30,7 @@ function Country() {
           <Rating name="read-only" value={avrgRating} precision={0.5} readOnly
                   emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
           />
-          <Typography variant="overline" sx={{ml: 1}}> {avrgRating}</Typography>
+          <Typography variant="overline" sx={{ml: 1}}> {avrgRating.toFixed(2)}</Typography>
         </Box>
         <Container sx={{display: 'flex', flexDirection: 'row'}}>
           <Container sx={{width: '220px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
