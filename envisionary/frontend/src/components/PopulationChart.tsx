@@ -15,7 +15,7 @@ import { ValueType, NameType } from "recharts/types/component/DefaultTooltipCont
 
 
 // Formatting for Rechart Tooltip (inspiration: https://codesandbox.io/s/unruffled-napier-pzbdld?file=/src/CustomTooltip.js:0-572)
-const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element|null => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element | null => {
   if (active && payload && payload.length) {
     return (
       <Box sx={{

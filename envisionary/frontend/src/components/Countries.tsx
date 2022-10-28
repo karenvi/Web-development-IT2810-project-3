@@ -1,7 +1,7 @@
 import { Observable, useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { categoryState, searchQueryState } from '../states/states';
-import {GET_COUNTRIES} from '../graphql/queries';
+import { GET_COUNTRIES } from '../graphql/queries';
 import { ICountry } from '../types';
 import UserInput from './UserInput';
 
@@ -24,17 +24,17 @@ function Countries() {
   const filterCountries = (countries: Array<ICountry>, query: string) => {
     if (!query) {
       return countries;
-    } 
+    }
 
     // Make sure query is valid even though user types it without big capital letters etc.
     if (query) {
       const modifiedQuery = query.toLowerCase();
       query = modifiedQuery;
-    } 
-    
+    }
+
     return countries.filter((country: ICountry) => {
-        if (category == "Continent" || category == "Country") {
-          const categoryValue = country[category];
+      if (category == "Continent" || category == "Country") {
+        const categoryValue = country[category];
         if (categoryValue !== null) {
           const countryValueNotNull = categoryValue.toLowerCase();
           if (countryValueNotNull.includes(query)) {
