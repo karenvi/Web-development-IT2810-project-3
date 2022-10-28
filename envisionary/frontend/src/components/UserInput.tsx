@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
-import { categoryState, changeDetectedState, searchQueryState } from '../states/states';
+import { categoryState, searchQueryState } from '../states/states';
 import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import Table from '@mui/material/Table';
@@ -121,7 +121,7 @@ function UserInput({ queryFilteredCountries }: Props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dataPage.dataDisplaying().length == 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
+            {dataPage.dataDisplaying().length === 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
               dataPage.dataDisplaying().map((row: ICountry) => (
                 <TableRow
                   key={row._id}
@@ -137,7 +137,7 @@ function UserInput({ queryFilteredCountries }: Props) {
               ))}
           </TableBody>
         </Table>
-        {dataPage.dataDisplaying().length == 0 ? <></> :
+        {dataPage.dataDisplaying().length === 0 ? <></> :
           <Stack alignItems="center" sx={{ pt: '10px', pb: "10px" }}>
             <Pagination
               count={numberOfPages}
@@ -147,7 +147,7 @@ function UserInput({ queryFilteredCountries }: Props) {
               onChange={handlePagination}
               className="pagination"
             />
-            <Typography variant="subtitle1" sx={{ fontFamily: 'Roboto', fontSize: '16px' }}>{onPage} of {numberOfPages == 0 ? "1" : numberOfPages}</Typography>
+            <Typography variant="subtitle1" sx={{ fontFamily: 'Roboto', fontSize: '16px' }}>{onPage} of {numberOfPages === 0 ? "1" : numberOfPages}</Typography>
           </Stack>}
       </TableContainer>
     </>
