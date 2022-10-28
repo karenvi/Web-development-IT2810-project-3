@@ -18,7 +18,7 @@ import Paper from '@mui/material/Paper';
 import { ICountry } from './CountriesQuery';
 import PaginationFunctions from './PaginationFunctions';
 import { Pagination, Stack, Typography } from '@mui/material';
-
+import SortIcon from '@mui/icons-material/Sort';
 
 interface Props {
   queryFilteredCountries: any;
@@ -28,11 +28,17 @@ function UserInput ({queryFilteredCountries}: Props) {
   const [category, setCategory] = useRecoilState(categoryState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
   const [onPage, setOnPage] = useState(1);
+  // const [orderCountryAlphabetically, setOrderCountryAlphabetically] = useState(false);
+  const [orderDescPopulation, setOrderDescPopulation] = useState(false);
+  const [orderAscendingPopulation, setOrderAscendingPopulation] = useState(false);
+  const [orderContinentAlphabetically, setOrderContinentAlphabetically] = useState(false);
+  
+  
+
+
   const navigate = useNavigate()
   const elementsPerPage = 7;
-  const numberOfPages = Math.ceil(queryFilteredCountries.length / elementsPerPage);
-  const dataPage = PaginationFunctions(queryFilteredCountries, elementsPerPage);
-  
+
   // Routing to each country
   const toCountryPage = (country: ICountry) => {
       navigate('/country', {state: {country}})
@@ -69,6 +75,36 @@ function UserInput ({queryFilteredCountries}: Props) {
     } = event;
     
     handlePagination(event, 1);
+  }
+
+  const newArray: any[] = []
+  for (let i = 0; i < queryFilteredCountries.length; i++) {
+    if (queryFilteredCountries[i].Population2022 != null) {
+      newArray.push(queryFilteredCountries[i]);
+    }
+  }
+    
+  function checkFilters() {
+    if (orderDescPopulation) {
+      newArray.sort((a, b) => {return parseInt(b.Population2022) - parseInt(a.Population2022);})
+    } else if (orderAscendingPopulation) {
+      newArray.sort((a, b) => {return parseInt(a.Population2022) - parseInt(b.Population2022);})
+    } else if (orderContinentAlphabetically) {
+      newArray.sort((a, b) => {return a.Continent.localeCompare(b.Continent)});
+    }
+  }
+
+
+  const numberOfPages = Math.ceil(newArray.length / elementsPerPage);
+  const dataPage = PaginationFunctions(newArray, elementsPerPage);
+
+  checkFilters();
+
+  function checkValue(value: Boolean) {
+    if (value) {
+      return false;
+    }
+    return true;
   }
 
 
@@ -114,10 +150,10 @@ function UserInput ({queryFilteredCountries}: Props) {
            <Table sx={{ minWidth: 300 }} aria-label="simple table">
              <TableHead>
                <TableRow>
-                 <TableCell sx={tableHeadStyling}>Country</TableCell>
-                 <TableCell sx={tableHeadStyling} align="right">Continent</TableCell>
-                 <TableCell sx={tableHeadStyling} align="right">Population (2022)</TableCell>
-                 <TableCell sx={tableHeadStyling} align="right">Area (km&#178;)</TableCell>
+                 <TableCell sx={tableHeadStyling}>Country<SortIcon /></TableCell>
+                 <TableCell sx={tableHeadStyling} align="right">Continent<SortIcon onClick={(e) => {setOrderContinentAlphabetically(checkValue(orderContinentAlphabetically))}}/></TableCell>
+                 <TableCell sx={tableHeadStyling} align="right">Population (2022)<SortIcon onClick={(e) => {setOrderAscendingPopulation(checkValue(orderAscendingPopulation))}}/></TableCell>
+                 <TableCell sx={tableHeadStyling} align="right">Area (km&#178;)<SortIcon /></TableCell>
                </TableRow>
              </TableHead>
              <TableBody>

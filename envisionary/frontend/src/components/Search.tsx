@@ -21,7 +21,7 @@ function Search() {
   if (error) return <p>Error :(</p>;
 
   const filterCountries = (countries: any, query: String | null) => {
-    if (!query) {
+    if (!query || query == "") {
       return countries;
     } 
 
