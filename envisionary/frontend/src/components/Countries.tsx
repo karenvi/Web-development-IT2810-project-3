@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { Observable, useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { categoryState, searchQueryState } from '../states/states';
 import {GET_COUNTRIES} from '../graphql/queries';
@@ -21,7 +21,7 @@ function Countries() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const filterCountries = (countries: Array<ICountry>, query: String | null) => {
+  const filterCountries = (countries: Array<ICountry>, query: string) => {
     if (!query) {
       return countries;
     } 
@@ -32,9 +32,9 @@ function Countries() {
       query = modifiedQuery;
     } 
     
-    return countries.filter((country: any) => {
-      if (category !== "") {
-        const categoryValue = country[category];
+    return countries.filter((country: ICountry) => {
+        if (category == "Continent" || category == "Country") {
+          const categoryValue = country[category];
         if (categoryValue !== null) {
           const countryValueNotNull = categoryValue.toLowerCase();
           if (countryValueNotNull.includes(query)) {
