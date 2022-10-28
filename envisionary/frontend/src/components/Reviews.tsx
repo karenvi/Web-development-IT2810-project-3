@@ -4,14 +4,9 @@ import StarIcon from '@mui/icons-material/Star';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_REVIEWS_BY_COUNTRY_NAME } from './CountriesQuery';
+import { IReview } from "../types"
 
 function Reviews() {
-  interface IReview {
-    Name: string
-    ReviewText: string,
-    Date: string,
-    Rating: number
-  }
 
   let number = 0;
   const location = useLocation();

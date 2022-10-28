@@ -31,6 +31,8 @@ query Countries {
     }
 }
 `;
+
+// Get a reviews for a specific country
 export const GET_REVIEWS_BY_COUNTRY_NAME = gql`
 query CountryReviewsByName($country: String) {
   countryByName(Country: $country) {
@@ -43,3 +45,11 @@ query CountryReviewsByName($country: String) {
     }
 }
 `;
+
+// Get only country names
+export const GET_COUNTRY_NAMES = gql`
+query getCountryNames {
+    countries {
+        Country
+    }
+}`;
