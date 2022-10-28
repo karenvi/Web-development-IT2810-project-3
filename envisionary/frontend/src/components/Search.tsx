@@ -9,11 +9,11 @@ function Search() {
   const [category, setCategory] = useRecoilState(categoryState);
 
   // Code for the searchbar
-  const { search } = window.location;
-  const query = new URLSearchParams(search).get('s');
-  if (query) {
-    setSearchQuery(query);
-  }
+  // const { search } = window.location;
+  // const query = new URLSearchParams(search).get('s');
+  // if (query) {
+  //   setSearchQuery(query);
+  // }
 
   const { loading, error, data } = useQuery(GET_COUNTRIES);
 
