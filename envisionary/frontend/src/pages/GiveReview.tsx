@@ -3,8 +3,12 @@ import Card from '@mui/material/Card';
 import { Autocomplete, Button, Rating, TextField, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_COUNTRY_NAMES } from "../graphql/queries";
+import { ADD_REVIEW } from "../graphql/mutations"
+import { ICountry } from "../types";
+
 
 function GiveReview() {
   const [country, setCountry] = useState('');
@@ -12,42 +16,24 @@ function GiveReview() {
   const [author, setAuthor] = useState('');
   const [reviewText, setReviewText] = useState('');
 
-  // TODO: Move queries to its own file for more tidy code
-  const getCountryNames = gql`query getCountryNames {
-    countries {
-      _id,
-      Country
-    }
-  }`;
-
-  const { loading, error, data } = useQuery(getCountryNames);
+  const { loading, error, data } = useQuery(GET_COUNTRY_NAMES);
 
   let countryNames: Array<{ label: string }> = [];
 
-  const getCountries = () => {
+  const getCountryNames = () => {
     if (loading) return [{ label: "Loading available countries ... " }];
     if (error) return [{ label: "Could not find any countries to review" }];
 
-    data.countries.map((country: any) => { // TODO: make interface for country instead of any
-      if (country.Country !== null) { // some countries currently have null values. Do not include them
+    data.countries.map((country: ICountry) => {
+      if (country.Country !== null) { // some countries might have null values. Do not include them
         countryNames.push({ label: country.Country })
       }
     })
     return countryNames;
   };
 
-  // TODO: Move me to query file
-  const addReviewMutation = gql`mutation AddReview($country: String, $name: String, $reviewText: String, $date: String, $rating: Float) {
-    addReview(Country: $country, Name: $name, ReviewText: $reviewText, Date: $date, Rating: $rating) {
-      Name,
-      ReviewText,
-      Date,
-      Rating
-    }
-  }`;
-
-  // Write code for adding the review to the database here
-  const [addReview] = useMutation(addReviewMutation);
+  // Use ADD_REVIEW mutation to add review to database
+  const [addReview] = useMutation(ADD_REVIEW);
 
   const reviewHeaderStyling = { mt: 3, fontSize: '18px' }
 
@@ -63,7 +49,7 @@ function GiveReview() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={getCountries()}
+          options={getCountryNames()}
           sx={{ width: 250 }}
           inputValue={country}
           onInputChange={(event, newInputValue) => {

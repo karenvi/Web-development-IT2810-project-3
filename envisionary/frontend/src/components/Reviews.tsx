@@ -3,19 +3,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import StarIcon from '@mui/icons-material/Star';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_REVIEWS_BY_COUNTRY_NAME } from './CountriesQuery';
+import { GET_REVIEWS_BY_COUNTRY_NAME } from '../graphql/queries';
+import { IReview } from "../types"
 
 function Reviews() {
-  interface IReview {
-    Name: string
-    ReviewText: string,
-    Date: string,
-    Rating: number
-  }
 
   let number = 0;
   const location = useLocation();
-  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
+  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME,
+    { variables: { country: location.state.country.Country } });
 
   // Fetches any new reviews before displaying reviews section
   refetch();

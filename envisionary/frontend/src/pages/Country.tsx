@@ -6,19 +6,19 @@ import { Box, Container } from '@mui/system';
 import Reviews from '../components/Reviews';
 import PopulationChart from '../components/PopulationChart';
 import StarIcon from '@mui/icons-material/Star';
-import { IReview } from '../components/CountriesQuery';
 import { useQuery } from '@apollo/client';
-import { GET_REVIEWS_BY_COUNTRY_NAME } from '../components/CountriesQuery';
-
+import { IReview } from '../types';
+import { GET_REVIEWS_BY_COUNTRY_NAME } from '../graphql/queries';
 
 function Country() {
   const location = useLocation();
-  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
+  const { loading, error, data, refetch } = useQuery(
+    GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
 
   // Fetches any new reviews before calculating average rating
   refetch();
 
-  // calculate average rating 
+  // Calculate average rating 
   let totalSum: number = 0, avrgRating: number = 0;
   if (!loading && !error && data.countryByName.Reviews !== null) {
     data.countryByName.Reviews.map((row: IReview) => totalSum += row.Rating);
