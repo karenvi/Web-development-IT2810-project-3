@@ -31,6 +31,7 @@ type Country {
 
 type Query {
   countries: [Country]
+  countryByName(Country: String): Country
 }
 
 type Mutation {

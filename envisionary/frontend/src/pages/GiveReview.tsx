@@ -70,7 +70,6 @@ function GiveReview() {
           inputValue={country}
           onInputChange={(event, newInputValue) => {
             setCountry(newInputValue);
-            console.log([newInputValue, rating, author, reviewText]); // TODO: Remove this when development is done
           }}
           renderInput={(params) => <TextField {...params} label="" placeholder="Country" required={true} />}
           isOptionEqualToValue={(option, value) => option.label === value.label}

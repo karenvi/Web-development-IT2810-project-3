@@ -5,6 +5,11 @@ export const searchQueryState = atom({
   default: '',
 });
 
+export const changeDetectedState = atom<Boolean>({
+  key: 'detectedstate',
+  default: false,
+});
+
 // Makes "country" the default state to search for
 export const categoryState = atom({
   key: 'categoryStateID',
