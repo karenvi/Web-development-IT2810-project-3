@@ -31,10 +31,8 @@ function Countries() {
       const modifiedQuery = query.toLowerCase();
       query = modifiedQuery;
     } 
-    console.log(countries);
+    
     return countries.filter((country: any) => {
-      console.log(country);
-      //console.log(country[category]);
       if (category !== "") {
         const categoryValue = country[category];
         if (categoryValue !== null) {
