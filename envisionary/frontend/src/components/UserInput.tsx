@@ -43,8 +43,8 @@ function UserInput({ queryFilteredCountries }: Props) {
 
   // Skips/goes and goes to next page 
   const handlePagination = (e: ChangeEvent<unknown>, p: number) => {
-      dataPage.skip(p);
-      setOnPage(p);
+    dataPage.skip(p);
+    setOnPage(p);
   }
 
   const history = useNavigate();
@@ -52,23 +52,23 @@ function UserInput({ queryFilteredCountries }: Props) {
   const labelSearch = "Search after " + category.toLowerCase();
 
   // Sets category based on user input
-  const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value as string);
+  const handleChange = (e: SelectChangeEvent) => {
+    setCategory(e.target.value as string);
   };
 
   // To ensure that the SPA requirement is achieved in the search (doesnt change url on search)
-  async function onSubmit(e: ChangeEvent<unknown>) {
+  async function onSubmit(e: React.FormEvent) {
     history(`?=${searchQuery}`, { replace: true });
     e.preventDefault();
   }
 
   // Make pagination go back to page 1 whenever user changes input
-  const detectAnyChanges = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const detectAnyChanges = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {
       target: { value }
-    } = event;
+    } = e;
 
-    handlePagination(event, 1);
+    handlePagination(e, 1);
   }
 
 
