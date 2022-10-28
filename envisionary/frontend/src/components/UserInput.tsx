@@ -7,7 +7,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
 import { categoryState, changeDetectedState, searchQueryState } from '../states/states';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -42,7 +42,7 @@ function UserInput ({queryFilteredCountries}: Props) {
   const tableHeadStyling = {fontWeight: 'bold'}
 
   // Skips/goes and goes to next page 
-  const handlePagination = (e: any, p: number) => {
+  const handlePagination = (e: ChangeEvent<unknown>, p: number) => {
       dataPage.skip(p);
       setOnPage(p);
   }
@@ -57,9 +57,9 @@ function UserInput ({queryFilteredCountries}: Props) {
   };
 
   // To ensure that the SPA requirement is achieved in the search (doesnt change url on search)
-  async function onSubmit(event: any) {
+  async function onSubmit(e: ChangeEvent<unknown>) {
     history(`?=${searchQuery}`, { replace: true });
-    event.preventDefault();
+    e.preventDefault();
   }
 
   // Make pagination go back to page 1 whenever user changes input
