@@ -7,13 +7,15 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  TooltipProps,
 } from "recharts";
 import { useLocation } from 'react-router-dom';
 import { Box } from "@mui/material";
+import { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
 
 
 // Formatting for Rechart Tooltip (inspiration: https://codesandbox.io/s/unruffled-napier-pzbdld?file=/src/CustomTooltip.js:0-572)
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element|null => {
   if (active && payload && payload.length) {
     return (
       <Box sx={{
