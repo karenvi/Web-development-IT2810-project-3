@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-// Code for displaying data from the database
+// Get all countries with all fields
 export const GET_COUNTRIES = gql`
 query Countries {
     countries {
@@ -31,6 +31,8 @@ query Countries {
     }
 }
 `;
+
+// Get a reviews for a specific country
 export const GET_REVIEWS_BY_COUNTRY_NAME = gql`
 query CountryReviewsByName($country: String) {
   countryByName(Country: $country) {
@@ -44,33 +46,10 @@ query CountryReviewsByName($country: String) {
 }
 `;
 
-export interface IReview {
-    Name: string
-    ReviewText: string,
-    Date: string,
-    Rating: number
-}
-
-export interface ICountry {
-    _id: {
-        $oid: string
-    },
-    Rank: string,
-    CCA3: string,
-    Country: string,
-    Capital: string,
-    Continent: string,
-    Population2022: string,
-    Population2020: string,
-    Population2015: string,
-    Population2010: string,
-    Population2000: string,
-    Population1990: string,
-    Population1980: string,
-    Population1970: string,
-    Area: string,
-    Density: string,
-    GrowthRate: string,
-    WorldPopulationPercentage: string,
-    Reviews: Array<IReview>
-}
+// Get only country names
+export const GET_COUNTRY_NAMES = gql`
+query getCountryNames {
+    countries {
+        Country
+    }
+}`;

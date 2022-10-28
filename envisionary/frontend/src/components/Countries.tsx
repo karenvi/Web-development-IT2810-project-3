@@ -1,7 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { categoryState, searchQueryState } from '../states/states';
-import {GET_COUNTRIES} from './CountriesQuery';
+import { GET_COUNTRIES } from '../graphql/queries';
+import { ICountry } from '../types';
 import UserInput from './UserInput';
 
 function Countries() {
@@ -20,24 +21,24 @@ function Countries() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const filterCountries = (countries: any, query: String | null) => {
+  const filterCountries = (countries: Array<ICountry>, query: string) => {
     if (!query) {
       return countries;
-    } 
+    }
 
     // Make sure query is valid even though user types it without big capital letters etc.
     if (query) {
       const modifiedQuery = query.toLowerCase();
       query = modifiedQuery;
-    } 
+    }
 
-    return countries.filter((country: any) => {
-      if (category != "") {
-        const countryName = country[category];
-        if (countryName != null) {
-          const countryNameNotNull = countryName.toLowerCase();
-          if (countryNameNotNull.includes(query)) {
-            return countryNameNotNull.includes(query)
+    return countries.filter((country: ICountry) => {
+      if (category === "Continent" || category === "Country") {
+        const categoryValue = country[category];
+        if (categoryValue !== null) {
+          const countryValueNotNull = categoryValue.toLowerCase();
+          if (countryValueNotNull.includes(query)) {
+            return countryValueNotNull.includes(query)
           }
         }
       }
