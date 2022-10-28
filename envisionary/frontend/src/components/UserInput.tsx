@@ -124,7 +124,7 @@ function UserInput ({queryFilteredCountries}: Props) {
                {dataPage.dataDisplaying().length == 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
                dataPage.dataDisplaying().map((row: ICountry ) => (
                  <TableRow
-                   key={row._id.$oid}
+                   key={row._id}
                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                    onClick={() => {toCountryPage(row)}}
                    hover={true}

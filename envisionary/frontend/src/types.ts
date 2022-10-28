@@ -8,9 +8,7 @@ export interface IReview {
 }
 
 export interface ICountry {
-    _id: {
-        $oid: string
-    };
+    _id: string;
     Rank: string;
     CCA3: string;
     Country: string;
