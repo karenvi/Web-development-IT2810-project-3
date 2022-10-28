@@ -8,7 +8,7 @@ import PopulationChart from '../components/PopulationChart';
 import StarIcon from '@mui/icons-material/Star';
 import { useQuery } from '@apollo/client';
 import { IReview } from '../types';
-import { GET_REVIEWS_BY_COUNTRY_NAME } from '../components/CountriesQuery';
+import { GET_REVIEWS_BY_COUNTRY_NAME } from '../graphql/queries';
 
 function Country() {
   const location = useLocation();

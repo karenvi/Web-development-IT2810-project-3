@@ -4,7 +4,7 @@ import { Autocomplete, Button, Rating, TextField, Typography } from '@mui/materi
 import StarIcon from '@mui/icons-material/Star';
 import { Box } from '@mui/system';
 import { useState } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { GET_COUNTRY_NAMES } from "../graphql/queries";
 import { ADD_REVIEW } from "../graphql/mutations"
 import { ICountry } from "../types";
