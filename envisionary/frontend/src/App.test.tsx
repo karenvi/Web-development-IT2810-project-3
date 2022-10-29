@@ -1,11 +1,19 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
 import { RecoilRoot } from 'recoil';
+import { MockedProvider } from "@apollo/client/testing";
+import { mocks } from './__test__/mocks/mocks';
 
 
-it("renders page correctly", () => {
-    const { container } = render(<App/>);
+
+it("App renders correctly", () => {
+    const { container } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <RecoilRoot>
+          <App/>
+        </RecoilRoot>
+      </MockedProvider>
+    );
     expect(container).toMatchSnapshot();
   });
 

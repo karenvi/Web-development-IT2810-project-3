@@ -24,7 +24,7 @@ interface Props {
   queryFilteredCountries: Array<ICountry>;
 }
 
-function UserInput({ queryFilteredCountries }: Props) {
+export function UserInput({ queryFilteredCountries }: Props) {
   const [category, setCategory] = useRecoilState(categoryState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
   const [onPage, setOnPage] = useState(1);

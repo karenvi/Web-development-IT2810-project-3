@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders correctly 1`] = `
+<div>
+  <div
+    class="App"
+  >
+    <nav
+      class="header"
+    >
+      <div
+        class="linkContainer"
+      >
+        <a
+          class="link"
+          href="/"
+        >
+          Countries
+        </a>
+        <a
+          class="link"
+          href="/give-review"
+        >
+          Give review
+        </a>
+      </div>
+    </nav>
+    <p>
+      Loading...
+    </p>
+  </div>
+</div>
+`;
