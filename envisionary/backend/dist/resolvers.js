@@ -3,6 +3,11 @@ import mongoose from 'mongoose';
 export const resolvers = {
     Query: {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(),
+        paginatedCountries: async (_parent, args) => {
+            const response = await mongoose.connection.db.collection("countries").find({})
+                .skip(args.offset * args.limit).limit(args.limit).toArray();
+            return response;
+        },
         countryByName: async (_parent, args) => {
             const response = await mongoose.connection.db.collection("countries").findOne({ Country: args.Country });
             return response;

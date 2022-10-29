@@ -12,9 +12,22 @@ interface IcountryReviewsByNameArgs {
     Country: string
 }
 
+interface IPaginationArgs {
+    offset: number;
+    limit: number;
+}
+
 export const resolvers = {
     Query: {
-        countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries
+        countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries w/o pagination arguments
+
+        paginatedCountries: async (_parent: unknown, args: IPaginationArgs) => { // resolver to get countries with pagination
+            const response = await mongoose.connection.db.collection("countries").find({})
+            .skip(args.offset*args.limit).limit(args.limit).toArray(); 
+            return response;
+            
+        },
+
         countryByName: async (_parent: unknown, args: IcountryReviewsByNameArgs) => {
             const response = await mongoose.connection.db.collection("countries").findOne({Country: args.Country});
             return response;
