@@ -32,6 +32,18 @@ query Countries {
 }
 `;
 
+export const GET_COUNTRIES_PAGINATION = gql`
+query PaginatedCountries($offset: Int, $limit: Int) {
+  paginatedCountries(offset: $offset, limit: $limit) {
+    _id,
+    Country,
+    Continent,
+    Population2022,
+    Area,
+  }
+}
+`;
+
 // Get a reviews for a specific country
 export const GET_REVIEWS_BY_COUNTRY_NAME = gql`
 query CountryReviewsByName($country: String) {

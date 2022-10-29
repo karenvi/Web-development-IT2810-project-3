@@ -28,3 +28,11 @@ export interface ICountry {
     WorldPopulationPercentage: string;
     Reviews: Array<IReview>;
 }
+
+export interface IPagination {
+    _id: string;
+    Country: string;
+    Continent: string;
+    Population2022: string;
+    Area: string;
+}

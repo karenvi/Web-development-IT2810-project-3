@@ -1,54 +1,47 @@
 import { useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { categoryState, searchQueryState } from '../states/states';
-import { GET_COUNTRIES } from '../graphql/queries';
-import { ICountry } from '../types';
+import { GET_COUNTRIES, GET_COUNTRIES_PAGINATION } from '../graphql/queries';
+import { ICountry, IPagination } from '../types';
 import UserInput from './UserInput';
+import { useState } from 'react';
+
+const PAGE_SIZE = 7;
 
 function Countries() {
-  const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
-  const [category, setCategory] = useRecoilState(categoryState);
+  const [page, setPage] = useState(0);
+  const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
+    variables: {
+      limit: PAGE_SIZE,
+      offset: page,
+    }
+  });
 
-  // Code for the searchbar
-  const { search } = window.location;
-  const query = new URLSearchParams(search).get('s');
-  if (query) {
-    setSearchQuery(query);
-  }
-
-  const { loading, error, data } = useQuery(GET_COUNTRIES);
+  console.log(fetchMore)
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const filterCountries = (countries: Array<ICountry>, query: string) => {
-    if (!query) {
-      return countries;
-    }
-
-    // Make sure query is valid even though user types it without big capital letters etc.
-    if (query) {
-      const modifiedQuery = query.toLowerCase();
-      query = modifiedQuery;
-    }
-
-    return countries.filter((country: ICountry) => {
-      if (category === "Continent" || category === "Country") {
-        const categoryValue = country[category];
-        if (categoryValue !== null) {
-          const countryValueNotNull = categoryValue.toLowerCase();
-          if (countryValueNotNull.includes(query)) {
-            return countryValueNotNull.includes(query)
-          }
-        }
-      }
-    })
+  const checkIfPageInvalid = (page: number) => {
+    if (page == 33) {
+      return true;
+    } 
+    return false;
   }
 
-  const queryFilteredCountries = filterCountries(data.countries, searchQuery);
-
   return (
-    <UserInput queryFilteredCountries={queryFilteredCountries} />
+    <>
+    <nav>
+      <button disabled={!page} onClick={() => setPage(prev => prev - 1)}>Previous</button>
+      <span>Page {page + 1} </span>
+      <button disabled={checkIfPageInvalid(page)} onClick={() => setPage(prev => prev + 1)}>Next</button>
+    </nav>
+    <ul>
+      {data.paginatedCountries.map((launch: IPagination) => (
+        <li key={launch._id}>{launch.Country}, {launch.Continent}, {launch.Population2022}, {launch.Area}.</li>
+      ))}
+    </ul>
+    </>
   );
 }
 export default Countries

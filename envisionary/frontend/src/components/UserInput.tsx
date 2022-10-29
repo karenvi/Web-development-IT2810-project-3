@@ -21,7 +21,7 @@ import { Pagination, Stack, Typography } from '@mui/material';
 
 
 interface Props {
-  queryFilteredCountries: Array<ICountry>;
+  queryFilteredCountries: Array<any>;
 }
 
 function UserInput({ queryFilteredCountries }: Props) {
