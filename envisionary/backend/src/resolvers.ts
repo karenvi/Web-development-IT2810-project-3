@@ -15,6 +15,10 @@ interface IcountryReviewsByNameArgs {
 interface IPaginationArgs {
     offset: number;
     limit: number;
+    sortOn: string;
+    sortDesc: boolean; // descending = false when alphabetical order (A-Z, true for Z-A)
+    filterField: string;
+    query: string;
 }
 
 export const resolvers = {
@@ -22,14 +26,22 @@ export const resolvers = {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(), // to get all countries w/o pagination arguments
 
         paginatedCountries: async (_parent: unknown, args: IPaginationArgs) => { // resolver to get countries with pagination
-            const response = await mongoose.connection.db.collection("countries").find({})
-            .skip(args.offset*args.limit).limit(args.limit).toArray(); 
+            const sortOnField = args.sortOn;
+            const sortingChoice = args.sortDesc ? -1 : 1; 
+            const filterField = args.filterField;
+            const queryRegex = args.query; // TODO: add search regex. Test in compass with e.g. { Country: { $regex: /y$/ } }
+
+            const response = await mongoose.connection.db.collection("countries")
+                .find({ [filterField]: { $regex: [queryRegex] } })
+                .sort({ [sortOnField]: sortingChoice })
+                .skip(args.offset * args.limit)
+                .limit(args.limit).toArray();
+
             return response;
-            
         },
 
         countryByName: async (_parent: unknown, args: IcountryReviewsByNameArgs) => {
-            const response = await mongoose.connection.db.collection("countries").findOne({Country: args.Country});
+            const response = await mongoose.connection.db.collection("countries").findOne({ Country: args.Country });
             return response;
         },
     },
