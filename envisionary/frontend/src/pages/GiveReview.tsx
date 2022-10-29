@@ -1,13 +1,14 @@
 import '../App.css'
 import Card from '@mui/material/Card';
-import { Autocomplete, Button, Rating, TextField, Typography } from '@mui/material';
+import { Alert, Autocomplete, Button, Rating, Snackbar, TextField, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { Box } from '@mui/system';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_COUNTRY_NAMES } from "../graphql/queries";
 import { ADD_REVIEW } from "../graphql/mutations"
 import { ICountry } from "../types";
+import { validate } from 'graphql';
 
 
 function GiveReview() {
@@ -15,19 +16,19 @@ function GiveReview() {
   const [rating, setRating] = useState<number>(0);
   const [author, setAuthor] = useState('');
   const [reviewText, setReviewText] = useState('');
-  const [validForm, setValidForm] = useState<validForm>({validCountry: false, validAuthor: false, validReviewText: false});
-  const [errors, setErrors] = useState<errors>({countryError: " ", nameError: " ", reviewTextError: " "});
-
-  interface validForm {
-    validCountry: boolean,
-    validAuthor: boolean,
-    validReviewText: boolean
+  const [notValidForm, setNotValidForm] = useState<notValidForm>({country: false, author: false});
+  const [errors, setErrors] = useState<errors>({countryError: " ", authorError: " "});
+  const [clear, setClear] = useState("false")
+  const [open, setOpen] = useState(false)
+  
+  interface notValidForm {
+    country: boolean,
+    author: boolean,
   }
 
   interface errors {
     countryError: string,
-    nameError: string,
-    reviewTextError: string
+    authorError: string,
   }
 
   const { loading, error, data } = useQuery(GET_COUNTRY_NAMES);
@@ -49,46 +50,31 @@ function GiveReview() {
   // Use ADD_REVIEW mutation to add review to database
   const [addReview] = useMutation(ADD_REVIEW);
 
-  
-
-  const validateCountry = (countryName: string) => {
-    const countries = data.countries.filter((country: ICountry) => country.Country == countryName)
-    if (countryName === "") {
-      setValidForm({...validForm, validCountry: true})
-      setErrors({...errors, countryError: "Empty field."})
-    } else if (countries.length == 0){
-      setValidForm({...validForm, validCountry: true})
-      setErrors({...errors, countryError: "Country doesn't exist."})
+  const validation = () => {
+    if (country !== "" && author !== "") {
+      setNotValidForm({country: false, author: false})
+      setErrors({countryError: " ", authorError: " "})
+      return true
+    } else if (country !== "" && author === ""){
+      setNotValidForm({country: false, author: true})
+      setErrors({countryError: " ", authorError: "Name is required"})
+      return false
+    } else if (country === "" && author !== "") {
+      setNotValidForm({country: true, author: false})
+      setErrors({countryError: "Country is required", authorError: " "})
+      return false
     } else {
-      setValidForm({...validForm, validCountry: false})
-      setErrors({...errors, countryError: " "})
+      setNotValidForm({country: true, author: true})
+      setErrors({countryError: "Country is required.", authorError: "Name is required"})
+      return false
     }
   }
-
-  const validateName = (name: string) => {
-    if (name === "") {
-      setValidForm({...validForm, validAuthor: true})
-      setErrors({...errors, nameError: "Empty field."})
-    } else {
-      setValidForm({...validForm, validAuthor: false})
-      setErrors({...errors, nameError: " "})
-    }
-  }
-
-  const validateReviewText = (reviewText: string) => {
-    if (reviewText === "") {
-      setValidForm({...validForm, validReviewText: true})
-      setErrors({...errors, reviewTextError: "Empty field."})
-    } else {
-      setValidForm({...validForm, validReviewText: false})
-      setErrors({...errors, reviewTextError: " "})
-    }
-  }
-
 
   const submit = () => {
-
-    // if (isFormValid()){
+    console.log(errors)
+    console.log(notValidForm)
+    if (validation()){
+      console.log("Submitted")
       addReview({ 
         variables:
         {
@@ -99,12 +85,27 @@ function GiveReview() {
           rating: rating
         }
       });
-      setCountry(""); // TODO: this does nothing, ideally we want to unselect country in dropdown too
+      setOpen(true) // Opens the success alert.
+
       setAuthor("");
       setReviewText("");
       setRating(0);
-  // }
 
+      // Clears the country field
+      if (clear === "false") {
+        setClear("true")
+      } else {
+        setClear("false")
+      }
+    }
+
+  }
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   }
 
   const reviewHeaderStyling = { mt: 3, fontSize: '18px' }
@@ -117,15 +118,16 @@ function GiveReview() {
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
         <Typography variant="h4">Give review</Typography>
-        <Typography variant="h6" sx={reviewHeaderStyling}>Choose a country</Typography>
+        <Typography variant="h6" sx={reviewHeaderStyling}>Choose a country *</Typography>
         <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={getCountryNames()}
           sx={{ width: 250 }}
+          key={clear}
           inputValue={country}
           onInputChange={(event, newInputValue) => {
-            setCountry(newInputValue);
+              setCountry(newInputValue);
           }}
           renderInput={(params) => 
             <TextField 
@@ -133,27 +135,26 @@ function GiveReview() {
               label="" 
               placeholder="Country" 
               required={true}
-              error={validForm.validCountry}
-              onBlur={(e) => validateCountry(e.target.value)}
+              error={notValidForm.country}
               helperText={errors.countryError}
             />}
           isOptionEqualToValue={(option, value) => option.label === value.label}
         />
 
-        <Typography variant="h6" sx={reviewHeaderStyling}>Name</Typography>
+        <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Name *</Typography>
         <TextField id="outlined-basic"
           required
           label=""
           placeholder="Name"
           variant="outlined"
           value={author}
-          error={validForm.validAuthor}
-          onBlur={(e) => validateName(e.target.value)}
-          helperText={errors.nameError}
-          // onChange={(e) => setAuthor(e.target.value)}
+          error={notValidForm.author}
+          helperText={errors.authorError}
+          onChange={(e) => setAuthor(e.target.value)}
+          
         />
 
-        <Typography variant="h6" sx={reviewHeaderStyling}>Rating</Typography>
+        <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
         <Rating
           name="hover-feedback"
           value={rating}
@@ -182,21 +183,15 @@ function GiveReview() {
           onClick={(event) => {
             event.preventDefault();
             submit()
-            // country && addReview({
-            //   variables:
-            //   {
-            //     country: country,
-            //     name: author,
-            //     reviewText: reviewText,
-            //     date: new Date().toISOString(),
-            //     rating: rating
-            //   }
-            // });
-            
           }}
         >
           Submit
         </Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Review successfully given!
+          </Alert>
+        </Snackbar>
       </Box>
     </Card>
   );
