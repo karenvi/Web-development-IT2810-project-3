@@ -2,8 +2,7 @@ import * as React from "react";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
-import { GET_COUNTRIES } from '../components/CountriesQuery';
-import PaginationFunctions from "../components/PaginationFunctions";
+import { GET_COUNTRIES } from '../graphql/queries';
 export {};
 
 

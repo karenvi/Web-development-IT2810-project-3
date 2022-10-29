@@ -4,10 +4,16 @@ import { searchQueryState } from "../../states/states";
 import { atom } from "recoil";
 import React, { Component } from 'react';
 
-export const RecoilObserver = (node: RecoilState<string>, onInput: any) => {
+/* export const RecoilObserver = (node: any, onInput: any) => {
     const value = useRecoilValue(node);
     useEffect(() => onInput(value), [onInput, value]);
     return null;
+}; */
+
+export const RecoilObserver = (node: any, onInput: any) => {
+  const value = useRecoilValue(node);
+  useEffect(() => onInput(value), [onInput, value]);
+  return null;
 };
 
 
