@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 
 const client = new ApolloClient({
@@ -12,20 +12,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-client
-  .query({
-    query: gql`
-      query GetCountries {
-        countries {
-          Country,
-          Continent,
-          Population2022,
-          Area
-        }
-      }
-    `,
-  })
-  .then((result) => console.log(result))
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
