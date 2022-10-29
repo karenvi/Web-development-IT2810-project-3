@@ -74,8 +74,8 @@ const data: Array<any> = [{ id: "1", Rank: "36", Country: "Afghanistan", Capital
                         
                         ];
 
-describe("testing PaginationFunctions component", () => {
-
+it("testing PaginationFunctions component", () => {
+    
 });
 
 

@@ -87,6 +87,7 @@ function UserInput({ queryFilteredCountries }: Props) {
           </label>
           <TextField
             label={labelSearch}
+            inputProps={{ "data-testid": "header-search" }}
             variant="outlined"
             type="text"
             id="header-search"

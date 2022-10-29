@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, RecoilState } from "recoil";
 
 export const searchQueryState = atom({
   key: 'searchQueryID',

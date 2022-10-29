@@ -1,8 +1,5 @@
 import { useEffect } from "react";
-import { RecoilState, useRecoilValue } from "recoil";
-import { searchQueryState } from "../../states/states";
-import { atom } from "recoil";
-import React, { Component } from 'react';
+import { useRecoilValue } from "recoil";
 
 /* export const RecoilObserver = (node: any, onInput: any) => {
     const value = useRecoilValue(node);
@@ -10,7 +7,7 @@ import React, { Component } from 'react';
     return null;
 }; */
 
-export const RecoilObserver = (node: any, onInput: any) => {
+export const RecoilObserver = ({node, onInput}: any) => {
   const value = useRecoilValue(node);
   useEffect(() => onInput(value), [onInput, value]);
   return null;
