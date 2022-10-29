@@ -6,27 +6,10 @@ import { RecoilRoot } from "recoil";
 import { BrowserRouter as Router } from "react-router-dom";
 import { RecoilObserver } from "./testStates/testStates";
 import { searchQueryState } from "../states/states";
+import { mocks } from './mocks/mocks';
+import { MockedProvider } from "@apollo/client/testing";
 export {};
 
-
-/* const mocks = [
-    {   
-        request: {
-            query: GET_COUNTRIES,
-            variables: {},
-        },
-        result: {
-            data: {
-                countries: { id: "1", Rank: "36", Country: "Afghanistan", Capital: "Kabul", 
-                Continent: "Asia",  Population2022: "41128771", Population2020: "38972230", Population2015: "33753499",
-                Population2010: "28189672", Population2000: "19542982", Population1990: "10694796", Population1980: "12486631",
-                Population1970: "10752971", Area: "652230", Density: "63.0587", GrowthRate: "1.0257", WorldPopulationPercentage: "0.52",   
-                Reviews: [{Name: "Trond", ReviewText: "Flott land å feriere i.", ReviewDate: "2022-10-26T13:50:35.783Z", Rating: 3.5},
-                        {Name: "", ReviewDate: "", Date: "", Rating: 3.5}] }
-            }
-        }
-    }
-]; */
 
 const data: Array<any> = [
     { _id: "1", Area: "120538", CCA3: "PRK", Capital: "Pyongyang", Continent: "Asia", Country: "North Korea", Density: "216.2755", 
@@ -50,9 +33,11 @@ describe("Testing UserInput component", () => {
 
         const component = renderer.create(
             <Router>
-                <RecoilRoot>
-                    <UserInput queryFilteredCountries={data} />
-                </RecoilRoot>
+                <MockedProvider mocks={mocks} addTypename={false}>
+                    <RecoilRoot>
+                        <UserInput queryFilteredCountries={data} />
+                    </RecoilRoot>
+                </MockedProvider>
             </Router>
         );
 
