@@ -10,8 +10,7 @@ function Reviews() {
 
   let number = 0;
   const location = useLocation();
-  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME,
-    { variables: { country: location.state.country.Country } });
+  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
 
   // Fetches any new reviews before displaying reviews section
   refetch();
@@ -28,7 +27,7 @@ function Reviews() {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Reviews</Typography>
+            <Typography>Reviews of {location.state.country.Country}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             {data.countryByName.Reviews.map((row: IReview) => (
@@ -48,9 +47,10 @@ function Reviews() {
                     <Typography color='gray' align="right" sx={{ fontSize: "14px" }}>
                       {new Date(row.Date).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</Typography>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Typography align="left">{row.ReviewText}</Typography>
-                  </Grid>
+                  {row.ReviewText.length == 0 ? <></> 
+                  : <Grid item xs={12}>
+                      <Typography align="left">{row.ReviewText}</Typography>
+                    </Grid>}
                 </Grid>
               </Paper>
             ))}
