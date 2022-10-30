@@ -26,3 +26,8 @@ body {
   white-space: nowrap;
   width: 1px;
 }
+
+/* Makes things that are clickable seem clickable by changing cursor (https://css-tricks.com/snippets/css/give-clickable-elements-a-pointer-cursor/) which helps accessibility */
+a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
+  cursor: pointer;
+}

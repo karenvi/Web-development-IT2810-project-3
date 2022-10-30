@@ -23,6 +23,9 @@ const PAGE_SIZE = 10;
 // Styling of the table headers
 const tableHeadStyling = { fontWeight: 'bold' };
 
+// Styling of next and prev buttons
+const buttonStyling = { backgroundColor: '#31597a', '&:hover': { backgroundColor: '#172A3A'} }
+
 
 function Countries() {
   const [category, setCategory] = useRecoilState(categoryState);
@@ -124,10 +127,10 @@ function Countries() {
         onClick={() => { toCountryPage(row) }}
         hover={true}
         >
-        <TableCell component="th" scope="row">{row.Country}</TableCell>
-        <TableCell align="right">{row.Continent}</TableCell>
-        <TableCell align="right">{parseInt(row.Population2022).toLocaleString()}</TableCell>
-        <TableCell align="right">{parseInt(row.Area).toLocaleString()}</TableCell>
+        <TableCell component="th" scope="row" className="pointer">{row.Country}</TableCell>
+        <TableCell align="right" className="pointer">{row.Continent}</TableCell>
+        <TableCell align="right" className="pointer">{parseInt(row.Population2022).toLocaleString()}</TableCell>
+        <TableCell align="right" className="pointer">{parseInt(row.Area).toLocaleString()}</TableCell>
         </TableRow>
         ))}
         {/* Pagination */}
@@ -136,13 +139,13 @@ function Countries() {
                   {data?.paginatedCountries.length === 0 ? <></> :
       <Grid container  direction="row" justifyContent="space-between" alignItems="flex-end" sx={{mt: '10px', mb: '20px'}}>
         <Grid sx={{ml: "20px"}}>
-      <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)}>Previous</Button>
+      <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)} sx={buttonStyling}>Previous</Button>
       </Grid>
       <Grid sx={{mb: "5px"}}>
       Page {page + 1}
       </Grid>
       <Grid sx={{mr: "20px"}}>
-      <Button variant="contained" disabled={checkIfPageInvalid()} onClick={() => setPage(prev => prev + 1)}>Next</Button>
+      <Button variant="contained" disabled={checkIfPageInvalid()} onClick={() => setPage(prev => prev + 1)} sx={buttonStyling}>Next</Button>
       </Grid>
       </Grid>}
           </TableCell>

@@ -45,6 +45,8 @@
   align-items: center;
 }
 
+/* Design for the links in the header bar */
+
 .linkContainer {
   width: 100%;
   display: flex;
@@ -68,6 +70,10 @@
   text-decoration: none;
   color: whitesmoke;
   font-weight: 600;
+}
+
+.link:hover, #logoLink:hover {
+  color:rgba(255, 255, 255, 0.80);
 }
 
 
