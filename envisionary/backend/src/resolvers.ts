@@ -32,7 +32,7 @@ export const resolvers = {
             const queryRegex = args.query; // TODO: add search regex. Test in compass with e.g. { Country: { $regex: /y$/ } }
 
             const response = await mongoose.connection.db.collection("countries")
-                .find({}) // .find({ [filterField]: {$regex: queryRegex} })
+                .find({ [filterField]: {$regex: `.*${queryRegex}.*`, $options: 'i'}})
                 .sort({ [sortOnField]: sortingChoice })
                 .skip(args.offset * args.limit)
                 .limit(args.limit).toArray();

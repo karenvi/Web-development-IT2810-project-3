@@ -99,6 +99,12 @@ query GetCountryDataByName($country: String) {
     Density,
     GrowthRate,
     WorldPopulationPercentage,
+    Reviews{
+        Name,
+        ReviewText,
+        Date,
+        Rating
+    }
     }
 }
 `;

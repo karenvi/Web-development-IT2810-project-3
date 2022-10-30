@@ -10,8 +10,7 @@ function Reviews() {
 
   let number = 0;
   const location = useLocation();
-  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME,
-    { variables: { country: location.state.country.Country } });
+  const { loading, error, data, refetch } = useQuery(GET_REVIEWS_BY_COUNTRY_NAME, { variables: { country: location.state.country.Country } });
 
   // Fetches any new reviews before displaying reviews section
   refetch();
