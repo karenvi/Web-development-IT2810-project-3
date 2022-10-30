@@ -16,10 +16,10 @@ describe('Testing countries page', () => {
   })
 
   it('Austria contains correct information', () => {
-    cy.get('h3').contains("Austria")
-    cy.get('span').contains("Area: 83,871 km²")
-    cy.get('span').contains("Population rank: 99")
-    cy.get('span').contains("Capital: Vienna")
+    cy.get('h3').contains('Austria')
+    cy.get('span').contains('Area: 83,871 km²')
+    cy.get('span').contains('Population rank: 99')
+    cy.get('span').contains('Capital: Vienna')
   })
 
   it('Austria has review by Willy', () => {
@@ -30,6 +30,8 @@ describe('Testing countries page', () => {
 
   it('Go back and search for Taiwan', () => {
     cy.go('back')
+    cy.get('#header-search').type('taiwan')
+    cy.get('tbody').contains('Taiwan').click()
   })
 })
 
