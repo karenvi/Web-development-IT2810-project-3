@@ -44,7 +44,7 @@ function Country() {
           <Container sx={{ width: '220px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Typography variant="overline">Population rank: {location.state.country.Rank}</Typography>
             <Typography variant="overline">Country code: {location.state.country.CCA3}</Typography>
-            <Typography variant="overline">Capital: {location.state.country.Capital}</Typography>
+            <Typography variant="overline" align='left'>Capital: {location.state.country.Capital}</Typography>
             <Typography variant="overline" align='left'>Continent: {location.state.country.Continent}</Typography>
           </Container>
           <Container sx={{ width: '350px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
