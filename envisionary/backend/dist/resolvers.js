@@ -3,6 +3,18 @@ import mongoose from 'mongoose';
 export const resolvers = {
     Query: {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(),
+        paginatedCountries: async (_parent, args) => {
+            const sortOnField = args.sortOn;
+            const sortingChoice = args.sortDesc ? -1 : 1;
+            const filterOnField = args.filterOn;
+            const queryRegex = { $regex: `.*${args.query}.*`, $options: 'i' };
+            const response = await mongoose.connection.db.collection("countries")
+                .find({ [filterOnField]: queryRegex })
+                .sort({ [sortOnField]: sortingChoice })
+                .skip(args.offset * args.limit)
+                .limit(args.limit).toArray();
+            return response;
+        },
         countryByName: async (_parent, args) => {
             const response = await mongoose.connection.db.collection("countries").findOne({ Country: args.Country });
             return response;

@@ -28,6 +28,7 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
   return null;
 };
 
+
 function PopulationChart() {
 
   const location = useLocation()

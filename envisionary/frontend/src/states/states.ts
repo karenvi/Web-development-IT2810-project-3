@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 export const searchQueryState = atom({
-  key: 'searchQueryID',
+  key: 'queryfromuser',
   default: '',
 });
 
@@ -10,10 +10,14 @@ export const changeDetectedState = atom<Boolean>({
   default: false,
 });
 
-// Makes "country" the default state to search for
 export const categoryState = atom({
-  key: 'categoryStateID',
+  key: 'stateforcategory',
   default: 'Country',
+});
+
+export const pageState = atom({
+  key: 'pageforpagination',
+  default: 0,
 });
 
 
