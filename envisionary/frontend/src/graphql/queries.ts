@@ -33,8 +33,8 @@ query Countries {
 `;
 
 export const GET_COUNTRIES_PAGINATION = gql`
-query PaginatedCountries($offset: Int, $limit: Int) {
-  paginatedCountries(offset: $offset, limit: $limit) {
+query PaginatedCountries($offset: Int, $limit: Int, $sortOn: String, $sortDesc: Boolean, $filterField: String, $query: String) {
+  paginatedCountries(offset: $offset, limit: $limit, sortOn: $sortOn, sortDesc: $sortDesc, filterField: $filterField, query: $query) {
     _id,
     Rank,
     CCA3,

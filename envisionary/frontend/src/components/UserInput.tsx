@@ -33,6 +33,10 @@ function UserInput() {
     variables: {
       limit: PAGE_SIZE,
       offset: page,
+      sortOn: "Country",
+      sortDesc: false,
+      filterField: "Country",
+      query: "Afghanistan",
     }
   });
 
