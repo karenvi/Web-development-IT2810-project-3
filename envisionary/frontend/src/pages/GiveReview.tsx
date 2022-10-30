@@ -105,7 +105,7 @@ function GiveReview() {
         <Typography variant="h6" sx={reviewHeaderStyling}>Choose a country *</Typography>
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
+          id="country-box"
           options={getCountryNames()}
           sx={{ width: 250 }}
           key={clear}
@@ -126,7 +126,7 @@ function GiveReview() {
         />
 
         <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Name *</Typography>
-        <TextField id="outlined-basic"
+        <TextField id="name-field"
           required
           label=""
           placeholder="Name"
