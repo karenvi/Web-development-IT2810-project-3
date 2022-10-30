@@ -78,7 +78,7 @@ function Countries() {
   return (
     <>
     <UserInput />
-      <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
+      <TableContainer sx={{ width: '50%', m: '10px', mb: "200px" }} component={Paper}>
         <Table sx={{ minWidth: 300 }} aria-label="simple table">
         <TableHead>
         <TableRow>
