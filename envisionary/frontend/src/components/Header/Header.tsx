@@ -5,10 +5,12 @@ function Header() {
 
   return (
     <nav className='header'>
-      <div className='linkContainer'>
-        <Link className='link' to="/">Countries</Link>
-        <Link className='link' to="/give-review">Give review</Link>
-      </div>
+      <div id="logoContainer"><Link id='logoLink' to="/">ENVISIONARY</Link></div>
+        <div className='linkContainer'>
+          <Link className='link' to="/">Countries</Link>
+          <Link className='link' to="/give-review">Give review</Link>
+          <Link className='link' to="/info-page">Information</Link>
+        </div>
     </nav>
   );
 }

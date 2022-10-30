@@ -12,6 +12,7 @@ html {
 
 body {
   background-color: aliceblue;
+  overflow-x: hidden;
 }
 
 /* Makes a visually hidden header title for placeholders, makes it possible for screen readers to read text outside placeholder */

@@ -19,10 +19,11 @@ function Country() {
   refetch();
 
   // Calculate average rating 
-  let totalSum: number = 0, avrgRating: number = 0;
+  let totalSum: number = 0, avrgRating: number = 0, numberOfReviews: number = 0;
   if (!loading && !error && data.countryByName.Reviews !== null) {
     data.countryByName.Reviews.map((row: IReview) => totalSum += row.Rating);
     avrgRating = totalSum / data.countryByName.Reviews.length;
+    numberOfReviews = data.countryByName.Reviews.length;
   }
 
 
@@ -36,7 +37,7 @@ function Country() {
           <Rating name="read-only" value={avrgRating} precision={0.5} readOnly
             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
           />
-          <Typography variant="overline" sx={{ ml: 1 }}> {avrgRating.toFixed(2)} / 5</Typography>
+          <Typography variant="overline" sx={{ ml: 1 }}> {avrgRating.toFixed(2)} / 5 ({numberOfReviews} {numberOfReviews == 1 ? "review" : "reviews"})</Typography>
         </Box>
       <Box sx={{ width: '45vw', minWidth: '500px', height: '30vw', minHeight: '350px' }}>
         <PopulationChart />
