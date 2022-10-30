@@ -36,10 +36,29 @@ export const GET_COUNTRIES_PAGINATION = gql`
 query PaginatedCountries($offset: Int, $limit: Int) {
   paginatedCountries(offset: $offset, limit: $limit) {
     _id,
+    Rank,
+    CCA3,
     Country,
+    Capital,
     Continent,
     Population2022,
+    Population2020,
+    Population2015,
+    Population2010,
+    Population2000,
+    Population1990,
+    Population1980,
+    Population1970,
     Area,
+    Density,
+    GrowthRate,
+    WorldPopulationPercentage,
+    Reviews {
+        Name,
+        ReviewText,
+        Date,
+        Rating
+    }
   }
 }
 `;

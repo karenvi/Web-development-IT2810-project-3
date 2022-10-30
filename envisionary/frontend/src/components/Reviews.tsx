@@ -28,7 +28,7 @@ function Reviews() {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Reviews</Typography>
+            <Typography>Reviews of {location.state.country.Country}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             {data.countryByName.Reviews.map((row: IReview) => (
