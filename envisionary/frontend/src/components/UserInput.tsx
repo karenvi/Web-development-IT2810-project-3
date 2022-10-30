@@ -15,7 +15,7 @@ function UserInput() {
   const [page, setPage] = useRecoilState(pageState);
   const navigate = useNavigate();
 
-  const labelSearch = "Search after " + category.toLowerCase();
+  const labelSearch = "Search for " + category.toLowerCase();
 
   // To ensure that the SPA requirement is achieved in the search (doesnt change url on search)
   async function onSubmit(e: React.FormEvent) {
