@@ -3,12 +3,11 @@ import Card from '@mui/material/Card';
 import { Alert, Autocomplete, Button, Rating, Snackbar, TextField, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_COUNTRY_NAMES } from "../graphql/queries";
 import { ADD_REVIEW } from "../graphql/mutations"
 import { ICountry } from "../types";
-import { validate } from 'graphql';
 
 
 function GiveReview() {
@@ -16,20 +15,10 @@ function GiveReview() {
   const [rating, setRating] = useState<number>(0);
   const [author, setAuthor] = useState('');
   const [reviewText, setReviewText] = useState('');
-  const [notValidForm, setNotValidForm] = useState<notValidForm>({country: false, author: false});
-  const [errors, setErrors] = useState<errors>({countryError: " ", authorError: " "});
+  const [notValidForm, setNotValidForm] = useState<{country: boolean, author: boolean}>({country: false, author: false});
+  const [errors, setErrors] = useState<{countryError: string, authorError: string}>({countryError: " ", authorError: " "});
   const [clear, setClear] = useState("false")
   const [open, setOpen] = useState(false)
-  
-  interface notValidForm {
-    country: boolean,
-    author: boolean,
-  }
-
-  interface errors {
-    countryError: string,
-    authorError: string,
-  }
 
   const { loading, error, data } = useQuery(GET_COUNTRY_NAMES);
 
@@ -65,16 +54,13 @@ function GiveReview() {
       return false
     } else {
       setNotValidForm({country: true, author: true})
-      setErrors({countryError: "Country is required.", authorError: "Name is required"})
+      setErrors({countryError: "Country is required", authorError: "Name is required"})
       return false
     }
   }
 
   const submit = () => {
-    console.log(errors)
-    console.log(notValidForm)
     if (validation()){
-      console.log("Submitted")
       addReview({ 
         variables:
         {
@@ -98,7 +84,6 @@ function GiveReview() {
         setClear("false")
       }
     }
-
   }
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -110,7 +95,6 @@ function GiveReview() {
 
   const reviewHeaderStyling = { mt: 3, fontSize: '18px' }
 
-  // TODO: Tilbakemelding til brukeren ved feil input
   return (
     <Card sx={{
       m: '3%', width: '50%', maxWidth: 700, display: 'flex', justifyContent: 'center',
@@ -151,7 +135,6 @@ function GiveReview() {
           error={notValidForm.author}
           helperText={errors.authorError}
           onChange={(e) => setAuthor(e.target.value)}
-          
         />
 
         <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
@@ -159,7 +142,6 @@ function GiveReview() {
           name="hover-feedback"
           value={rating}
           precision={0.5}
-          // getLabelText={getLabelText}
           onChange={(event, newValue) => {
             newValue === null ? setRating(0) : setRating(newValue);
           }}
