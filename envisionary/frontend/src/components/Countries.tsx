@@ -47,7 +47,7 @@ function Countries() {
     }
   });
 
-  if (loading) return <p>Loading...</p>;
+  //if (loading) return <p>Loading...</p>; TODO: ADD ANOTHER SOLUTION FOR COMMUNICATING "LOADING" TO USER
   if (error) return <p>Error - could not load data.</p>;
 
   // Routing to each country
@@ -57,7 +57,7 @@ function Countries() {
 
   // TODO: Disable the next button if the user is on the last page (the solution right now is not really acceptable :/)
   const checkIfPageInvalid = () => {
-    if (data.paginatedCountries.length < 10) {
+    if (data?.paginatedCountries.length < 10) {
       return true;
     }
     return false;
@@ -116,8 +116,8 @@ function Countries() {
         </TableHead>
         <TableBody>
           
-        {data.paginatedCountries.length === 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
-        data.paginatedCountries.map((row: ICountry) => (
+        {data?.paginatedCountries.length === 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
+        data?.paginatedCountries.map((row: ICountry) => (
         <TableRow
         key={row._id}
         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -133,7 +133,7 @@ function Countries() {
         {/* Pagination */}
         <TableRow>
           <TableCell colSpan={4}>
-                  {data.paginatedCountries.length === 0 ? <></> :
+                  {data?.paginatedCountries.length === 0 ? <></> :
       <Grid container  direction="row" justifyContent="space-between" alignItems="flex-end" sx={{mt: '10px', mb: '20px'}}>
         <Grid sx={{ml: "20px"}}>
       <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)}>Previous</Button>
