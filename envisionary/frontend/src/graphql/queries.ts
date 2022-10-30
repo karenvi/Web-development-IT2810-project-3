@@ -53,12 +53,6 @@ query PaginatedCountries($offset: Int, $limit: Int, $sortOn: String, $sortDesc: 
     Density,
     GrowthRate,
     WorldPopulationPercentage,
-    Reviews {
-        Name,
-        ReviewText,
-        Date,
-        Rating
-    }
   }
 }
 `;

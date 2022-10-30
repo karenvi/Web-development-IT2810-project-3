@@ -5,15 +5,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
-import { categoryState, searchQueryState } from '../states/states';
+import { categoryState, pageState, searchQueryState } from '../states/states';
 
 // This component takes in a search query from user and what category the user has picked to search in.
 function UserInput() {
   const [category, setCategory] = useRecoilState(categoryState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
+  const [page, setPage] = useRecoilState(pageState);
 
   const labelSearch = "Search after " + category.toLowerCase();
-  
+
   return (
       <Box
         sx={{
@@ -33,7 +34,10 @@ function UserInput() {
             id="header-search"
             name="s"
             value={searchQuery}
-            onInput={e => setSearchQuery((e.target as HTMLInputElement).value)}
+            onInput={(event) => {
+              setSearchQuery((event.target as HTMLInputElement).value);
+              setPage(0);
+            }}
           />
         </form>
         <FormControl fullWidth sx={{ width: '150px', ml: "10px" }}>
@@ -46,7 +50,7 @@ function UserInput() {
             id="demo-simple-select"
             value={category}
             label="Category:"
-            onChange={(e) => { setCategory(e.target.value as string)}}
+            onChange={(event) => { setCategory(event.target.value as string)}}
           >
             <MenuItem value='Country'>Country</MenuItem>
             <MenuItem value='Continent'>Continent</MenuItem>

@@ -2,7 +2,7 @@ import { Button, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { categoryState, searchQueryState } from '../states/states';
+import { categoryState, pageState, searchQueryState } from '../states/states';
 import { ICountry } from '../types';
 import UserInput from './UserInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,16 +27,16 @@ const tableHeadStyling = { fontWeight: 'bold' };
 function Countries() {
   const [category, setCategory] = useRecoilState(categoryState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
-
+  const [page, setPage] = useRecoilState(pageState);
   // This state takes in the value from the dropdown
   const [sortingCategory, setSortingCategory] = useState("Country-asc");
   // A clean "value" from the dropdown, default country and ascending order
   const [finalSortingCategory, setFinalSortingCategory] = useState("Country");
   const [sortDescending, setSortDescending] = useState(false);
-  const [page, setPage] = useState(0);
+ 
   const navigate = useNavigate()
 
-  const { loading, error, data } = useQuery(GET_COUNTRIES_PAGINATION, {
+  const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
     variables: {
       limit: PAGE_SIZE,
       offset: page,
@@ -55,11 +55,11 @@ function Countries() {
     navigate('/country', { state: { country } })
   }
 
-  // Disable the next button if the user is on the last page
-  const checkIfPageInvalid = (page: number) => {
-    if (page === 24) {
+  // TODO: Disable the next button if the user is on the last page (the solution right now is not really acceptable :/)
+  const checkIfPageInvalid = () => {
+    if (data.paginatedCountries.length < 10) {
       return true;
-    } 
+    }
     return false;
   }
 
@@ -142,7 +142,7 @@ function Countries() {
       Page {page + 1}
       </Grid>
       <Grid sx={{mr: "20px"}}>
-      <Button variant="contained" disabled={checkIfPageInvalid(page)} onClick={() => setPage(prev => prev + 1)}>Next</Button>
+      <Button variant="contained" disabled={checkIfPageInvalid()} onClick={() => setPage(prev => prev + 1)}>Next</Button>
       </Grid>
       </Grid>}
           </TableCell>
