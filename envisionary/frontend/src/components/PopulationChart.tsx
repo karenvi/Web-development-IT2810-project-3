@@ -28,7 +28,17 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
   return null;
 };
 
-function PopulationChart() {
+interface Props {
+  population2022: string;
+  population2020: string;
+  population2010: string;
+  population2000: string;
+  population1990: string;
+  population1980: string;
+  population1970: string;
+}
+
+function PopulationChart({population2022, population2020, population2010, population2000, population1990, population1980, population1970}: Props) {
 
   const location = useLocation()
   const data = [

@@ -32,7 +32,9 @@ function Country() {
       alignItems: 'center', p: 5
     }}>
       <Typography variant="h3" sx={{ m: 2 }}>{location.state.country.Country}</Typography>
-      <Box sx={{ width: '45vw', minWidth: '500px', height: '30vw', minHeight: '350px' }}><PopulationChart /></Box>
+      <Box sx={{ width: '45vw', minWidth: '500px', height: '30vw', minHeight: '350px' }}>
+        {/* <PopulationChart population2022={} /> */}
+        </Box>
       <Container sx={{ width: '670px', display: 'flex', flexDirection: 'column', m: 4, alignItems: 'flex-start' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1 }}>
           <Rating name="read-only" value={avrgRating} precision={0.5} readOnly

@@ -15,23 +15,26 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { ICountry } from '../types';
-import PaginationFunctions from '../utils/PaginationFunctions';
-import { Pagination, Stack, Typography } from '@mui/material';
+import { useQuery } from '@apollo/client';
+import { GET_COUNTRIES, GET_COUNTRIES_PAGINATION } from '../graphql/queries';
+import { ICountry, IPagination } from '../types';
 
 
-interface Props {
-  queryFilteredCountries: Array<any>;
-}
+const PAGE_SIZE = 10;
 
-function UserInput({ queryFilteredCountries }: Props) {
+function UserInput() {
   const [category, setCategory] = useRecoilState(categoryState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
-  const [onPage, setOnPage] = useState(1);
+  const [page, setPage] = useState(0);
   const navigate = useNavigate()
-  const elementsPerPage = 7;
-  const numberOfPages = Math.ceil(queryFilteredCountries.length / elementsPerPage);
-  const dataPage = PaginationFunctions(queryFilteredCountries, elementsPerPage);
+
+
+  const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
+    variables: {
+      limit: PAGE_SIZE,
+      offset: page,
+    }
+  });
 
   // Routing to each country
   const toCountryPage = (country: ICountry) => {
@@ -40,12 +43,6 @@ function UserInput({ queryFilteredCountries }: Props) {
 
   // Styling of the table headers
   const tableHeadStyling = { fontWeight: 'bold' }
-
-  // Skips/goes and goes to next page 
-  const handlePagination = (e: ChangeEvent<unknown>, p: number) => {
-    dataPage.skip(p);
-    setOnPage(p);
-  }
 
   const history = useNavigate();
 
@@ -62,15 +59,15 @@ function UserInput({ queryFilteredCountries }: Props) {
     e.preventDefault();
   }
 
-  // Make pagination go back to page 1 whenever user changes input
-  const detectAnyChanges = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    const {
-      target: { value }
-    } = e;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
-    handlePagination(e, 1);
+  const checkIfPageInvalid = (page: number) => {
+    if (page == 23) {
+      return true;
+    } 
+    return false;
   }
-
 
   return (
     <>
@@ -93,7 +90,6 @@ function UserInput({ queryFilteredCountries }: Props) {
             name="s"
             value={searchQuery}
             onInput={e => setSearchQuery((e.target as HTMLInputElement).value)}
-            onChange={detectAnyChanges}
           />
         </form>
         <FormControl fullWidth sx={{ width: '150px', ml: "10px" }}>
@@ -121,8 +117,8 @@ function UserInput({ queryFilteredCountries }: Props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dataPage.dataDisplaying().length === 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
-              dataPage.dataDisplaying().map((row: ICountry) => (
+            {data.paginatedCountries.length === 0 ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow> :
+              data.paginatedCountries.map((row: ICountry) => (
                 <TableRow
                   key={row._id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -137,18 +133,12 @@ function UserInput({ queryFilteredCountries }: Props) {
               ))}
           </TableBody>
         </Table>
-        {dataPage.dataDisplaying().length === 0 ? <></> :
-          <Stack alignItems="center" sx={{ pt: '10px', pb: "10px" }}>
-            <Pagination
-              count={numberOfPages}
-              variant='outlined'
-              size='small'
-              page={onPage}
-              onChange={handlePagination}
-              className="pagination"
-            />
-            <Typography variant="subtitle1" sx={{ fontFamily: 'Roboto', fontSize: '16px' }}>{onPage} of {numberOfPages === 0 ? "1" : numberOfPages}</Typography>
-          </Stack>}
+        {data.paginatedCountries.length === 0 ? <></> :
+          <nav>
+          <button disabled={!page} onClick={() => setPage(prev => prev - 1)}>Previous</button>
+          <span>Page {page + 1} </span>
+          <button disabled={checkIfPageInvalid(page)} onClick={() => setPage(prev => prev + 1)}>Next</button>
+        </nav>}
       </TableContainer>
     </>
   )

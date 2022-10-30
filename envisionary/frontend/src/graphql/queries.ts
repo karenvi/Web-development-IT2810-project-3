@@ -58,6 +58,32 @@ query CountryReviewsByName($country: String) {
 }
 `;
 
+// Get a reviews for a specific country
+export const GET_COUNTRY_DATA_BY_NAME = gql`
+query GetCountryDataByName($country: String) {
+  countryByName(Country: $country) {
+    _id,
+    Rank,
+    CCA3,
+    Country,
+    Capital,
+    Continent,
+    Population2022,
+    Population2020,
+    Population2015,
+    Population2010,
+    Population2000,
+    Population1990,
+    Population1980,
+    Population1970,
+    Area,
+    Density,
+    GrowthRate,
+    WorldPopulationPercentage,
+    }
+}
+`;
+
 // Get only country names
 export const GET_COUNTRY_NAMES = gql`
 query getCountryNames {
