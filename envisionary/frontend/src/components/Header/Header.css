@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  height: 10vh;
+  height: 90px;
   width: 100vw;
   background-color: #172A3A;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
@@ -10,13 +10,72 @@
 }
 
 .linkContainer {
-  width: 250px;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
 .link {
   text-decoration: none;
   color: whitesmoke;
   font-weight: 500;
+  margin-right: 4vw;
+}
+
+#logoContainer {
+  justify-content: left;
+  margin-left: 4vw;
+  font-size: 25px;
+}
+
+#logoLink {
+  text-decoration: none;
+  color: whitesmoke;
+  font-weight: 600;
+}
+
+.header {
+  display: flex;
+  height: 90px;
+  width: 100vw;
+  background-color: #172A3A;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
+    0px 1px 10px 0px rgb(0 0 0 / 12%);
+  justify-content: center;
+  align-items: center;
+}
+
+.linkContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link {
+  text-decoration: none;
+  color: whitesmoke;
+  font-weight: 500;
+  margin-right: 4vw;
+}
+
+#logoContainer {
+  justify-content: left;
+  margin-left: 4vw;
+  font-size: 25px;
+}
+
+#logoLink {
+  text-decoration: none;
+  color: whitesmoke;
+  font-weight: 600;
+}
+
+
+@media only screen and (max-width: 600px) {
+  #logoLink {
+    font-size: 4vw;
+  }
+  .link {
+    font-size: 3vw;
+  }
 }
