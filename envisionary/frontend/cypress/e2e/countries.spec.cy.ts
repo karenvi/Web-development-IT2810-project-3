@@ -10,7 +10,7 @@ export {};
 describe('Testing countries page', () => {
   it('Goes to page 2 to page to and opens Austria', () => {
     cy.visit('http://localhost:3000')
-    cy.get('button').contains("2").scrollIntoView().click()
+    cy.get('button').contains("Next").scrollIntoView().click()
     cy.contains("Austria").click()
   })
 

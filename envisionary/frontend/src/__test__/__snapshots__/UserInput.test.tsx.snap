@@ -1,396 +1,144 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing UserInput component snapshot test 1`] = `
-Array [
-  <div
-    className="MuiBox-root css-1mwmua6"
+<div
+  className="MuiBox-root css-1mwmua6"
+>
+  <form
+    action="/"
+    autoComplete="off"
+    method="get"
+    onSubmit={[Function]}
   >
-    <form
-      action="/"
-      autoComplete="off"
-      method="get"
-      onSubmit={[Function]}
+    <label
+      htmlFor="header-search"
     >
-      <label
-        htmlFor="header-search"
+      <span
+        className="visually-hidden"
       >
-        <span
-          className="visually-hidden"
-        >
-          Search by 
-          country
-        </span>
-      </label>
-      <div
-        className="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
-        onInput={[Function]}
-      >
-        <label
-          className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-          data-shrink={false}
-          htmlFor="header-search"
-          id="header-search-label"
-        >
-          Search after country
-        </label>
-        <div
-          className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
-          onClick={[Function]}
-        >
-          <input
-            aria-invalid={false}
-            autoFocus={false}
-            className="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            data-testid="header-search"
-            disabled={false}
-            id="header-search"
-            name="s"
-            onAnimationStart={[Function]}
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            required={false}
-            type="text"
-            value=""
-          />
-          <fieldset
-            aria-hidden={true}
-            className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-          >
-            <legend
-              className="css-yjsfm1"
-            >
-              <span>
-                Search after country
-              </span>
-            </legend>
-          </fieldset>
-        </div>
-      </div>
-    </form>
+        Search by 
+        country
+      </span>
+    </label>
     <div
-      className="MuiFormControl-root MuiFormControl-fullWidth css-1tp1e4i-MuiFormControl-root"
+      className="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      onInput={[Function]}
     >
       <label
-        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
-        data-shrink={true}
-        id="demo-simple-select-label"
+        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink={false}
+        htmlFor="header-search"
+        id="header-search-label"
       >
-        Category
+        Search for country
       </label>
       <div
-        className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+        className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
         onClick={[Function]}
       >
-        <div
-          aria-expanded="false"
-          aria-haspopup="listbox"
-          aria-labelledby="demo-simple-select-label demo-simple-select"
-          className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-          id="demo-simple-select"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          onMouseDown={[Function]}
-          role="button"
-          tabIndex={0}
-        >
-          Country
-        </div>
         <input
-          aria-hidden={true}
-          className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          aria-invalid={false}
+          autoFocus={false}
+          className="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+          data-testid="header-search"
           disabled={false}
+          id="header-search"
+          name="s"
           onAnimationStart={[Function]}
+          onBlur={[Function]}
           onChange={[Function]}
+          onFocus={[Function]}
           required={false}
-          tabIndex={-1}
-          value="Country"
+          type="text"
+          value=""
         />
-        <svg
-          aria-hidden={true}
-          className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
-          data-testid="ArrowDropDownIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M7 10l5 5 5-5z"
-          />
-        </svg>
         <fieldset
           aria-hidden={true}
           className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
           <legend
-            className="css-14lo706"
+            className="css-yjsfm1"
           >
             <span>
-              Category
+              Search for country
             </span>
           </legend>
         </fieldset>
       </div>
     </div>
-  </div>,
+  </form>
   <div
-    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-baftdi-MuiPaper-root-MuiTableContainer-root"
+    className="MuiFormControl-root MuiFormControl-fullWidth css-1tp1e4i-MuiFormControl-root"
   >
-    <table
-      aria-label="simple table"
-      className="MuiTable-root css-1kwtu5z-MuiTable-root"
-      role={null}
+    <label
+      className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink={true}
+      id="demo-simple-select-label"
     >
-      <thead
-        className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
-        role={null}
+      Category:
+    </label>
+    <label
+      htmlFor="header-search"
+    >
+      <span
+        className="visually-hidden"
       >
-        <tr
-          className="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
-          role={null}
-        >
-          <th
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-11sptls-MuiTableCell-root"
-            scope="col"
-          >
-            Country
-          </th>
-          <th
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o98s2t-MuiTableCell-root"
-            scope="col"
-          >
-            Continent
-          </th>
-          <th
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o98s2t-MuiTableCell-root"
-            scope="col"
-          >
-            Population (2022)
-          </th>
-          <th
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o98s2t-MuiTableCell-root"
-            scope="col"
-          >
-            Area (km²)
-          </th>
-        </tr>
-      </thead>
-      <tbody
-        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
-        role={null}
-      >
-        <tr
-          className="MuiTableRow-root MuiTableRow-hover css-34nofg-MuiTableRow-root"
-          onClick={[Function]}
-          role={null}
-        >
-          <th
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
-            scope="row"
-          >
-            North Korea
-          </th>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            Asia
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            26 069 416
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            120 538
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root MuiTableRow-hover css-34nofg-MuiTableRow-root"
-          onClick={[Function]}
-          role={null}
-        >
-          <th
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
-            scope="row"
-          >
-            North Macedonia
-          </th>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            Europe
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            2 093 599
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            25 713
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root MuiTableRow-hover css-34nofg-MuiTableRow-root"
-          onClick={[Function]}
-          role={null}
-        >
-          <th
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
-            scope="row"
-          >
-            Northern Mariana Islands
-          </th>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            Oceania
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            49 551
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-177gid-MuiTableCell-root"
-          >
-            464
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        Select what to search category to search in
+      </span>
+    </label>
     <div
-      className="css-1y1kydf-MuiStack-root"
+      className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      onClick={[Function]}
     >
-      <nav
-        aria-label="pagination navigation"
-        className="MuiPagination-root MuiPagination-outlined pagination css-1oj2twp-MuiPagination-root"
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-labelledby="demo-simple-select-label demo-simple-select"
+        className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        id="demo-simple-select"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        role="button"
+        tabIndex={0}
       >
-        <ul
-          className="MuiPagination-ul css-wjh20t-MuiPagination-ul"
+        Country
+      </div>
+      <input
+        aria-hidden={true}
+        className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        disabled={false}
+        onAnimationStart={[Function]}
+        onChange={[Function]}
+        required={false}
+        tabIndex={-1}
+        value="Country"
+      />
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden={true}
+        className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          className="css-14lo706"
         >
-          <li>
-            <button
-              aria-label="Go to previous page"
-              className="MuiButtonBase-root Mui-disabled MuiPaginationItem-root MuiPaginationItem-sizeSmall MuiPaginationItem-outlined MuiPaginationItem-circular Mui-disabled MuiPaginationItem-previousNext css-10x4xic-MuiButtonBase-root-MuiPaginationItem-root"
-              disabled={true}
-              onBlur={[Function]}
-              onClick={[Function]}
-              onContextMenu={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              tabIndex={-1}
-              type="button"
-            >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-tnzq9a-MuiSvgIcon-root-MuiPaginationItem-icon"
-                data-testid="NavigateBeforeIcon"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-                />
-              </svg>
-            </button>
-          </li>
-          <li>
-            <button
-              aria-current="true"
-              aria-label="page 1"
-              className="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-sizeSmall MuiPaginationItem-outlined MuiPaginationItem-circular Mui-selected MuiPaginationItem-page css-10x4xic-MuiButtonBase-root-MuiPaginationItem-root"
-              disabled={false}
-              onBlur={[Function]}
-              onClick={[Function]}
-              onContextMenu={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              tabIndex={0}
-              type="button"
-            >
-              1
-            </button>
-          </li>
-          <li>
-            <button
-              aria-label="Go to next page"
-              className="MuiButtonBase-root Mui-disabled MuiPaginationItem-root MuiPaginationItem-sizeSmall MuiPaginationItem-outlined MuiPaginationItem-circular Mui-disabled MuiPaginationItem-previousNext css-10x4xic-MuiButtonBase-root-MuiPaginationItem-root"
-              disabled={true}
-              onBlur={[Function]}
-              onClick={[Function]}
-              onContextMenu={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              tabIndex={-1}
-              type="button"
-            >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiPaginationItem-icon css-tnzq9a-MuiSvgIcon-root-MuiPaginationItem-icon"
-                data-testid="NavigateNextIcon"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-                />
-              </svg>
-            </button>
-          </li>
-        </ul>
-      </nav>
-      <h6
-        className="MuiTypography-root MuiTypography-subtitle1 css-t4w1uz-MuiTypography-root"
-      >
-        1
-         of 
-        1
-      </h6>
+          <span>
+            Category:
+          </span>
+        </legend>
+      </fieldset>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;
