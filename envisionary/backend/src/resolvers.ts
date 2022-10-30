@@ -17,7 +17,7 @@ interface IPaginationArgs {
     limit: number;
     sortOn: string;
     sortDesc: boolean; // descending = false when alphabetical order (A-Z, true for Z-A)
-    filterField: string;
+    filterOn: string;
     query: string;
 }
 
@@ -28,11 +28,11 @@ export const resolvers = {
         paginatedCountries: async (_parent: unknown, args: IPaginationArgs) => { // resolver to get countries with pagination
             const sortOnField = args.sortOn;
             const sortingChoice = args.sortDesc ? -1 : 1; 
-            const filterField = args.filterField;
-            const queryRegex = args.query; // TODO: add search regex. Test in compass with e.g. { Country: { $regex: /y$/ } }
+            const filterOnField = args.filterOn;
+            const queryRegex = {$regex: `.*${args.query}.*`, $options: 'i'};
 
             const response = await mongoose.connection.db.collection("countries")
-                .find({ [filterField]: {$regex: `.*${queryRegex}.*`, $options: 'i'}})
+                .find({ [filterOnField]: queryRegex})
                 .sort({ [sortOnField]: sortingChoice })
                 .skip(args.offset * args.limit)
                 .limit(args.limit).toArray();

@@ -42,7 +42,7 @@ function Countries() {
       offset: page,
       sortOn: finalSortingCategory,
       sortDesc: sortDescending,
-      filterField: category,
+      filterOn: category,
       query: searchQuery,
     }
   });
