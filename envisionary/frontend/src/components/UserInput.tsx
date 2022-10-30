@@ -6,14 +6,23 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
 import { categoryState, pageState, searchQueryState } from '../states/states';
+import { useNavigate } from 'react-router-dom';
 
 // This component takes in a search query from user and what category the user has picked to search in.
 function UserInput() {
   const [category, setCategory] = useRecoilState(categoryState);
   const [searchQuery, setSearchQuery] = useRecoilState(searchQueryState);
   const [page, setPage] = useRecoilState(pageState);
+  const navigate = useNavigate();
 
   const labelSearch = "Search after " + category.toLowerCase();
+
+  // To ensure that the SPA requirement is achieved in the search (doesnt change url on search)
+  async function onSubmit(e: React.FormEvent) {
+    navigate(``, { replace: true });
+    e.preventDefault();
+  }
+  
 
   return (
       <Box
@@ -23,7 +32,7 @@ function UserInput() {
           borderRadius: '10px'
         }}
       >
-        <form>
+        <form action="/" method="get" autoComplete="off" onSubmit={onSubmit}>
           <label htmlFor="header-search">
             <span className="visually-hidden">Search by {category.toLowerCase()}</span>
           </label>
