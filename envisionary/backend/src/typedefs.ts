@@ -32,7 +32,7 @@ type Country {
 type Query {
   countries: [Country]
   paginatedCountries(offset: Int, limit: Int, sortOn: String, sortDesc: Boolean, filterField: String, query: String): [Country]
-  countryByName(Country: String): [Country]
+  countryByName(Country: String): Country
 }
 
 type Mutation {
