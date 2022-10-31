@@ -115,7 +115,6 @@ function Countries() {
           checked={hideUnreviewedCountries}
           onChange={(event) => { 
             setHideUnreviewed(event.target.checked);
-            console.log("checked");
             setPage(0);
           }}
           inputProps={{ 'aria-label': 'controlled' }}
