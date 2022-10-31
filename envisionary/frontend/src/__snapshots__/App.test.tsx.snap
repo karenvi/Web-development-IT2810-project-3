@@ -12,7 +12,7 @@ exports[`App renders correctly 1`] = `
         id="logoContainer"
       >
         <a
-          href="/"
+          href="#/"
           id="logoLink"
         >
           ENVISIONARY
@@ -23,19 +23,19 @@ exports[`App renders correctly 1`] = `
       >
         <a
           class="link"
-          href="/"
+          href="#/"
         >
           Countries
         </a>
         <a
           class="link"
-          href="/give-review"
+          href="#/give-review"
         >
           Give review
         </a>
         <a
           class="link"
-          href="/info-page"
+          href="#/info-page"
         >
           Information
         </a>

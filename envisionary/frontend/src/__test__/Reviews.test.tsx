@@ -6,8 +6,9 @@ import { create, ReactTestRenderer } from 'react-test-renderer';
 import { RecoilRoot } from 'recoil';
 import Countries from '../components/Countries';
 import { mocks } from './mocks/mocks';
+import Reviews from '../components/Reviews';
+import { GET_REVIEWS_BY_COUNTRY_NAME } from "../graphql/queries"
 export {};
-
 
 
 describe("Testing Countries component", () => {
@@ -18,7 +19,7 @@ describe("Testing Countries component", () => {
             <Router>
                 <MockedProvider mocks={mocks} addTypename={false}>
                     <RecoilRoot>
-                        <Countries />
+                        <Reviews />
                     </RecoilRoot>
                 </MockedProvider>
             </Router>
@@ -26,19 +27,6 @@ describe("Testing Countries component", () => {
 
         let tree = component.toJSON();
         expect(tree).toMatchSnapshot();
-    });
-
-    it('Contains the right elements', () => {
-        let component: ReactTestRenderer = create(
-            <Router >
-                <MockedProvider mocks={mocks} addTypename={false}>
-                    <RecoilRoot>
-                        <Countries />
-                    </RecoilRoot>
-                </MockedProvider>
-            </Router>
-        );
-        expect(component.root.findAllByType('span')[5].props.children).toBe('Sort by:');
     });
 
 });
