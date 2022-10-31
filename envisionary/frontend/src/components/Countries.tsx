@@ -39,8 +39,8 @@ function Countries() {
   const [hideUnreviewedCountries, setHideUnreviewed] = useState(false);
  
   const navigate = useNavigate()
-
-  const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
+  
+  const { loading, error, data, refetch } = useQuery(GET_COUNTRIES_PAGINATION, {
     variables: {
       limit: pageSize,
       offset: page,
@@ -51,6 +51,7 @@ function Countries() {
       hideUnreviewed: hideUnreviewedCountries,
     }
   });
+  refetch();
 
   //if (loading) return <p>Loading...</p>; TODO: ADD ANOTHER SOLUTION FOR COMMUNICATING "LOADING" TO USER
   if (error) return <p>Error - could not load data.</p>;
@@ -111,7 +112,7 @@ function Countries() {
   
         </TableCell>    
         <TableCell colSpan={2} sx={tableHeadStyling} align="right">  
-        Reviewed countries<Checkbox
+        Hide unreviewed countries<Checkbox
           checked={hideUnreviewedCountries}
           onChange={(event) => { 
             setHideUnreviewed(event.target.checked);
