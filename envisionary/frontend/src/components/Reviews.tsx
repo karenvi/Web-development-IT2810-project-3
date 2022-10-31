@@ -21,7 +21,7 @@ function Reviews() {
   return (
     <>
       {!data.countryByName.Reviews ? <Typography>Nobody has reviewed {location.state.country.Country} yet</Typography> :
-        <Accordion>
+        <Accordion sx={{width: '100%' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -33,7 +33,7 @@ function Reviews() {
             {data.countryByName.Reviews.map((row: IReview) => (
               <Paper variant="outlined" key={number++} aria-label="Review" sx={{ mb: 2 }}>
                 <Grid container spacing={2} p={2}>
-                  <Grid item xs={9} sx={{ display: 'flex', flexDirection: 'row' }}>
+                  <Grid item md={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                     <Typography fontWeight='bold'>{row.Name}</Typography>
                     <Typography mx={0.5}>rated it</Typography>
                     <Rating name="read-only"
@@ -43,7 +43,7 @@ function Reviews() {
                       emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item md={4} sx={{ display: 'flex', flexDirection: 'row', width: "100%", justifyContent: {xs: 'start', sm: 'start', md: 'end'}}}>
                     <Typography color='gray' align="right" sx={{ fontSize: "14px" }}>
                       {new Date(row.Date).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</Typography>
                   </Grid>

@@ -97,7 +97,7 @@ function GiveReview() {
 
   return (
     <Card component="main" sx={{
-      m: '3%', width: '50%', maxWidth: 700, minWidth: '510px', display: 'flex', justifyContent: 'center',
+      m: '3%', width: {xs: '70%', sm: '50%'}, maxWidth: "700px", mb: "200px", display: 'flex', justifyContent: 'center',
       alignItems: 'center', p: 6
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>

@@ -31,3 +31,8 @@ body {
 a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
   cursor: pointer;
 }
+
+/* Move the reviewdate a little down if the screen is too small in width */
+#reviewDate {
+  position: absolute;
+}

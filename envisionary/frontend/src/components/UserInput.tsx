@@ -27,7 +27,7 @@ function UserInput() {
   return (
     <Box
       sx={{
-        m: 5, p: '35px', width: '40%', maxWidth: '450px', minWidth: '330px', backgroundColor: 'white', display: 'flex', justifyContent: 'center',
+        m: 5, p: '35px', width: '60%', maxWidth: '450px', backgroundColor: 'white', display: 'flex', justifyContent: 'center',
         boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
         borderRadius: '10px'
       }}
@@ -52,7 +52,7 @@ function UserInput() {
       <FormControl fullWidth sx={{ width: '150px', ml: "10px" }}>
         <InputLabel id="demo-simple-select-label">Category:</InputLabel>
         <label htmlFor="header-search">
-          <span className="visually-hidden">Select which category to search in</span>
+          <span className="visually-hidden">Select what to search category to search in</span>
         </label>
         <Select
           labelId="demo-simple-select-label"
