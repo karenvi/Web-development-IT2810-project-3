@@ -9,6 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { useQuery } from '@apollo/client';
 import { IReview } from '../types';
 import { GET_COUNTRY_DATA_BY_NAME } from '../graphql/queries';
+import { cardStyling } from './InfoPage';
 
 function Country() {
   const location = useLocation();
@@ -28,30 +29,27 @@ function Country() {
 
 
   return (
-    <Card sx={{
-      m: '3%', width: '50%', minWidth: '520px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
-      alignItems: 'center', p: 5
-    }}>
-      <Typography variant="h3" sx={{ m: 2 }}>{location.state.country.Country}</Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1 }}>
+    <Card sx={cardStyling}>
+      <Typography variant="h3" sx={{ m: 2, fontSize: '40px' }}>{location.state.country.Country}</Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1}}>
           <Rating name="read-only" value={avrgRating} precision={0.5} readOnly
             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
           />
-          <Typography variant="overline" sx={{ ml: 1 }}> {avrgRating.toFixed(2)} / 5 ({numberOfReviews} {numberOfReviews == 1 ? "review" : "reviews"})</Typography>
+          <Typography variant="overline" sx={{ ml: 1 }}> {avrgRating.toFixed(2)} / 5 ({numberOfReviews})</Typography>
         </Box>
-      <Box sx={{ width: '45vw', minWidth: '500px', height: '30vw', minHeight: '350px' }}>
+      <Box sx={{ width: '100%', height: '30vw', minHeight: '350px' }}>
         <PopulationChart />
         </Box>
-      <Container sx={{ width: '670px', display: 'flex', flexDirection: 'column', m: 4, alignItems: 'flex-start' }}>
+      <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', m: 4, alignItems: 'flex-start' }}>
         
         <Container sx={{ display: 'flex', flexDirection: 'row' }}>
-          <Container sx={{ width: '220px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <Container sx={{ width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Typography variant="overline"><b>Population rank:</b> {location.state.country.Rank}</Typography>
             <Typography variant="overline"><b>Country code:</b> {location.state.country.CCA3}</Typography>
             <Typography variant="overline"><b>Capital:</b> {location.state.country.Capital}</Typography>
             <Typography variant="overline" align='left'><b>Continent:</b> {location.state.country.Continent}</Typography>
           </Container>
-          <Container sx={{ width: '350px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <Container sx={{ width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <Typography variant="overline"><b>Area:</b> {parseInt(location.state.country.Area).toLocaleString()} km&#178;</Typography>
             <Typography variant="overline"><b>Density:</b> {location.state.country.Density} per km&#178;</Typography>
             <Typography variant="overline"><b>GDP growth rate:</b> {location.state.country.GrowthRate}</Typography>

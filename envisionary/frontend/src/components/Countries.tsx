@@ -81,8 +81,8 @@ function Countries() {
   return (
     <>
     <UserInput />
-      <TableContainer sx={{ width: '50%', m: '10px', mb: "200px" }} component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+      <TableContainer sx={{ width: {xs: '95%', sm: '75%', md: '65%', lg: '55%'}, m: '10px', mb: "200px" }} component={Paper}>
+        <Table aria-label="simple table">
         <TableHead>
         <TableRow>
           {/* Let user pick what the data displayed should be sorted on */}

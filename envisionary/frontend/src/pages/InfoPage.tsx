@@ -1,13 +1,14 @@
-import { Typography } from "@mui/material";
+import { Card } from "@mui/material";
+
+export const cardStyling = { m: '3%', width: {xs: '70%', sm: '60%', lg:'50%'}, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', p: 5, mb: '200px'}
+
 
 function InfoPage() {
 
   return (
-    <>
-    <Typography variant="body1">
-        Information about the site
-    </Typography>
-    </>
+    <Card sx={cardStyling}>
+      Information!
+    </Card>
   );
 }
 
