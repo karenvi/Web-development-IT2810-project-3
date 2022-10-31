@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Feed from './pages/Feed'
 import Country from './pages/Country'
 import GiveReview from './pages/GiveReview';
+import InfoPage from './pages/InfoPage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' element={<Feed />} />
           <Route path='/country' element={<Country />} />
           <Route path='/give-review' element={<GiveReview />} />
+          <Route path='/info-page' element={<InfoPage />} />
         </Routes>
       </Router>
     </div>
