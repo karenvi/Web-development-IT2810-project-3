@@ -18,7 +18,7 @@ import Paper from '@mui/material/Paper';
 import { useQuery } from '@apollo/client';
 import { GET_COUNTRIES_PAGINATION } from '../graphql/queries';
 
-const PAGE_SIZE = 10;
+const pageSize = 10;
 
 // Styling of the table headers
 const tableHeadStyling = { fontWeight: 'bold' };
@@ -36,19 +36,19 @@ function Countries() {
   // A clean "value" from the dropdown, default country and ascending order
   const [finalSortingCategory, setFinalSortingCategory] = useState("Country");
   const [sortDescending, setSortDescending] = useState(false);
-  const [showReviews, setShowReviews] = useState(false);
+  const [hideUnreviewedCountries, setHideUnreviewed] = useState(false);
  
   const navigate = useNavigate()
 
   const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
     variables: {
-      limit: PAGE_SIZE,
+      limit: pageSize,
       offset: page,
       sortOn: finalSortingCategory,
       sortDesc: sortDescending,
       filterOn: category,
-      query: searchQuery,
-      reviewedCountriesBool: showReviews,
+      searchFieldValue: searchQuery,
+      hideUnrewieved: hideUnreviewedCountries,
     }
   });
 
@@ -112,9 +112,10 @@ function Countries() {
         </TableCell>    
         <TableCell colSpan={2} sx={tableHeadStyling} align="right">  
         Reviewed countries<Checkbox
-          checked={showReviews}
+          checked={hideUnreviewedCountries}
           onChange={(event) => { 
-            setShowReviews(event.target.checked);
+            setHideUnreviewed(event.target.checked);
+            console.log("checked");
             setPage(0);
           }}
           inputProps={{ 'aria-label': 'controlled' }}

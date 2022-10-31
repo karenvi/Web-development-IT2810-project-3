@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 ;
+;
 export const resolvers = {
     Query: {
         countries: () => mongoose.connection.db.collection("countries").find({}).toArray(),
@@ -7,10 +8,12 @@ export const resolvers = {
             const sortOnField = args.sortOn;
             const sortingChoice = args.sortDesc ? -1 : 1;
             const filterOnField = args.filterOn;
-            const queryRegex = { $regex: `.*${args.query}.*`, $options: 'i' };
-            const reviewsBool = args.reviewedCountriesBool ? { $and: [{ [filterOnField]: queryRegex }, { "Reviews": { $exists: args.reviewedCountriesBool } }] } : { [filterOnField]: queryRegex };
+            const inputRegex = { $regex: `.*${args.searchFieldValue}.*`, $options: 'i' };
+            const filter = args.hideUnreviewed
+                ? { $and: [{ [filterOnField]: inputRegex }, { "Reviews": { $exists: args.hideUnreviewed } }] } // if show only reviewed countries
+                : { [filterOnField]: inputRegex }; // if show both reviewed and unrevieved countries
             const response = await mongoose.connection.db.collection("countries")
-                .find(reviewsBool)
+                .find(filter)
                 .sort({ [sortOnField]: sortingChoice })
                 .skip(args.offset * args.limit)
                 .limit(args.limit).toArray();

@@ -31,7 +31,7 @@ type Country {
 
 type Query {
   countries: [Country]
-  paginatedCountries(offset: Int, limit: Int, sortOn: String, sortDesc: Boolean, filterOn: String, query: String, reviewedCountriesBool: Boolean): [Country]
+  paginatedCountries(offset: Int, limit: Int, sortOn: String, sortDesc: Boolean, filterOn: String, searchFieldValue: String, hideUnreviewed: Boolean): [Country]
   countryByName(Country: String): Country
 }
 
