@@ -39,8 +39,8 @@ function GiveReview() {
 
   // TODO: Tilbakemelding til brukeren ved feil input
   return (
-    <Card sx={{
-      m: '3%', width: '50%', maxWidth: 700, display: 'flex', justifyContent: 'center',
+    <Card component="main" sx={{
+      m: '3%', width: '50%', maxWidth: 700, minWidth: '510px', display: 'flex', justifyContent: 'center',
       alignItems: 'center', p: 6
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -55,14 +55,15 @@ function GiveReview() {
           onInputChange={(event, newInputValue) => {
             setCountry(newInputValue);
           }}
-          renderInput={(params) => <TextField {...params} label="" placeholder="Country" required={true} />}
+          renderInput={(params) => <TextField {...params} label="" aria-label="CountryName" placeholder="Country" required={true} />}
           isOptionEqualToValue={(option, value) => option.label === value.label}
         />
 
         <Typography variant="h6" sx={reviewHeaderStyling}>Name</Typography>
-        <TextField id="outlined-basic"
+        <TextField id="name-field"
           required
           label=""
+          aria-label="Name"
           placeholder="Name"
           variant="outlined"
           value={author}
@@ -72,6 +73,7 @@ function GiveReview() {
         <Typography variant="h6" sx={reviewHeaderStyling}>Rating</Typography>
         <Rating
           name="hover-feedback"
+          aria-label="Rating"
           value={rating}
           precision={0.5}
           // getLabelText={getLabelText}
@@ -85,6 +87,7 @@ function GiveReview() {
         <TextField
           id="outlined-multiline-static"
           label=""
+          aria-label="Review content"
           placeholder="Write your review..."
           multiline
           rows={7}

@@ -73,7 +73,8 @@ function UserInput({ queryFilteredCountries }: Props) {
 
 
   return (
-    <>
+    <Box component="main" sx={{display: 'flex', flexDirection: 'column',  justifyContent: 'center',
+        alignItems: 'center', width: '100%'}}>
       <Box
         sx={{
           m: 5, p: '35px', width: '40%', maxWidth: '450px', minWidth: '330px', backgroundColor: 'white', display: 'flex', justifyContent: 'center',
@@ -110,8 +111,8 @@ function UserInput({ queryFilteredCountries }: Props) {
           </Select>
         </FormControl>
       </Box>
-      <TableContainer sx={{ width: '50%', m: '10px' }} component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+      <TableContainer sx={{ width: '50%', m: '10px', minWidth: '520px' }} component={Paper}>
+        <Table sx={{ minWidth: 300 }} aria-label="Table of countries">
           <TableHead>
             <TableRow>
               <TableCell sx={tableHeadStyling}>Country</TableCell>
@@ -150,7 +151,7 @@ function UserInput({ queryFilteredCountries }: Props) {
             <Typography variant="subtitle1" sx={{ fontFamily: 'Roboto', fontSize: '16px' }}>{onPage} of {numberOfPages === 0 ? "1" : numberOfPages}</Typography>
           </Stack>}
       </TableContainer>
-    </>
+    </Box>
   )
 }
 export default UserInput
