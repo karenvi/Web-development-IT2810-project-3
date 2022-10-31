@@ -19,6 +19,7 @@ interface IPaginationArgs {
     sortDesc: boolean; // descending = false when alphabetical order (A-Z, true for Z-A)
     filterOn: string;
     query: string;
+    reviewedCountriesBool: boolean;
 }
 
 export const resolvers = {
@@ -30,9 +31,10 @@ export const resolvers = {
             const sortingChoice = args.sortDesc ? -1 : 1; 
             const filterOnField = args.filterOn;
             const queryRegex = {$regex: `.*${args.query}.*`, $options: 'i'};
+            const reviewsBool = args.reviewedCountriesBool ? {$and: [{ [filterOnField]: queryRegex}, { "Reviews": { $exists: args.reviewedCountriesBool}}]} : { [filterOnField]: queryRegex};
 
             const response = await mongoose.connection.db.collection("countries")
-                .find({ [filterOnField]: queryRegex})
+                .find(reviewsBool)
                 .sort({ [sortOnField]: sortingChoice })
                 .skip(args.offset * args.limit)
                 .limit(args.limit).toArray();

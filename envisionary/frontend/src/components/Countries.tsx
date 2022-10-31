@@ -1,4 +1,4 @@
-import { Button, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
+import { Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -36,6 +36,7 @@ function Countries() {
   // A clean "value" from the dropdown, default country and ascending order
   const [finalSortingCategory, setFinalSortingCategory] = useState("Country");
   const [sortDescending, setSortDescending] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
  
   const navigate = useNavigate()
 
@@ -47,6 +48,7 @@ function Countries() {
       sortDesc: sortDescending,
       filterOn: category,
       query: searchQuery,
+      reviewedCountriesBool: showReviews,
     }
   });
 
@@ -86,7 +88,7 @@ function Countries() {
         <TableHead>
         <TableRow>
           {/* Let user pick what the data displayed should be sorted on */}
-        <TableCell colSpan={4} sx={tableHeadStyling}>
+        <TableCell colSpan={2} sx={tableHeadStyling}>
         <label htmlFor="header-search">
         <span className="visually-hidden">Sort by:</span>
         </label>
@@ -106,6 +108,17 @@ function Countries() {
 
         </Select>
         </FormControl>
+  
+        </TableCell>    
+        <TableCell colSpan={2} sx={tableHeadStyling} align="right">  
+        Reviewed countries<Checkbox
+          checked={showReviews}
+          onChange={(event) => { 
+            setShowReviews(event.target.checked);
+            setPage(0);
+          }}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
         </TableCell>
         </TableRow>
 
@@ -148,9 +161,11 @@ function Countries() {
       <Button variant="contained" disabled={checkIfPageInvalid()} onClick={() => setPage(prev => prev + 1)} sx={buttonStyling}>Next</Button>
       </Grid>
       </Grid>}
+      {page >= 1 && data?.paginatedCountries.length === 0 ? <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)} sx={buttonStyling}>Previous page</Button> : <></>}
           </TableCell>
-        </TableRow>
+          </TableRow>
         </TableBody>
+        
         </Table>
        
 
