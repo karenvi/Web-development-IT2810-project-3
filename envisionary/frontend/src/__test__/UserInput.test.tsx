@@ -25,31 +25,52 @@ describe("Testing UserInput component", () => {
             </Router>
         );
 
-        let tree = component.toJSON();
+        const tree = component.toJSON();
         expect(tree).toMatchSnapshot();
+
+
+
     });
 
-/*      it("result is changed when typing", () => {
+    it("result is changed when typing", () => {
 
         const onInput = jest.fn(); 
 
         render(
             <Router>
-                <MockedProvider mocks={mocks} addTypename={false}></MockedProvider>
+                <MockedProvider mocks={mocks} addTypename={false}>
                 <RecoilRoot>
                     <RecoilObserver node={searchQueryState} onInput={onInput} />
                     <UserInput />
-                </RecoilRoot>,
+                </RecoilRoot>
+                </MockedProvider>
             </Router>
           );
 
-        const component = screen.getByTestId("header-search"); 
+        // typing into search field actually does something
+        const component = screen.getByTestId("search-test"); 
         fireEvent.change(component, {target: {value: 'North Korea'}});
         expect(onInput).toHaveBeenCalled();
+    });
 
-        const countryList = screen.getByText("North Korea");
-        expect(countryList).toContainHTML("North Korea");
-    }); */
+    it("drop down menu contains correct information", () => {
+
+        const onInput = jest.fn(); 
+
+        render(
+            <Router>
+                <MockedProvider mocks={mocks} addTypename={false}>
+                <RecoilRoot>
+                    <RecoilObserver node={searchQueryState} onInput={onInput} />
+                    <UserInput />
+                </RecoilRoot>
+                </MockedProvider>
+            </Router>
+          );
+
+        const component = screen.getByTestId("select-test") as HTMLInputElement;
+        expect(component.value).toBe("Country");
+    });
 
     it("contains the proper elements", () => {
         const component = renderer.create(

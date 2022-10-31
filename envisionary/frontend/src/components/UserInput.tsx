@@ -38,7 +38,8 @@ function UserInput() {
           </label>
           <TextField
             label={labelSearch}
-            inputProps={{ "data-testid": "header-search" }}
+            inputProps={{ "data-testid": "search-test" }}
+            //data-testid="search-test"
             variant="outlined"
             type="text"
             id="header-search"
@@ -58,6 +59,7 @@ function UserInput() {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
+            inputProps={{ "data-testid": "select-test" }}
             value={category}
             label="Category:"
             onChange={(event) => { setCategory(event.target.value as string)}}

@@ -40,7 +40,7 @@ exports[`Testing UserInput component snapshot test 1`] = `
           aria-invalid={false}
           autoFocus={false}
           className="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-          data-testid="header-search"
+          data-testid="search-test"
           disabled={false}
           id="header-search"
           name="s"
@@ -108,6 +108,7 @@ exports[`Testing UserInput component snapshot test 1`] = `
       <input
         aria-hidden={true}
         className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        data-testid="select-test"
         disabled={false}
         onAnimationStart={[Function]}
         onChange={[Function]}

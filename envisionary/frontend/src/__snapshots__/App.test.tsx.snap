@@ -76,7 +76,7 @@ exports[`App renders correctly 1`] = `
             <input
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-              data-testid="header-search"
+              data-testid="search-test"
               id="header-search"
               name="s"
               type="text"
@@ -133,6 +133,7 @@ exports[`App renders correctly 1`] = `
           <input
             aria-hidden="true"
             class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            data-testid="select-test"
             tabindex="-1"
             value="Country"
           />

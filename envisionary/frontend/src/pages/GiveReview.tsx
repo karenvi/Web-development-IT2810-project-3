@@ -150,7 +150,7 @@ function GiveReview() {
 
         <Typography variant="h6" sx={reviewHeaderStyling}>Review Content</Typography>
         <TextField
-          id="outlined-multiline-static"
+          id="review-content-field"
           label=""
           placeholder="Write your review..."
           multiline

@@ -99,7 +99,7 @@ function Countries() {
         label="Sort by:"
         onChange={sortData}
         >
-        <MenuItem value='Country-asc'>Ascending country</MenuItem>
+        <MenuItem value="Country-asc">Ascending country</MenuItem>
         <MenuItem value='Continent-asc'>Ascending continent</MenuItem>
         <MenuItem value='Country-desc'>Descending country</MenuItem>
         <MenuItem value='Continent-desc'>Descending continent</MenuItem>
