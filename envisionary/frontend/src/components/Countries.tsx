@@ -48,7 +48,7 @@ function Countries() {
       sortDesc: sortDescending,
       filterOn: category,
       searchFieldValue: searchQuery,
-      hideUnrewieved: hideUnreviewedCountries,
+      hideUnreviewed: hideUnreviewedCountries,
     }
   });
 
