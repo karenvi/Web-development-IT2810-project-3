@@ -1,4 +1,4 @@
-import { Button, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
+import { Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -18,7 +18,7 @@ import Paper from '@mui/material/Paper';
 import { useQuery } from '@apollo/client';
 import { GET_COUNTRIES_PAGINATION } from '../graphql/queries';
 
-const PAGE_SIZE = 10;
+const pageSize = 10;
 
 // Styling of the table headers
 const tableHeadStyling = { fontWeight: 'bold' };
@@ -36,17 +36,19 @@ function Countries() {
   // A clean "value" from the dropdown, default country and ascending order
   const [finalSortingCategory, setFinalSortingCategory] = useState("Country");
   const [sortDescending, setSortDescending] = useState(false);
+  const [hideUnreviewedCountries, setHideUnreviewed] = useState(false);
  
   const navigate = useNavigate()
 
   const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
     variables: {
-      limit: PAGE_SIZE,
+      limit: pageSize,
       offset: page,
       sortOn: finalSortingCategory,
       sortDesc: sortDescending,
       filterOn: category,
-      query: searchQuery,
+      searchFieldValue: searchQuery,
+      hideUnreviewed: hideUnreviewedCountries,
     }
   });
 
@@ -86,7 +88,7 @@ function Countries() {
         <TableHead>
         <TableRow>
           {/* Let user pick what the data displayed should be sorted on */}
-        <TableCell colSpan={4} sx={tableHeadStyling}>
+        <TableCell colSpan={2} sx={tableHeadStyling}>
         <label htmlFor="header-search">
         <span className="visually-hidden">Sort by:</span>
         </label>
@@ -106,6 +108,17 @@ function Countries() {
 
         </Select>
         </FormControl>
+  
+        </TableCell>    
+        <TableCell colSpan={2} sx={tableHeadStyling} align="right">  
+        Reviewed countries<Checkbox
+          checked={hideUnreviewedCountries}
+          onChange={(event) => { 
+            setHideUnreviewed(event.target.checked);
+            setPage(0);
+          }}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
         </TableCell>
         </TableRow>
 
@@ -148,9 +161,11 @@ function Countries() {
       <Button variant="contained" disabled={checkIfPageInvalid()} onClick={() => setPage(prev => prev + 1)} sx={buttonStyling}>Next</Button>
       </Grid>
       </Grid>}
+      {page >= 1 && data?.paginatedCountries.length === 0 ? <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)} sx={buttonStyling}>Previous page</Button> : <></>}
           </TableCell>
-        </TableRow>
+          </TableRow>
         </TableBody>
+        
         </Table>
        
 

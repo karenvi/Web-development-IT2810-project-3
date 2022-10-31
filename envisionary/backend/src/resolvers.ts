@@ -13,13 +13,14 @@ interface IcountryReviewsByNameArgs {
 }
 
 interface IPaginationArgs {
-    offset: number;
-    limit: number;
-    sortOn: string;
-    sortDesc: boolean; // descending = false when alphabetical order (A-Z, true for Z-A)
-    filterOn: string;
-    query: string;
-}
+    offset: number; // "page number"
+    limit: number; // number of countries per page
+    sortOn: string; // the field to sort on (e.g. sort on the "Country" field)
+    sortDesc: boolean; // sortDesc: false when alphabetical order (A-Z)
+    filterOn: string; // which field to filter on (e.g. filterOn: "Country" with searchFieldValue: "Norway" gives 1 match)
+    searchFieldValue: string; // the input value in the search field
+    hideUnreviewed: boolean; // filter to find only reviewed countries
+};
 
 export const resolvers = {
     Query: {
@@ -27,12 +28,15 @@ export const resolvers = {
 
         paginatedCountries: async (_parent: unknown, args: IPaginationArgs) => { // resolver to get countries with pagination
             const sortOnField = args.sortOn;
-            const sortingChoice = args.sortDesc ? -1 : 1; 
+            const sortingChoice = args.sortDesc ? -1 : 1;
             const filterOnField = args.filterOn;
-            const queryRegex = {$regex: `.*${args.query}.*`, $options: 'i'};
+            const inputRegex = { $regex: `.*${args.searchFieldValue}.*`, $options: 'i' };
+            const filter = args.hideUnreviewed
+                ? { $and: [{ [filterOnField]: inputRegex }, { "Reviews": { $exists: args.hideUnreviewed } }] } // if show only reviewed countries
+                : { [filterOnField]: inputRegex }; // if show both reviewed and unrevieved countries
 
             const response = await mongoose.connection.db.collection("countries")
-                .find({ [filterOnField]: queryRegex})
+                .find(filter)
                 .sort({ [sortOnField]: sortingChoice })
                 .skip(args.offset * args.limit)
                 .limit(args.limit).toArray();
