@@ -168,8 +168,8 @@ function Countries() {
             {/* Pagination */}
             <TableRow>
               <TableCell colSpan={4}>
-                {data?.paginatedCountries.length === 0 ? <></> :
-                  <Grid container direction="row" justifyContent="space-between" alignItems="flex-end" sx={{ mt: '10px', mb: '20px' }}>
+                {data?.paginatedCountries.length !== 0
+                  && <Grid container direction="row" justifyContent="space-between" alignItems="flex-end" sx={{ mt: '10px', mb: '20px' }}>
                     <Grid sx={{ ml: "20px" }}>
                       <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)} sx={buttonStyling}>Previous</Button>
                     </Grid>

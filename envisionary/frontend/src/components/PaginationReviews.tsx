@@ -54,8 +54,8 @@ function PaginationReviews({ sortReviews, country }: Props) {
                                         <Typography color='gray' align="right" sx={{ fontSize: "14px" }}>
                                             {new Date(row.Date).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</Typography>
                                     </Grid>
-                                    {row.ReviewText.length !== 0 && // Hide reviewtext if empty 
-                                        <Grid item xs={12}>
+                                    {row.ReviewText.length !== 0 // hide reviewtext if empty
+                                        && <Grid item xs={12}>
                                             <Typography align="left">{row.ReviewText}</Typography>
                                         </Grid>}
                                 </Grid>
