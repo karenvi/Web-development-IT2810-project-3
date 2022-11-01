@@ -41,14 +41,24 @@ function GiveReview() {
 
   const validation = () => {
     if (country !== "" && author !== "") {
+      if (author.length > 40) {
+        setNotValidForm({country: false, author: true})
+        setErrors({countryError: " ", authorError: "Name cannot be longer than 40 characters"})
+        return false
+      }
       setNotValidForm({country: false, author: false})
       setErrors({countryError: " ", authorError: " "})
       return true
-    } else if (country !== "" && author === ""){
+    } else if (country !== "" && author === "") {
       setNotValidForm({country: false, author: true})
       setErrors({countryError: " ", authorError: "Name is required"})
       return false
     } else if (country === "" && author !== "") {
+      if (author.length > 40) {
+        setNotValidForm({country: true, author: true})
+        setErrors({countryError: "Country is required", authorError: "Name cannot be longer than 40 characters"})
+        return false
+      }
       setNotValidForm({country: true, author: false})
       setErrors({countryError: "Country is required", authorError: " "})
       return false
@@ -101,11 +111,11 @@ function GiveReview() {
       alignItems: 'center', p: 6
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        <Typography variant="h4">Give review</Typography>
-        <Typography variant="h6" sx={reviewHeaderStyling}>Choose a country *</Typography>
+        <Typography component="h1" variant="h4">Give review</Typography>
+        <Typography component="label" htmlFor="country-box" variant="h6" sx={reviewHeaderStyling}>Choose a country *</Typography>
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
+          id="country-box"
           options={getCountryNames()}
           sx={{ width: 250 }}
           key={clear}
@@ -117,7 +127,6 @@ function GiveReview() {
             <TextField 
               {...params} 
               label=""
-              aria-label="CountryName"
               placeholder="Country" 
               required={true}
               error={notValidForm.country}
@@ -126,11 +135,11 @@ function GiveReview() {
           isOptionEqualToValue={(option, value) => option.label === value.label}
         />
 
-        <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Name *</Typography>
-        <TextField id="outlined-basic"
+        <Typography component="label" htmlFor="name-field" variant="h6" sx={{mt: 1, fontSize: '18px'}}>Name *</Typography>
+        <TextField id="name-field"
           required
           label=""
-          aria-label="Name"
+          sx={{ width: 250 }}
           placeholder="Name"
           variant="outlined"
           value={author}
@@ -139,10 +148,9 @@ function GiveReview() {
           onChange={(e) => setAuthor(e.target.value)}
         />
 
-        <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
-        <Rating
+        <Typography component="label" htmlFor="rating-stars" variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
+        <Rating id="rating-stars"
           name="hover-feedback"
-          aria-label="Rating"
           value={rating}
           precision={0.5}
           onChange={(event, newValue) => {
@@ -151,11 +159,10 @@ function GiveReview() {
           emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
         />
 
-        <Typography variant="h6" sx={reviewHeaderStyling}>Review Content</Typography>
+        <Typography component="label" htmlFor="review-content-field" variant="h6" sx={reviewHeaderStyling}>Review Content</Typography>
         <TextField
-          id="outlined-multiline-static"
+          id="review-content-field"
           label=""
-          aria-label="Review content"
           placeholder="Write your review..."
           multiline
           rows={7}

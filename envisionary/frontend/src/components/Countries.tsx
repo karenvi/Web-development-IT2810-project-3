@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
+import { Box, Button, Checkbox, Grid, SelectChangeEvent, TableContainer, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -87,6 +87,7 @@ function Countries() {
       display: 'flex', flexDirection: 'column', justifyContent: 'center',
       alignItems: 'center', width: '100%'
     }}>
+      <Typography variant="h1" sx={{ fontSize: '45px', color: '#172A3A', mt: '40px', mb: '8px' }}>Search for a country</Typography>
       <UserInput />
       <TableContainer sx={{ width: { xs: '95%', sm: '85%', md: '75%', lg: '65%' }, m: '10px', mb: "200px" }} component={Paper}>
         <Table aria-label="Table of countries">
@@ -94,7 +95,7 @@ function Countries() {
             <TableRow>
               {/* Let user pick what the data displayed should be sorted on */}
               <TableCell colSpan={2} sx={tableHeadStyling}>
-                <label htmlFor="header-search">
+                <label htmlFor="filter-category">
                   <span className="visually-hidden">Sort by:</span>
                 </label>
                 <FormControl fullWidth sx={{ width: '300px', ml: "10px" }}>
@@ -106,7 +107,7 @@ function Countries() {
                     label="Sort by:"
                     onChange={sortData}
                   >
-                    <MenuItem value='Country-asc'>Ascending country</MenuItem>
+                    <MenuItem value="Country-asc">Ascending country</MenuItem>
                     <MenuItem value='Continent-asc'>Ascending continent</MenuItem>
                     <MenuItem value='Country-desc'>Descending country</MenuItem>
                     <MenuItem value='Continent-desc'>Descending continent</MenuItem>
