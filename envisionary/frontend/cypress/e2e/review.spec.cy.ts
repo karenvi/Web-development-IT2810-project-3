@@ -62,6 +62,10 @@ describe('Testing give review page', () => {
         cy.get('#name-field').click().type(name).should('have.value', name);
         cy.get('#review-content-field').click().type(reviewContent).should('have.value', reviewContent);
 
+        // give random rating
+        const rating: number = Math.random() * 135;
+        cy.get('#rating-stars').click(rating, 0);
+        
         // submit
         cy.get('button').contains('Submit').scrollIntoView().click();
         cy.contains('Countries').click()
