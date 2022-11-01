@@ -82,6 +82,8 @@ Additionally, we have provided a visual label for each input element that convey
 
 For our text input field we also provided a visually hidden element that can be read out loud by screen readers for visually impaired people or others who have a hard time reading as placeholder text inside text fields may be difficult for screen readers to read. That means it's not visible for users who do not use screen readers. All these elements are marked with the class-name “.visually-hidden” and we found the code at (source [here](https://www.emgoto.com/react-search-bar/)).
 
+Icons may seem common sense to many, but for some they may be confusing (source [here](https://uxdesign.cc/ux-of-the-hamburger-menu-890328a904f9)). Few icons thus improves web accessibility. Keeping that in mind, we chose to have a navigation bar with buttons instead of a "hamburger" menu.
+
 ### Responsivity
 Responsivity makes a product accessible for use on different devices. The team focused less on responsivity than the previous project, as responsivity was not explicitly mentioned as a requirement. However, we have ensured that the design is functional also on smaller screens, especially by using the sx prop on MUI components (Material UI) with breakpoints for xs (extra small), sm (small), md (medium), lg (large), and xl (extra large) screens. This was an easy way to maintain some degree of responsivity. Several components also use grids or flexboxes to ensure a flexible layout.
 
