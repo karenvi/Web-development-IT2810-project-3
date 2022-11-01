@@ -29,32 +29,29 @@ function Country() {
 
 
   return (
-    <Card sx={cardStyling}>
+    <Card component="main" sx={cardStyling}>
       <Typography variant="h3" sx={{ m: 2, fontSize: '40px' }}>{location.state.country.Country}</Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1}}>
+      <Box aria-label="Average rating" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1}}>
           <Rating name="read-only" value={avrgRating} precision={0.5} readOnly
             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
           />
           <Typography variant="overline" sx={{ ml: 1 }}> {avrgRating.toFixed(2)} / 5 ({numberOfReviews})</Typography>
         </Box>
       <Box sx={{ width: '100%', height: '30vw', minHeight: '350px' }}>
-        <PopulationChart />
+        <PopulationChart aria-label="Population chart"/>
         </Box>
-      <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', m: 4, alignItems: 'flex-start' }}>
-        
-        <Container sx={{ display: 'flex', flexDirection: 'row' }}>
-          <Container sx={{ width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <Typography variant="overline"><b>Population rank:</b> {location.state.country.Rank}</Typography>
-            <Typography variant="overline"><b>Country code:</b> {location.state.country.CCA3}</Typography>
-            <Typography variant="overline"><b>Capital:</b> {location.state.country.Capital}</Typography>
-            <Typography variant="overline" align='left'><b>Continent:</b> {location.state.country.Continent}</Typography>
-          </Container>
-          <Container sx={{ width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <Typography variant="overline"><b>Area:</b> {parseInt(location.state.country.Area).toLocaleString()} km&#178;</Typography>
-            <Typography variant="overline"><b>Density:</b> {location.state.country.Density} per km&#178;</Typography>
-            <Typography variant="overline"><b>GDP growth rate:</b> {location.state.country.GrowthRate}</Typography>
-            <Typography variant="overline" align='left'><b>Percentage of world population:</b> {location.state.country.WorldPopulationPercentage}%</Typography>
-          </Container>
+      <Container aria-label="Information about country" sx={{ width: '100%', display: 'flex', flexDirection: 'row', m: 4, alignItems: 'flex-start' }}>
+        <Container sx={{ width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <Typography variant="overline"><b>Population rank:</b> {location.state.country.Rank}</Typography>
+          <Typography variant="overline"><b>Country code:</b> {location.state.country.CCA3}</Typography>
+          <Typography variant="overline"><b>Capital:</b> {location.state.country.Capital}</Typography>
+          <Typography variant="overline" align='left'><b>Continent:</b> {location.state.country.Continent}</Typography>
+        </Container>
+        <Container sx={{ width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <Typography variant="overline"><b>Area:</b> {parseInt(location.state.country.Area).toLocaleString()} km&#178;</Typography>
+          <Typography variant="overline"><b>Density:</b> {location.state.country.Density} per km&#178;</Typography>
+          <Typography variant="overline"><b>GDP growth rate:</b> {location.state.country.GrowthRate}</Typography>
+          <Typography variant="overline" align='left'><b>Percentage of world population:</b> {location.state.country.WorldPopulationPercentage}%</Typography>
         </Container>
       </Container>
       <Reviews />
