@@ -153,6 +153,7 @@ function GiveReview() {
         <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
         <Rating
           name="hover-feedback"
+          id="rating"
           aria-label="Rating"
           value={rating}
           precision={0.5}
