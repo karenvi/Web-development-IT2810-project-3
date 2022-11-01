@@ -1,9 +1,19 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
+import { RecoilRoot } from 'recoil';
+import { MockedProvider } from "@apollo/client/testing";
+import { mocks } from './__test__/mocks/mocks';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+
+
+it("App renders correctly", () => {
+    const { container } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <RecoilRoot>
+          <App/>
+        </RecoilRoot>
+      </MockedProvider>
+    );
+    expect(container).toMatchSnapshot();
+  });
+
