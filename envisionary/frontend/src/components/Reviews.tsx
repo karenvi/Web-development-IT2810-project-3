@@ -38,7 +38,7 @@ function Reviews() {
           </AccordionSummary>
           <AccordionDetails>
             {sortReviews().map((row: IReview) => (
-              <Paper variant="outlined" key={number++} sx={{ mb: 2 }}>
+              <Paper variant="outlined" key={number++} aria-label="Review" sx={{ mb: 2 }}>
                 <Grid container spacing={2} p={2}>
                   <Grid item md={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                     <Typography fontWeight='bold'>{row.Name}</Typography>
