@@ -31,15 +31,15 @@ function Country() {
   return (
     <Card component="main" sx={cardStyling}>
       <Typography variant="h3" sx={{ m: 2, fontSize: '40px' }}>{location.state.country.Country}</Typography>
-      <Box aria-label="Average rating" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1}}>
-          <Rating name="read-only" value={avrgRating} precision={0.5} readOnly
-            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-          />
-          <Typography variant="overline" sx={{ ml: 1 }}> {avrgRating.toFixed(2)} / 5 ({numberOfReviews})</Typography>
-        </Box>
+      <Box aria-label="Average rating" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', px: '48px', mb: 1 }}>
+        <Rating name="read-only" value={avrgRating} precision={0.5} readOnly
+          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+        />
+        <Typography variant="overline" sx={{ ml: 1 }}> {avrgRating.toFixed(2)} / 5 ({numberOfReviews})</Typography>
+      </Box>
       <Box sx={{ width: '100%', height: '30vw', minHeight: '350px' }}>
-        <PopulationChart aria-label="Population chart"/>
-        </Box>
+        <PopulationChart aria-label="Population chart" />
+      </Box>
       <Container aria-label="Information about country" sx={{ width: '100%', display: 'flex', flexDirection: 'row', m: 4, alignItems: 'flex-start' }}>
         <Container sx={{ width: '50%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <Typography variant="overline"><b>Population rank:</b> {location.state.country.Rank}</Typography>
