@@ -9,7 +9,7 @@ function InfoPage() {
     <Card component="main" sx={cardStyling}>
       <Box sx={{textAlign: "left", m: 2}}>
         <Typography>ABOUT US</Typography>
-        <Typography variant="h4">Envision the world through the eyes of a traveller</Typography>
+        <Typography component="h1" variant="h4">Envision the world through the eyes of a traveller</Typography>
         <br></br>
         Humans are only given a limited amount of time to explore and experience the world. How can we spend that time wisely?
         <br></br> <br></br>
