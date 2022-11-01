@@ -151,7 +151,6 @@ function GiveReview() {
         <Typography component="label" htmlFor="rating-stars" variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
         <Rating id="rating-stars"
           name="hover-feedback"
-          aria-label="Rating"
           value={rating}
           precision={0.5}
           onChange={(event, newValue) => {
