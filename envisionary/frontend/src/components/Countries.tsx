@@ -58,7 +58,8 @@ function Countries() {
 
   // Routing to each country
   const toCountryPage = (country: ICountry) => {
-    navigate('/country', { state: { country } })
+    navigate('/country', { state: { country } });
+    setPage(0);
   }
 
   // TODO: Disable the next button if the user is on the last page (the solution right now is not really acceptable :/)
@@ -88,7 +89,7 @@ function Countries() {
     }}>
       <Typography variant="h1" sx={{ fontSize: '45px', color: '#172A3A', mt: '40px', mb: '8px' }}>Search for a country</Typography>
       <UserInput />
-      <TableContainer sx={{ width: { xs: '95%', sm: '75%', md: '65%', lg: '55%' }, m: '10px', mb: "200px" }} component={Paper}>
+      <TableContainer sx={{ width: { xs: '95%', sm: '85%', md: '75%', lg: '65%' }, m: '10px', mb: "200px" }} component={Paper}>
         <Table aria-label="Table of countries">
           <TableHead>
             <TableRow>
@@ -179,7 +180,8 @@ function Countries() {
                       <Button variant="contained" disabled={checkIfPageInvalid()} onClick={() => setPage(prev => prev + 1)} sx={buttonStyling}>Next</Button>
                     </Grid>
                   </Grid>}
-                {page >= 1 && data?.paginatedCountries.length === 0 ? <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)} sx={buttonStyling}>Previous page</Button> : <></>}
+                {(page >= 1 && data?.paginatedCountries.length === 0)
+                  && <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)} sx={buttonStyling}>Previous page</Button>}
               </TableCell>
             </TableRow>
           </TableBody>
