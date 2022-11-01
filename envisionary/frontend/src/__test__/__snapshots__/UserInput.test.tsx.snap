@@ -10,16 +10,6 @@ exports[`Testing UserInput component snapshot test 1`] = `
     method="get"
     onSubmit={[Function]}
   >
-    <label
-      htmlFor="header-search"
-    >
-      <span
-        className="visually-hidden"
-      >
-        Search by 
-        country
-      </span>
-    </label>
     <div
       className="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
       onInput={[Function]}
@@ -78,12 +68,12 @@ exports[`Testing UserInput component snapshot test 1`] = `
       Category:
     </label>
     <label
-      htmlFor="header-search"
+      htmlFor="demo-simple-select"
     >
       <span
         className="visually-hidden"
       >
-        Select what to search category to search in
+        Select which category to search in
       </span>
     </label>
     <div

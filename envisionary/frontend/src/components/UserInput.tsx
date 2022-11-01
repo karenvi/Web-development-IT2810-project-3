@@ -22,7 +22,6 @@ function UserInput() {
     navigate(``, { replace: true });
     e.preventDefault();
   }
-  
 
   return (
     <Box
@@ -33,9 +32,6 @@ function UserInput() {
       }}
     >
       <form action="/" method="get" autoComplete="off" onSubmit={onSubmit}>
-        <label htmlFor="header-search">
-          <span className="visually-hidden">Search by {category.toLowerCase()}</span>
-        </label>
         <TextField
           label={labelSearch}
           inputProps={{ "data-testid": "search-test" }}
@@ -52,8 +48,8 @@ function UserInput() {
       </form>
       <FormControl fullWidth sx={{ width: '150px', ml: "10px" }}>
         <InputLabel id="demo-simple-select-label">Category:</InputLabel>
-        <label htmlFor="header-search">
-          <span className="visually-hidden">Select what to search category to search in</span>
+        <label htmlFor="demo-simple-select">
+          <span className="visually-hidden">Select which category to search in</span>
         </label>
         <Select
           labelId="demo-simple-select-label"
@@ -61,7 +57,7 @@ function UserInput() {
           inputProps={{ "data-testid": "select-test" }}
           value={category}
           label="Category:"
-          onChange={(event) => { setCategory(event.target.value as string)}}
+          onChange={(event) => { setCategory(event.target.value as string) }}
         >
           <MenuItem value='Country'>Country</MenuItem>
           <MenuItem value='Continent'>Continent</MenuItem>

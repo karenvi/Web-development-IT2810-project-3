@@ -111,8 +111,8 @@ function GiveReview() {
       alignItems: 'center', p: 6
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        <Typography variant="h4">Give review</Typography>
-        <Typography variant="h6" sx={reviewHeaderStyling}>Choose a country *</Typography>
+        <Typography component="h1" variant="h4">Give review</Typography>
+        <Typography component="label" htmlFor="country-box" variant="h6" sx={reviewHeaderStyling}>Choose a country *</Typography>
         <Autocomplete
           disablePortal
           id="country-box"
@@ -127,7 +127,6 @@ function GiveReview() {
             <TextField 
               {...params} 
               label=""
-              aria-label="CountryName"
               placeholder="Country" 
               required={true}
               error={notValidForm.country}
@@ -136,12 +135,11 @@ function GiveReview() {
           isOptionEqualToValue={(option, value) => option.label === value.label}
         />
 
-        <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Name *</Typography>
+        <Typography component="label" htmlFor="name-field" variant="h6" sx={{mt: 1, fontSize: '18px'}}>Name *</Typography>
         <TextField id="name-field"
           required
           label=""
           sx={{ width: 250 }}
-          aria-label="Name"
           placeholder="Name"
           variant="outlined"
           value={author}
@@ -150,10 +148,9 @@ function GiveReview() {
           onChange={(e) => setAuthor(e.target.value)}
         />
 
-        <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
-        <Rating
+        <Typography component="label" htmlFor="rating-stars" variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
+        <Rating id="rating-stars"
           name="hover-feedback"
-          id="rating"
           aria-label="Rating"
           value={rating}
           precision={0.5}
@@ -163,11 +160,10 @@ function GiveReview() {
           emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
         />
 
-        <Typography variant="h6" sx={reviewHeaderStyling}>Review Content</Typography>
+        <Typography component="label" htmlFor="review-content-field" variant="h6" sx={reviewHeaderStyling}>Review Content</Typography>
         <TextField
           id="review-content-field"
           label=""
-          aria-label="Review content"
           placeholder="Write your review..."
           multiline
           rows={7}

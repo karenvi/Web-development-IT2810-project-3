@@ -1,7 +1,7 @@
 import { MockedProvider } from '@apollo/client/testing';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter, HashRouter as Router } from "react-router-dom";
 import { create, ReactTestRenderer } from 'react-test-renderer';
 import { RecoilRoot } from 'recoil';
 import Countries from '../components/Countries';
@@ -25,7 +25,7 @@ describe("Testing Countries component", () => {
         );
 
         const tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(tree).toMatchSnapshot(); 
     });
 
     it('Contains the right elements', () => {
