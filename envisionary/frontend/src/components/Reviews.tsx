@@ -31,7 +31,7 @@ function Reviews() {
           </AccordionSummary>
           <AccordionDetails>
             {data.countryByName.Reviews.map((row: IReview) => (
-              <Paper variant="outlined" key={number++} sx={{ mb: 2 }}>
+              <Paper variant="outlined" key={number++} aria-label="Review" sx={{ mb: 2 }}>
                 <Grid container spacing={2} p={2}>
                   <Grid item md={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                     <Typography fontWeight='bold'>{row.Name}</Typography>
@@ -47,7 +47,7 @@ function Reviews() {
                     <Typography color='gray' align="right" sx={{ fontSize: "14px" }}>
                       {new Date(row.Date).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</Typography>
                   </Grid>
-                  {row.ReviewText.length == 0 ? <></> 
+                  {row.ReviewText.length === 0 ? <></> 
                   : <Grid item xs={12}>
                       <Typography align="left">{row.ReviewText}</Typography>
                     </Grid>}

@@ -6,7 +6,7 @@ export const cardStyling = { m: '3%', width: {xs: '70%', sm: '60%', lg:'50%'}, d
 function InfoPage() {
 
   return (
-    <Card sx={cardStyling}>
+    <Card component="main" sx={cardStyling}>
       Information!
     </Card>
   );

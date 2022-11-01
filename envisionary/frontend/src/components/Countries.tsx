@@ -1,4 +1,4 @@
-import { Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
+import { Box, Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -82,10 +82,11 @@ function Countries() {
   }
 
   return (
-    <>
+  <Box component="main" sx={{display: 'flex', flexDirection: 'column',  justifyContent: 'center',
+         alignItems: 'center', width: '100%'}}>
     <UserInput />
       <TableContainer sx={{ width: {xs: '95%', sm: '75%', md: '65%', lg: '55%'}, m: '10px', mb: "200px" }} component={Paper}>
-        <Table aria-label="simple table">
+        <Table aria-label="Table of countries">
         <TableHead>
         <TableRow>
           {/* Let user pick what the data displayed should be sorted on */}
@@ -168,10 +169,8 @@ function Countries() {
         </TableBody>
         
         </Table>
-       
-
       </TableContainer>
-    </>
+    </Box>
   );
 }
 export default Countries
