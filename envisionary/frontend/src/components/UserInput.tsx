@@ -57,7 +57,7 @@ function UserInput() {
           inputProps={{ "data-testid": "select-test" }}
           value={category}
           label="Category:"
-          onChange={(event) => { setCategory(event.target.value as string)}}
+          onChange={(event) => { setCategory(event.target.value as string) }}
         >
           <MenuItem value='Country'>Country</MenuItem>
           <MenuItem value='Continent'>Continent</MenuItem>

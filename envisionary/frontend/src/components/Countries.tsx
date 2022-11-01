@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Grid, SelectChangeEvent, TableContainer, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Grid, SelectChangeEvent, TableContainer, Typography, Skeleton } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -137,22 +137,34 @@ function Countries() {
             </TableRow>
           </TableHead>
           <TableBody>
+            {loading // if data is not yet loaded, show placeholder rows with MUI's skeleton
+              ? [...Array(10)].map((row, index) => <TableRow
+                key={index}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row" className="pointer"><Skeleton /> </TableCell>
+                <TableCell align="right" className="pointer"><Skeleton /> </TableCell>
+                <TableCell align="right" className="pointer"><Skeleton /> </TableCell>
+                <TableCell align="right" className="pointer"><Skeleton /> </TableCell>
+              </TableRow>)
 
-            {data?.paginatedCountries.length === 0
-              ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow>
-              : data?.paginatedCountries.map((row: ICountry) => (
-                <TableRow
-                  key={row._id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  onClick={() => { toCountryPage(row) }}
-                  hover={true}
-                >
-                  <TableCell component="th" scope="row" className="pointer">{row.Country}</TableCell>
-                  <TableCell align="right" className="pointer">{row.Continent}</TableCell>
-                  <TableCell align="right" className="pointer">{parseInt(row.Population2022).toLocaleString()}</TableCell>
-                  <TableCell align="right" className="pointer">{parseInt(row.Area).toLocaleString()}</TableCell>
-                </TableRow>
-              ))}
+              // if data is loaded, show real data rows
+              : (data?.paginatedCountries.length === 0
+                ? <TableRow><TableCell colSpan={4}>Sorry, no results matched your search</TableCell></TableRow>
+                : data?.paginatedCountries.map((row: ICountry) => (
+                  <TableRow
+                    key={row._id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    onClick={() => { toCountryPage(row) }}
+                    hover={true}
+                  >
+                    <TableCell component="th" scope="row" className="pointer">{row.Country}</TableCell>
+                    <TableCell align="right" className="pointer">{row.Continent}</TableCell>
+                    <TableCell align="right" className="pointer">{parseInt(row.Population2022).toLocaleString()}</TableCell>
+                    <TableCell align="right" className="pointer">{parseInt(row.Area).toLocaleString()}</TableCell>
+                  </TableRow>
+                )))}
+
             {/* Pagination */}
             <TableRow>
               <TableCell colSpan={4}>
