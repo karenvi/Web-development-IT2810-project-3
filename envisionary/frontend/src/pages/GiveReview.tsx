@@ -41,14 +41,24 @@ function GiveReview() {
 
   const validation = () => {
     if (country !== "" && author !== "") {
+      if (author.length > 40) {
+        setNotValidForm({country: false, author: true})
+        setErrors({countryError: " ", authorError: "Name cannot be longer than 40 characters"})
+        return false
+      }
       setNotValidForm({country: false, author: false})
       setErrors({countryError: " ", authorError: " "})
       return true
-    } else if (country !== "" && author === ""){
+    } else if (country !== "" && author === "") {
       setNotValidForm({country: false, author: true})
       setErrors({countryError: " ", authorError: "Name is required"})
       return false
     } else if (country === "" && author !== "") {
+      if (author.length > 40) {
+        setNotValidForm({country: true, author: true})
+        setErrors({countryError: "Country is required", authorError: "Name cannot be longer than 40 characters"})
+        return false
+      }
       setNotValidForm({country: true, author: false})
       setErrors({countryError: "Country is required", authorError: " "})
       return false
@@ -130,6 +140,7 @@ function GiveReview() {
         <TextField id="outlined-basic"
           required
           label=""
+          sx={{ width: 250 }}
           aria-label="Name"
           placeholder="Name"
           variant="outlined"
