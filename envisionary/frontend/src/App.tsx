@@ -1,8 +1,8 @@
 import './App.css';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Feed from './pages/Feed'
-import Country from './pages/Country'
+import Feed from './pages/Feed';
+import Country from './pages/Country';
 import GiveReview from './pages/GiveReview';
 import InfoPage from './pages/InfoPage';
 
