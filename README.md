@@ -1,6 +1,8 @@
 # Project 3 - Envisionary
 Welcome to our project, Envisionary. Envisionary allows the user to make informed choices about their next travel destination through viewing information and reviews from other travellers about the world’s countries. The users of Envisionary are encouraged to write their own reviews on countries they have visited. For ease of use, Envisionary’s data can be filtered in several ways; both by searching for countries and continents and by hiding unreviewed countries. The countries can also be sorted from A-Z or Z-A on both countries and continents.
 
+Our project is powered by MongoDB, Apollo, TypeScript React and Node.js. Because our Apollo server also uses Express under the hood, our project ends up with a *MERN* stack. Additionally, we have used Mongoose, the component library Material UI, recharts for charts, recoil for global state management and React Router DOM for routing between pages in a SPA friendly way. For querying the database, we have used GraphQL. Lastly, we have tested with Jest, React Testing Library and Cypress.
+
 ## 🎉 Running the project
 The project can be viewed and tested live on http://it2810-66.idi.ntnu.no/project3/. However, to run locally do the following:
 
@@ -41,12 +43,12 @@ We have six components: Header, Countries, PopulationChart, Reviews, ReviewsPagi
 
 Below is an image of the component structure and how they interact with each other. Solid lines indicate that they are imported components. Dashed lines indicate that they have functions that are being used in the component, such as queries and mutations. The blue background color indicate that it is in the components folder, purple is the graphql folder, pink is the pages folder, green is the states folder, and the beige/brown is the utils folder.
 
-<img src="./component_diagram_frontend.png" width="50%">
+<img src="./component_diagram_frontend.png" width="65%">
 
 ## 🌐🤝 Global state management
-We use Recoil to manage global states, as it was very easy to implement. In the beginning we considered Redux, but realised it was too overwhelming to use in this small project as Redux is often used for larger projects as read in this [source](https://www.imaginarycloud.com/blog/recoil-vs-redux/l).
+We use Recoil to manage global states, as it was very easy to implement. In the beginning we considered Redux, but we realised that Redux is more suited for larger projects as read in this [source](https://www.imaginarycloud.com/blog/recoil-vs-redux/l).
 Our recoil states are saved in the file states.ts in the frontend folder of the project, and it handles the state of the user search query, search category chosen by user, and the page location on the countries pagination.
-By using recoil we were able to avoid using props in many of our components, which was a great relief for the team members in Envisionary, as props can make the code seem more unreadable and difficult than it really is.
+"Props drilling" is often seen in projects with many components passing props to each other. By using recoil, we were able to limit our use of props, hence making the code easier to read and maintain.
 
 ## 💡💚 Sustainable web design
 * Colour use
