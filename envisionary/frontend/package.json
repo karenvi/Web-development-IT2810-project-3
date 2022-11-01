@@ -1,6 +1,7 @@
 {
   "name": "envisionary",
   "version": "0.1.0",
+  "homepage": "/project3",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.7.0",
