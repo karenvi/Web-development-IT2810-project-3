@@ -20,10 +20,17 @@ export function Reviews() {
   if (loading) return <p>Loading reviews ...</p>;
   if (error) return <p>Could not get reviews</p>;
 
+  // Order reviews from new-old
+  const sortReviews = () => {
+    let reviews = [...data?.countryByName?.Reviews];
+    reviews.sort((firstReview: IReview, nextReview: IReview) => Date.parse(nextReview.Date) - Date.parse(firstReview.Date));
+    return reviews;
+  }
+
   return (
     <>
       {!data.countryByName.Reviews ? <Typography>Nobody has reviewed {location.state.country.Country} yet</Typography> :
-        <Accordion>
+        <Accordion sx={{ width: '100%' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -32,10 +39,10 @@ export function Reviews() {
             <Typography>Reviews of {location.state.country.Country}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {data.countryByName.Reviews.map((row: IReview) => (
-              <Paper variant="outlined" key={number++} sx={{ mb: 2 }}>
+            {sortReviews().map((row: IReview) => (
+              <Paper variant="outlined" key={number++} aria-label="Review" sx={{ mb: 2 }}>
                 <Grid container spacing={2} p={2}>
-                  <Grid item xs={9} sx={{ display: 'flex', flexDirection: 'row' }}>
+                  <Grid item md={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                     <Typography fontWeight='bold'>{row.Name}</Typography>
                     <Typography mx={0.5}>rated it</Typography>
                     <Rating name="read-only"
@@ -45,12 +52,12 @@ export function Reviews() {
                       emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item md={4} sx={{ display: 'flex', flexDirection: 'row', width: "100%", justifyContent: { xs: 'start', sm: 'start', md: 'end' } }}>
                     <Typography color='gray' align="right" sx={{ fontSize: "14px" }}>
                       {new Date(row.Date).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</Typography>
                   </Grid>
-                  {row.ReviewText.length == 0 ? <></> 
-                  : <Grid item xs={12}>
+                  {row.ReviewText.length == 0 ? <></>
+                    : <Grid item xs={12}>
                       <Typography align="left">{row.ReviewText}</Typography>
                     </Grid>}
                 </Grid>

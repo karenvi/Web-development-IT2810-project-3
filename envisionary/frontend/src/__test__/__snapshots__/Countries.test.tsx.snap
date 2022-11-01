@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Testing Countries component snapshot test 1`] = `
-Array [
+<main
+  className="MuiBox-root css-hbm2t4"
+>
   <div
-    className="MuiBox-root css-1mwmua6"
+    className="MuiBox-root css-eolfkn"
   >
     <form
       action="/"
@@ -142,13 +144,13 @@ Array [
         </fieldset>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-167pgal-MuiPaper-root-MuiTableContainer-root"
+    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-6ilaaq-MuiPaper-root-MuiTableContainer-root"
   >
     <table
-      aria-label="simple table"
-      className="MuiTable-root css-1kwtu5z-MuiTable-root"
+      aria-label="Table of countries"
+      className="MuiTable-root css-rqglhn-MuiTable-root"
       role={null}
     >
       <thead
@@ -162,7 +164,7 @@ Array [
           <th
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-11sptls-MuiTableCell-root"
-            colSpan={4}
+            colSpan={2}
             scope="col"
           >
             <label
@@ -238,6 +240,50 @@ Array [
                 </fieldset>
               </div>
             </div>
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-1o98s2t-MuiTableCell-root"
+            colSpan={2}
+            scope="col"
+          >
+            Hide unreviewed countries
+            <span
+              className="MuiButtonBase-root MuiCheckbox-root MuiCheckbox-colorPrimary PrivateSwitchBase-root MuiCheckbox-root MuiCheckbox-colorPrimary MuiCheckbox-root MuiCheckbox-colorPrimary css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root"
+              onBlur={[Function]}
+              onContextMenu={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={null}
+            >
+              <input
+                aria-label="controlled"
+                checked={false}
+                className="PrivateSwitchBase-input css-1m9pwf3"
+                data-indeterminate={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <svg
+                aria-hidden={true}
+                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                data-testid="CheckBoxOutlineBlankIcon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+                />
+              </svg>
+            </span>
           </th>
         </tr>
         <tr
@@ -351,6 +397,6 @@ Array [
         </tr>
       </tbody>
     </table>
-  </div>,
-]
+  </div>
+</main>
 `;

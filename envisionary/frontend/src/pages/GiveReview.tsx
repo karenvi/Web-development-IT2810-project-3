@@ -96,8 +96,8 @@ function GiveReview() {
   const reviewHeaderStyling = { mt: 3, fontSize: '18px' }
 
   return (
-    <Card sx={{
-      m: '3%', width: '50%', maxWidth: 700, display: 'flex', justifyContent: 'center',
+    <Card component="main" sx={{
+      m: '3%', width: {xs: '70%', sm: '50%'}, maxWidth: "700px", mb: "200px", display: 'flex', justifyContent: 'center',
       alignItems: 'center', p: 6
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -116,7 +116,8 @@ function GiveReview() {
           renderInput={(params) => 
             <TextField 
               {...params} 
-              label="" 
+              label=""
+              aria-label="CountryName"
               placeholder="Country" 
               required={true}
               error={notValidForm.country}
@@ -129,6 +130,7 @@ function GiveReview() {
         <TextField id="name-field"
           required
           label=""
+          aria-label="Name"
           placeholder="Name"
           variant="outlined"
           value={author}
@@ -140,6 +142,7 @@ function GiveReview() {
         <Typography variant="h6" sx={{mt: 1, fontSize: '18px'}}>Rating</Typography>
         <Rating
           name="hover-feedback"
+          aria-label="Rating"
           value={rating}
           precision={0.5}
           onChange={(event, newValue) => {
@@ -152,6 +155,7 @@ function GiveReview() {
         <TextField
           id="review-content-field"
           label=""
+          aria-label="Review content"
           placeholder="Write your review..."
           multiline
           rows={7}

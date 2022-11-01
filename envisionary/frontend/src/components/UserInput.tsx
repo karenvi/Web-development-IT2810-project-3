@@ -25,50 +25,49 @@ function UserInput() {
   
 
   return (
-      <Box
-        sx={{
-          m: 5, p: '35px', width: '40%', maxWidth: '450px', minWidth: '330px', backgroundColor: 'white', display: 'flex', justifyContent: 'center',
-          boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
-          borderRadius: '10px'
-        }}
-      >
-        <form action="/" method="get" autoComplete="off" onSubmit={onSubmit}>
-          <label htmlFor="header-search">
-            <span className="visually-hidden">Search by {category.toLowerCase()}</span>
-          </label>
-          <TextField
-            label={labelSearch}
-            inputProps={{ "data-testid": "search-test" }}
-            //data-testid="search-test"
-            variant="outlined"
-            type="text"
-            id="header-search"
-            name="s"
-            value={searchQuery}
-            onInput={(event) => {
-              setSearchQuery((event.target as HTMLInputElement).value);
-              setPage(0);
-            }}
-          />
-        </form>
-        <FormControl fullWidth sx={{ width: '150px', ml: "10px" }}>
-          <InputLabel id="demo-simple-select-label">Category:</InputLabel>
-          <label htmlFor="header-search">
-            <span className="visually-hidden">Select what to search category to search in</span>
-          </label>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            inputProps={{ "data-testid": "select-test" }}
-            value={category}
-            label="Category:"
-            onChange={(event) => { setCategory(event.target.value as string)}}
-          >
-            <MenuItem value='Country'>Country</MenuItem>
-            <MenuItem value='Continent'>Continent</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
+    <Box
+      sx={{
+        m: 5, p: '35px', width: '60%', maxWidth: '450px', backgroundColor: 'white', display: 'flex', justifyContent: 'center',
+        boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+        borderRadius: '10px'
+      }}
+    >
+      <form action="/" method="get" autoComplete="off" onSubmit={onSubmit}>
+        <label htmlFor="header-search">
+          <span className="visually-hidden">Search by {category.toLowerCase()}</span>
+        </label>
+        <TextField
+          label={labelSearch}
+          inputProps={{ "data-testid": "search-test" }}
+          variant="outlined"
+          type="text"
+          id="header-search"
+          name="s"
+          value={searchQuery}
+          onInput={(event) => {
+            setSearchQuery((event.target as HTMLInputElement).value);
+            setPage(0);
+          }}
+        />
+      </form>
+      <FormControl fullWidth sx={{ width: '150px', ml: "10px" }}>
+        <InputLabel id="demo-simple-select-label">Category:</InputLabel>
+        <label htmlFor="header-search">
+          <span className="visually-hidden">Select what to search category to search in</span>
+        </label>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          inputProps={{ "data-testid": "select-test" }}
+          value={category}
+          label="Category:"
+          onChange={(event) => { setCategory(event.target.value as string)}}
+        >
+          <MenuItem value='Country'>Country</MenuItem>
+          <MenuItem value='Continent'>Continent</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
   )
 }
 export default UserInput;

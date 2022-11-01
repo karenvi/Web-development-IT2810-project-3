@@ -1,4 +1,4 @@
-import { Button, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
+import { Box, Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -18,7 +18,7 @@ import Paper from '@mui/material/Paper';
 import { useQuery } from '@apollo/client';
 import { GET_COUNTRIES_PAGINATION } from '../graphql/queries';
 
-const PAGE_SIZE = 10;
+const pageSize = 10;
 
 // Styling of the table headers
 const tableHeadStyling = { fontWeight: 'bold' };
@@ -36,19 +36,22 @@ function Countries() {
   // A clean "value" from the dropdown, default country and ascending order
   const [finalSortingCategory, setFinalSortingCategory] = useState("Country");
   const [sortDescending, setSortDescending] = useState(false);
+  const [hideUnreviewedCountries, setHideUnreviewed] = useState(false);
  
   const navigate = useNavigate()
-
-  const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
+  
+  const { loading, error, data, refetch } = useQuery(GET_COUNTRIES_PAGINATION, {
     variables: {
-      limit: PAGE_SIZE,
+      limit: pageSize,
       offset: page,
       sortOn: finalSortingCategory,
       sortDesc: sortDescending,
       filterOn: category,
-      query: searchQuery,
+      searchFieldValue: searchQuery,
+      hideUnreviewed: hideUnreviewedCountries,
     }
   });
+  refetch();
 
   //if (loading) return <p>Loading...</p>; TODO: ADD ANOTHER SOLUTION FOR COMMUNICATING "LOADING" TO USER
   if (error) return <p>Error - could not load data.</p>;
@@ -79,14 +82,15 @@ function Countries() {
   }
 
   return (
-    <>
+  <Box component="main" sx={{display: 'flex', flexDirection: 'column',  justifyContent: 'center',
+         alignItems: 'center', width: '100%'}}>
     <UserInput />
-      <TableContainer sx={{ width: '50%', m: '10px', mb: "200px" }} component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+      <TableContainer sx={{ width: {xs: '95%', sm: '75%', md: '65%', lg: '55%'}, m: '10px', mb: "200px" }} component={Paper}>
+        <Table aria-label="Table of countries">
         <TableHead>
         <TableRow>
           {/* Let user pick what the data displayed should be sorted on */}
-        <TableCell colSpan={4} sx={tableHeadStyling}>
+        <TableCell colSpan={2} sx={tableHeadStyling}>
         <label htmlFor="header-search">
         <span className="visually-hidden">Sort by:</span>
         </label>
@@ -106,6 +110,17 @@ function Countries() {
 
         </Select>
         </FormControl>
+  
+        </TableCell>    
+        <TableCell colSpan={2} sx={tableHeadStyling} align="right">  
+        Hide unreviewed countries<Checkbox
+          checked={hideUnreviewedCountries}
+          onChange={(event) => { 
+            setHideUnreviewed(event.target.checked);
+            setPage(0);
+          }}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
         </TableCell>
         </TableRow>
 
@@ -148,14 +163,14 @@ function Countries() {
       <Button variant="contained" disabled={checkIfPageInvalid()} onClick={() => setPage(prev => prev + 1)} sx={buttonStyling}>Next</Button>
       </Grid>
       </Grid>}
+      {page >= 1 && data?.paginatedCountries.length === 0 ? <Button variant="contained" disabled={!page} onClick={() => setPage(prev => prev - 1)} sx={buttonStyling}>Previous page</Button> : <></>}
           </TableCell>
-        </TableRow>
+          </TableRow>
         </TableBody>
+        
         </Table>
-       
-
       </TableContainer>
-    </>
+    </Box>
   );
 }
 export default Countries

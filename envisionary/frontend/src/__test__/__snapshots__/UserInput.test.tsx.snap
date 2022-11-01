@@ -2,7 +2,7 @@
 
 exports[`Testing UserInput component snapshot test 1`] = `
 <div
-  className="MuiBox-root css-1mwmua6"
+  className="MuiBox-root css-eolfkn"
 >
   <form
     action="/"

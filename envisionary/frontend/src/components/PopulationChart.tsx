@@ -82,6 +82,7 @@ function PopulationChart() {
   return (
     <ResponsiveContainer height="100%" width="100%">
       <LineChart
+        aria-label="Population chart"
         data={data}
         margin={{
           top: 10,
