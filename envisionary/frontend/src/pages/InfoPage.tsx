@@ -6,7 +6,7 @@ export const cardStyling = { m: '3%', width: { xs: '70%', sm: '60%', lg: '50%' }
 function InfoPage() {
 
   return (
-    <Card sx={cardStyling}>
+    <Card component="main" sx={cardStyling}>
       <Box sx={{textAlign: "left", m: 2}}>
         <Typography>ABOUT US</Typography>
         <Typography variant="h4">Envision the world through the eyes of a traveller</Typography>

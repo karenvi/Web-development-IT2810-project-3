@@ -1,4 +1,4 @@
-import { Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
+import { Box, Button, Checkbox, Grid, SelectChangeEvent, TableContainer } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -39,8 +39,8 @@ function Countries() {
   const [hideUnreviewedCountries, setHideUnreviewed] = useState(false);
  
   const navigate = useNavigate()
-
-  const { loading, error, data, fetchMore } = useQuery(GET_COUNTRIES_PAGINATION, {
+  
+  const { loading, error, data, refetch } = useQuery(GET_COUNTRIES_PAGINATION, {
     variables: {
       limit: pageSize,
       offset: page,
@@ -51,6 +51,7 @@ function Countries() {
       hideUnreviewed: hideUnreviewedCountries,
     }
   });
+  refetch();
 
   //if (loading) return <p>Loading...</p>; TODO: ADD ANOTHER SOLUTION FOR COMMUNICATING "LOADING" TO USER
   if (error) return <p>Error - could not load data.</p>;
@@ -81,10 +82,11 @@ function Countries() {
   }
 
   return (
-    <>
+  <Box component="main" sx={{display: 'flex', flexDirection: 'column',  justifyContent: 'center',
+         alignItems: 'center', width: '100%'}}>
     <UserInput />
       <TableContainer sx={{ width: {xs: '95%', sm: '75%', md: '65%', lg: '55%'}, m: '10px', mb: "200px" }} component={Paper}>
-        <Table aria-label="simple table">
+        <Table aria-label="Table of countries">
         <TableHead>
         <TableRow>
           {/* Let user pick what the data displayed should be sorted on */}
@@ -111,7 +113,7 @@ function Countries() {
   
         </TableCell>    
         <TableCell colSpan={2} sx={tableHeadStyling} align="right">  
-        Reviewed countries<Checkbox
+        Hide unreviewed countries<Checkbox
           checked={hideUnreviewedCountries}
           onChange={(event) => { 
             setHideUnreviewed(event.target.checked);
@@ -167,10 +169,8 @@ function Countries() {
         </TableBody>
         
         </Table>
-       
-
       </TableContainer>
-    </>
+    </Box>
   );
 }
 export default Countries
