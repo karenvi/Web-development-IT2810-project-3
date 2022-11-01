@@ -58,7 +58,8 @@ function Countries() {
 
   // Routing to each country
   const toCountryPage = (country: ICountry) => {
-    navigate('/country', { state: { country } })
+    navigate('/country', { state: { country } });
+    setPage(0);
   }
 
   // TODO: Disable the next button if the user is on the last page (the solution right now is not really acceptable :/)
@@ -85,7 +86,7 @@ function Countries() {
   <Box component="main" sx={{display: 'flex', flexDirection: 'column',  justifyContent: 'center',
          alignItems: 'center', width: '100%'}}>
     <UserInput />
-      <TableContainer sx={{ width: {xs: '95%', sm: '75%', md: '65%', lg: '55%'}, m: '10px', mb: "200px" }} component={Paper}>
+    <TableContainer sx={{ width: {xs: '95%', sm: '85%', md: '75%', lg: '65%'}, m: '10px', mb: "200px" }} component={Paper}>
         <Table aria-label="Table of countries">
         <TableHead>
         <TableRow>
