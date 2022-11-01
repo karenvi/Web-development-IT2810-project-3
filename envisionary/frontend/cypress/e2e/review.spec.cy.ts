@@ -64,7 +64,7 @@ describe('Testing give review page', () => {
 
         // give random rating
         const rating: number = Math.random() * 135;
-        cy.get('#rating').click(rating, 0);
+        cy.get('#rating-stars').click(rating, 0);
         
         // submit
         cy.get('button').contains('Submit').scrollIntoView().click();
