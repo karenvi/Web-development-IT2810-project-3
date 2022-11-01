@@ -84,9 +84,9 @@ describe("Testing UserInput component", () => {
         );
         
         const spans = component.root.findAllByType('span');
-        expect(spans[0].props.children[0]).toBe('Search by ');
-        expect(spans[0].props.children[1]).toBe('country');
-        expect(spans[2].props.children).toBe('Select what to search category to search in');
+        expect(spans[0].props.children).toBe('Search for country');
+        expect(spans[1].props.children).toBe('Select which category to search in');
+        expect(spans[2].props.children).toBe('Category:');
 
 
 
