@@ -20,7 +20,7 @@ Please contact a team member if you have problems running the project.
 
 ### Run end-to-end tests:
 1. Run the project as described in [this section](#🎉-running-the-project)
-2. Open a terminal window, navigate to the frontend folder and run `npm start cypress:open`. This will open cypress. 
+2. Open a terminal window, navigate to the frontend folder and run `npm run cypress:open`. This will open cypress. 
 3. When cypress has opened, click on "E2E Testing". And click "Start E2E Testing in Firefox" or "Start E2E Testing in Chrome". 
 4. There are two end-to-end tests: "countries.spec.cy.ts" and "review.spec.cy.ts". Simply click one to make the test run. 
 
