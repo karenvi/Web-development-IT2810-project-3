@@ -15,7 +15,7 @@ describe('Testing countries page', () => {
   })
 
   it('Austria contains correct information', () => {
-    cy.get('h3').contains('Austria')
+    cy.get('h1' ).contains('Austria')
     cy.wait(300)
     cy.get('span').contains('Area: 83,871 km²')
     cy.get('span').contains('Population rank: 99')
